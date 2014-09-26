@@ -15,7 +15,7 @@ $smarty->caching = true;
 $smarty->cache_lifetime = 120;
 
 $smarty->assign("Name", "Fred Irving Johnathan Bradley Peppergill", true);
-$smarty->assign("FirstName", array("John", "Mary", "James", "Henry"));
+$smarty->assign("FirstName", array("John", "Mary", "James", "Henry", "Master"));
 $smarty->assign("LastName", array("Doe", "Smith", "Johnson", "Case"));
 $smarty->assign("Class", array(array("A", "B", "C", "D"), array("E", "F", "G", "H"),
                                array("I", "J", "K", "L"), array("M", "N", "O", "P")));
