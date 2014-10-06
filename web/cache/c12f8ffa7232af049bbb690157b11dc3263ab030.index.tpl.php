@@ -36,10 +36,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'nocache_hash' => '77695425960f90d461-52234428',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_542a6a6840e0f7_46269358',
+  'unifunc' => 'content_542a939314f840_01846561',
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_542a6a6840e0f7_46269358')) {function content_542a6a6840e0f7_46269358($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_542a939314f840_01846561')) {function content_542a939314f840_01846561($_smarty_tpl) {?>
 <HTML>
 <HEAD>
     <TITLE>foo</TITLE>
@@ -48,7 +48,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 
 
-Session-ID: u0dq56fmh60n2mgu5sk7m6upq5
+Session-ID: s5a7bppvi8qp0gfpju0e76i0i0
 
 <form action="login.php" method="GET">
     <input type="text" name="username" value="Benutzername">

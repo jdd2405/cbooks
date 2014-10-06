@@ -1,6 +1,7 @@
 <?php
 
 require 'libs/Smarty.class.php';
+new Smarty();
 
 if(isset($_GET['username']) && isset($_GET['password'])){
     $username = $_GET['username'];
