@@ -1,11 +1,11 @@
-<?php /*%%SmartyHeaderCode:77695425960f90d461-52234428%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15854543304f8604da6-25097191%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'c12f8ffa7232af049bbb690157b11dc3263ab030' => 
+    '4253afb3894b7a9902785d07106d7d3552e79145' => 
     array (
-      0 => '.\\templates\\index.tpl',
-      1 => 1412065891,
+      0 => '.\\templates\\portal.tpl',
+      1 => 1412068199,
       2 => 'file',
     ),
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
@@ -33,13 +33,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '77695425960f90d461-52234428',
-  'cache_lifetime' => 120,
+  'nocache_hash' => '15854543304f8604da6-25097191',
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_54330f1a46c1f1_37460715',
+  'unifunc' => 'content_54330f1a646990_61359708',
   'has_nocache_code' => false,
+  'cache_lifetime' => 120,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54330f1a46c1f1_37460715')) {function content_54330f1a46c1f1_37460715($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_54330f1a646990_61359708')) {function content_54330f1a646990_61359708($_smarty_tpl) {?>
 <HTML>
 <HEAD>
     <TITLE>foo</TITLE>
@@ -48,13 +48,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 
 
-Session-ID: 8qj7kiq2ha271qprhu913sagv3
 
-<form action="login.php" method="GET">
-    <input type="text" name="username" value="Benutzername">
-    <input type="password" name="password" value="Passwort">
-    <input type="submit" value="login">
-</FORM>
+Herzlich willkommen.<br>
+<a href="logout.php">ausloggen</a>
 
 
 
