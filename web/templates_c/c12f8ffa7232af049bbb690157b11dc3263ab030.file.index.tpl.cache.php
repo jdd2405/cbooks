@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-08 03:26:13
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-08 03:57:53
          compiled from ".\templates\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:77695425960f90d461-52234428%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412731514,
+      1 => 1412733471,
       2 => 'file',
     ),
   ),
@@ -24,6 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.19',
   'unifunc' => 'content_5425960f9e7359_54099901',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5425960f9e7359_54099901')) {function content_5425960f9e7359_54099901($_smarty_tpl) {?><?php  $_config = new Smarty_Internal_Config("test.conf", $_smarty_tpl->smarty, $_smarty_tpl);$_config->loadConfigVars("setup", 'local'); ?>
@@ -51,6 +55,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   </head>
   <body>
       <div class="container">
+          <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
+              <div class="alert alert-info" role="alert">
+                  <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
+
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              </div>
+          <?php }?>
+              
           <header>
               <div class="row">
                   <div class="col-md-3">
@@ -340,6 +352,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 alert( msg );
             });
       }
+      
+      
+      $(".alert").alert();
         
     </script>
   </body>

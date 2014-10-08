@@ -25,3 +25,5 @@ $smarty->caching = true;
 $smarty->cache_lifetime = 120;
 
 
+session_start();
+session_regenerate_id(true); 

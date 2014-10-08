@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412731514,
+      1 => 1412733471,
       2 => 'file',
     ),
     '0debd65d8a9db561a3ba3fd862046bf4e41cc1db' => 
@@ -24,10 +24,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'nocache_hash' => '77695425960f90d461-52234428',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_543492b5555d95_22938328',
+  'unifunc' => 'content_54349a212ab821_30932963',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+  ),
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_543492b5555d95_22938328')) {function content_543492b5555d95_22938328($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_54349a212ab821_30932963')) {function content_54349a212ab821_30932963($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,6 +55,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   </head>
   <body>
       <div class="container">
+                        
           <header>
               <div class="row">
                   <div class="col-md-3">
@@ -340,6 +345,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 alert( msg );
             });
       }
+      
+      
+      $(".alert").alert();
         
     </script>
   </body>
