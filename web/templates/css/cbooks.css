@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08.10.2014, 02:54:29
+    Author     : Jonas
+*/
+
+body {
+    background-color: #F0F0FF;
+    color: #003355;
+    font-family: "arial black", arial;
+}
+
+header .logo {
+    margin: 30px -5px 15px 15px ;
+}
+
+#metaNav .nav-pills {float: right; margin-top: 50px;}
+
+#banner{
+    position: relative;
+}
+
+#banner .img-profile {width: 100%; background-color: #003355; border: 5px #003355; }
+#banner .username {font-size: 24px;}
+#banner .adress {color: #9999AA;}
+
+
+
+
+#loginBtn, #btnLogout {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    
+}
+
+
+#findABook .tab-content {margin-top: 15px;}
+
+#madeBy img {height: 40px;}
+
+
+.nav>li>a:hover, .nav>li>a:focus {background-color: #fff;}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: impact;
+}
+
+.inverse {
+    background-color: #003355;
+    color: #f9f9f9;
+}
+
+.jumbotron {background-color: #fff;}
+

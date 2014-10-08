@@ -1,6 +1,6 @@
 <?php
 
-require 'index.php';
+require_once 'globals.php';
 
 // Löschen aller Session-Variablen.
 $_SESSION = array();

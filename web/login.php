@@ -1,21 +1,23 @@
 <?php
 
-require 'index.php';
+require_once 'globals.php';
 
 
-if(isset($_GET['username']) && isset($_GET['password'])){
-    $username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = filter_input(INPUT_GET, 'password', FILTER_DEFAULT);
-    login($username, $password);
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
+    login($email, $password);
 }
 
-function login($username, $password){
+function login($email, $password){
     
 
-    if($username=="admin" && $password=="admin"){
+    if($email=="admin@realnet.ch" && $password=="admin"){
         $_SESSION['auth']=true;
         $_COOKIE['session_id']=  session_id();
+        $GLOBALS["smarty"]->assign('email', $email);
         $GLOBALS["smarty"]->display('portal.tpl');
+        
     }
 
     else {
