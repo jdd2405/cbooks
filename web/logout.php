@@ -1,22 +1,28 @@
 <?php
 
 require_once 'globals.php';
+include_once 'includes/functions.php';
 
-// Löschen aller Session-Variablen.
+
+sec_session_start();
+ 
+// Setze alle Session-Werte zurück 
 $_SESSION = array();
-
-// Falls die Session gelöscht werden soll, löschen Sie auch das
-// Session-Cookie.
-// Achtung: Damit wird die Session gelöscht, nicht nur die Session-Daten!
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000, $params["path"],
-        $params["domain"], $params["secure"], $params["httponly"]
-    );
-}
-
-// Zum Schluß, löschen der Session.
+ 
+// hole Session-Parameter 
+$params = session_get_cookie_params();
+ 
+// Lösche das aktuelle Cookie. 
+setcookie(session_name(),
+        '', time() - 42000, 
+        $params["path"], 
+        $params["domain"], 
+        $params["secure"], 
+        $params["httponly"]);
+ 
+// Vernichte die Session 
 session_destroy();
+header('Location: ../index.php');
 
 
-$smarty->display('logout.tpl');
+

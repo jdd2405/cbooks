@@ -1,9 +1,9 @@
 <?php
 
+require_once 'globals.php';
 
-$mysqli = new mysqli('194.126.200.55', 'cbooksch_dev', 'r34d_b00k$', 'cbooksch_dev');
+$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: " . $mysqli->connect_error;
 }
-
 
