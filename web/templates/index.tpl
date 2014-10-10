@@ -41,10 +41,10 @@
                 <div class="panel-body">
                     <h2>Grosse Auswahl</h2>
                     <table>
-                        {for $foo=0 to $number-1}
+                        {for $row=0 to $number-1}
                             <tr>
-                            {for $i=0 to 3}   
-                            <td>{$array[$foo][$i]}</td>
+                            {for $col=0 to 3}   
+                            <td>{$array[$row][$col]}</td>
                             {/for}
                             </tr>
                         {/for}

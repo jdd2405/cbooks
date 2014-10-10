@@ -20,7 +20,6 @@ require_once 'includes/db.inc.php';
     
     for($i =0; $i<4;$i++){
         $summary[$counter][$i]=$row[$i];
- 
      }
      $counter++;
   }

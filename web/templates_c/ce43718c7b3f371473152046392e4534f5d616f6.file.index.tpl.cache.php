@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-10 10:01:31
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-10 10:35:46
          compiled from ".\templates\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13193542a93cf9b7792-23545644%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ce43718c7b3f371473152046392e4534f5d616f6' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1412928084,
+      1 => 1412930141,
       2 => 'file',
     ),
     'b6733524be18c0f23311e74e9818c03ee8edd3d4' => 
@@ -208,16 +208,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <div class="panel-body">
                     <h2>Grosse Auswahl</h2>
                     <table>
-                        <?php $_smarty_tpl->tpl_vars['foo'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['foo']->step = 1;$_smarty_tpl->tpl_vars['foo']->total = (int) ceil(($_smarty_tpl->tpl_vars['foo']->step > 0 ? $_smarty_tpl->tpl_vars['number']->value-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['number']->value-1)+1)/abs($_smarty_tpl->tpl_vars['foo']->step));
-if ($_smarty_tpl->tpl_vars['foo']->total > 0) {
-for ($_smarty_tpl->tpl_vars['foo']->value = 0, $_smarty_tpl->tpl_vars['foo']->iteration = 1;$_smarty_tpl->tpl_vars['foo']->iteration <= $_smarty_tpl->tpl_vars['foo']->total;$_smarty_tpl->tpl_vars['foo']->value += $_smarty_tpl->tpl_vars['foo']->step, $_smarty_tpl->tpl_vars['foo']->iteration++) {
-$_smarty_tpl->tpl_vars['foo']->first = $_smarty_tpl->tpl_vars['foo']->iteration == 1;$_smarty_tpl->tpl_vars['foo']->last = $_smarty_tpl->tpl_vars['foo']->iteration == $_smarty_tpl->tpl_vars['foo']->total;?>
+                        <?php $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['row']->step = 1;$_smarty_tpl->tpl_vars['row']->total = (int) ceil(($_smarty_tpl->tpl_vars['row']->step > 0 ? $_smarty_tpl->tpl_vars['number']->value-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['number']->value-1)+1)/abs($_smarty_tpl->tpl_vars['row']->step));
+if ($_smarty_tpl->tpl_vars['row']->total > 0) {
+for ($_smarty_tpl->tpl_vars['row']->value = 0, $_smarty_tpl->tpl_vars['row']->iteration = 1;$_smarty_tpl->tpl_vars['row']->iteration <= $_smarty_tpl->tpl_vars['row']->total;$_smarty_tpl->tpl_vars['row']->value += $_smarty_tpl->tpl_vars['row']->step, $_smarty_tpl->tpl_vars['row']->iteration++) {
+$_smarty_tpl->tpl_vars['row']->first = $_smarty_tpl->tpl_vars['row']->iteration == 1;$_smarty_tpl->tpl_vars['row']->last = $_smarty_tpl->tpl_vars['row']->iteration == $_smarty_tpl->tpl_vars['row']->total;?>
                             <tr>
-                            <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 3+1 - (0) : 0-(3)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
-if ($_smarty_tpl->tpl_vars['i']->total > 0) {
-for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
-$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>   
-                            <td><?php echo $_smarty_tpl->tpl_vars['array']->value[$_smarty_tpl->tpl_vars['foo']->value][$_smarty_tpl->tpl_vars['i']->value];?>
+                            <?php $_smarty_tpl->tpl_vars['col'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['col']->step = 1;$_smarty_tpl->tpl_vars['col']->total = (int) ceil(($_smarty_tpl->tpl_vars['col']->step > 0 ? 3+1 - (0) : 0-(3)+1)/abs($_smarty_tpl->tpl_vars['col']->step));
+if ($_smarty_tpl->tpl_vars['col']->total > 0) {
+for ($_smarty_tpl->tpl_vars['col']->value = 0, $_smarty_tpl->tpl_vars['col']->iteration = 1;$_smarty_tpl->tpl_vars['col']->iteration <= $_smarty_tpl->tpl_vars['col']->total;$_smarty_tpl->tpl_vars['col']->value += $_smarty_tpl->tpl_vars['col']->step, $_smarty_tpl->tpl_vars['col']->iteration++) {
+$_smarty_tpl->tpl_vars['col']->first = $_smarty_tpl->tpl_vars['col']->iteration == 1;$_smarty_tpl->tpl_vars['col']->last = $_smarty_tpl->tpl_vars['col']->iteration == $_smarty_tpl->tpl_vars['col']->total;?>   
+                            <td><?php echo $_smarty_tpl->tpl_vars['array']->value[$_smarty_tpl->tpl_vars['row']->value][$_smarty_tpl->tpl_vars['col']->value];?>
 </td>
                             <?php }} ?>
                             </tr>
