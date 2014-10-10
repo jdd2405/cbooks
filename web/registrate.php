@@ -1,35 +1,80 @@
 <?php
 
 
-require_once 'globals.php';
-require_once 'db.php';
+require_once 'includes/globals.php';
+require_once 'includes/db.inc.php';
 
+$error_msg = "TEST";
 
-$password;
-$email;
-$msg;
-
-if(isset($_POST['email']) && isset($_POST['password'])){
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
-    
-    $user = new user($email, $password);
-    
-    $query = "INSERT INTO `user` (`id_user`, `email`, `pword`, `access_right`, `first_name`, `family_name`, `street`, `street_num`, `zip`, `city`, `country`, `reg_date`, `last_activity`) VALUES (NULL, '".$user->email."', '".$user->password."', '".$user->access_right."', '".$user->first_name."', '".$user->family_name."', '".$user->street."', '".$user->street_num."', '".$user->zip."', '".$user->city."', '".$user->country."', '".$user->reg_date."', ''".$user->last_activity."'');";
-
-    if ($mysqli->query($query) === TRUE) {
-        $msg = "Ein neuer Benutzer mit der E-Mail-Adresse ".$user->email." wurde hinzugefügt\n";
+if (isset($_POST['email'], $_POST['password'])) {
+    // Bereinige und überprüfe die Daten
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // keine gültige E-Mail
+        $error_msg .= '<p class="error">The email address you entered is not valid</p>';
     }
-    else {
-        printf("Error: ". $mysqli->error);    
+ 
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    if (strlen($password) != 128) {
+        // Das gehashte Passwort sollte 128 Zeichen lang sein.
+        // Wenn nicht, dann ist etwas sehr seltsames passiert
+        $error_msg .= '<p class="error">Invalid password configuration.</p>';
     }
+ 
+    // Benutzername und Passwort wurde auf der Benutzer-Seite schon überprüft.
+    // Das sollte genügen, denn niemand hat einen Vorteil, wenn diese Regeln   
+    // verletzt werden.
+    //
+ 
+    $prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
+    $stmt = $mysqli->prepare($prep_stmt);
+ 
+    if ($stmt) {
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+ 
+        if ($stmt->num_rows == 1) {
+            // Ein Benutzer mit dieser E-Mail-Adresse existiert schon
+            $error_msg .= '<p class="error">A user with this email address already exists.</p>';
+        }
+    } else {
+        $error_msg .= '<p class="error">Database error</p>';
+    }
+ 
+    // Noch zu tun: 
+    // Wir müssen uns noch um den Fall kümmern, wo der Benutzer keine
+    // Berechtigung für die Anmeldung hat indem wir überprüfen welche Art 
+    // von Benutzer versucht diese Operation durchzuführen.
+ 
+    if (empty($error_msg)) {
+        // Erstelle ein zufälliges Salt
+        $random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+ 
+        // Erstelle saltet Passwort 
+        $password = hash('sha512', $password . $random_salt);
+ 
+        // Trage den neuen Benutzer in die Datenbank ein 
+        if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, email, password, salt) VALUES (?, ?, ?, ?)")) {
+            $insert_stmt->bind_param('sss', $email, $password, $random_salt);
+            // Führe die vorbereitete Anfrage aus.
+            if (! $insert_stmt->execute()) {
+                header('Location: ../error.php?err=Registration failure: INSERT');
+            }
+        }
+        header('Location: register_success.php');
+    }
+}
     
-    $mysqli->close();
     
-    $smarty->assign("alert_info", $msg);
+    
+    
+    
+    //$smarty->assign("alert_error", $msg);
     $smarty->display('index.tpl');
     
-}
+
 
 
 

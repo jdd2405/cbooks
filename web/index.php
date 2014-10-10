@@ -5,7 +5,7 @@
  * @package Example-application
  */
 
-require_once 'globals.php';
+require_once 'includes/globals.php';
 
 
 $smarty->display('index.tpl');

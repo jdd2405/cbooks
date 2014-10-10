@@ -11,10 +11,10 @@
 
 
 require 'libs/Smarty.class.php';
-require 'user.class.php';
+require 'classes/user.class.php';
 
 function __autoload($classname) {
-    require_once $classname.".class.php";
+    require_once "classes/".$classname.".class.php";
 }
 
 $smarty = new Smarty;
