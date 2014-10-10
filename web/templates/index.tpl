@@ -40,6 +40,15 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Grosse Auswahl</h2>
+                    <table>
+                        {for $foo=0 to $number-1}
+                            <tr>
+                            {for $i=0 to 3}   
+                            <td>{$array[$foo][$i]}</td>
+                            {/for}
+                            </tr>
+                        {/for}
+                    </table>
                     <dl class="dl-horizontal">
                         <dt>Registrierte Bücher</dt>
                         <dd>10</dd>
