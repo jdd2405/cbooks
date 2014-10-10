@@ -17,12 +17,12 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form">
-                                <input type="text" class="form-control" placeholder="Titel, ISBN oder Stichwort">
-                                <button type="button" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            <form role="form" action="searchBook.php" method="post">
+                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
-
+                        
                         <div class="tab-pane" id="browse">
                             <ul class="list-inline">
                                 <li>Kategorie</li>
