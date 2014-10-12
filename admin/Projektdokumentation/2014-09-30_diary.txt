@@ -1,5 +1,0 @@
-GUI erter Entwurf besprochen	-> JD macht Mockup
-Datenbank-Konzept besprochen	-> Johi überarbeitet erster Wurf und erstellt DB
-Klassendiagramm angefangen	-> Thesi stellt Klassen zusammen
-
-Nächster Termin: 7.10.2014

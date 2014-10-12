@@ -1,5 +1,0 @@
-DB zweiter Entwurf besprochen	-> Basierend auf dem neuen umfangreicheren Entwurf bauen wir das System auf
-MVC Model View Control		-> JD zeigt Konzept für unser Projekt auf (vgl. 2014-10-07_model-view-control-jpg)
-Klassendiagramm			-> Thesi stellt Klassendiagramm zusammen basierend auf neuen DB-Erkenntnissen
-
-Nächster Termin: 10.10.2014 ~9.15
