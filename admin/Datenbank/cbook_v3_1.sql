@@ -1,6 +1,6 @@
 -- ----------- P I M P _ T H E _ S C R I P T -----------
 --                                                    --
---    Rename DBs: 'mydb' > 'usr_p180487_2'            --
+--    Rename DBs: 'mydb' > 'cbooksch_dev'            --
 --    Add Constraints and FK in seperate script part  --
 --    Remove Comments                                 --
 --    Add Table LoginAttempts                         --
@@ -13,22 +13,22 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `usr_p180487_2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `usr_p180487_2` ;
+CREATE SCHEMA IF NOT EXISTS `cbooksch_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `cbooksch_dev` ;
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`languages`
+-- Table `cbooksch_dev`.`languages`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`languages` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`languages` (
   `id_language` INT NOT NULL AUTO_INCREMENT,
   `lng_name` VARCHAR(45) NULL,
   PRIMARY KEY (`id_language`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`books`
+-- Table `cbooksch_dev`.`books`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`books` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`books` (
   `id_isbn` VARCHAR(17) NOT NULL,
   `title` VARCHAR(250) NULL,
   `subtitle` VARCHAR(250) NULL,
@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`books` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`cb_users`  pword not null
+-- Table `cbooksch_dev`.`cb_users`  pword not null
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`cb_users` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`cb_users` (
   `id_cb_user` INT NOT NULL AUTO_INCREMENT,
   `title` SET('h','f','b') NULL DEFAULT 'b',
   `username` VARCHAR(100) NULL,
@@ -68,16 +68,16 @@ CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`cb_users` (
   INDEX `fk_cb_users_languages1_idx` (`language` ASC),
   CONSTRAINT `fk_cb_users_languages1`
     FOREIGN KEY (`language`)
-    REFERENCES `usr_p180487_2`.`languages` (`id_language`)
+    REFERENCES `cbooksch_dev`.`languages` (`id_language`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`personal_books`
+-- Table `cbooksch_dev`.`personal_books`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`personal_books` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`personal_books` (
   `id_personal_book` INT NOT NULL AUTO_INCREMENT,
   `isbn` VARCHAR(17) NULL,
   `description` TEXT NULL,
@@ -92,16 +92,16 @@ CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`personal_books` (
   INDEX `fk_personal_books_books1_idx` (`isbn` ASC),
   CONSTRAINT `fk_objects_user10`
     FOREIGN KEY (`owner_id_user`)
-    REFERENCES `usr_p180487_2`.`cb_users` (`id_cb_user`)
+    REFERENCES `cbooksch_dev`.`cb_users` (`id_cb_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`lending_relations`
+-- Table `cbooksch_dev`.`lending_relations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`lending_relations` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`lending_relations` (
   `id_lending_relation` INT NOT NULL AUTO_INCREMENT,
   `requestDate` DATE NULL,
   `authorizationDate` DATE NULL,
@@ -115,9 +115,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`authors`
+-- Table `cbooksch_dev`.`authors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`authors` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`authors` (
   `id_author` INT NOT NULL AUTO_INCREMENT,
   `aut_name` VARCHAR(100) NULL,
   PRIMARY KEY (`id_author`))
@@ -125,9 +125,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`categories`
+-- Table `cbooksch_dev`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`categories` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`categories` (
   `id_categories` INT NOT NULL,
   `cat_name` VARCHAR(45) NULL,
   PRIMARY KEY (`id_categories`))
@@ -135,9 +135,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`books_has_authors`
+-- Table `cbooksch_dev`.`books_has_authors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`books_has_authors` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`books_has_authors` (
   `books_id_isbn` VARCHAR(17) NOT NULL,
   `authors_id_author` INT NOT NULL,
   PRIMARY KEY (`books_id_isbn`, `authors_id_author`))
@@ -145,18 +145,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`books_has_categories`
+-- Table `cbooksch_dev`.`books_has_categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `usr_p180487_2`.`books_has_categories` (
+CREATE TABLE IF NOT EXISTS `cbooksch_dev`.`books_has_categories` (
   `books_id_isbn` VARCHAR(17) NOT NULL,
   `categories_id_categories` INT NOT NULL,
   PRIMARY KEY (`books_id_isbn`, `categories_id_categories`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `usr_p180487_2`.`login_attempts`
+-- Table `cbooksch_dev`.`login_attempts`
 -- -----------------------------------------------------
-CREATE TABLE `usr_p180487_2`.`login_attempts` (
+CREATE TABLE `cbooksch_dev`.`login_attempts` (
     `id_cb_user` INT(11) NOT NULL,
 #	`id_cb_user` INT NOT NULL AUTO_INCREMENT,
     `time` VARCHAR(30) NOT NULL)
@@ -169,7 +169,7 @@ ALTER TABLE `books`
   ADD INDEX `fk_books_languages1_idx` (`language` ASC),
   ADD CONSTRAINT `fk_books_languages1`
     FOREIGN KEY (`language`)
-    REFERENCES `usr_p180487_2`.`languages` (`id_language`)
+    REFERENCES `cbooksch_dev`.`languages` (`id_language`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 ENGINE = InnoDB;
@@ -181,7 +181,7 @@ ENGINE = InnoDB;
 ALTER TABLE `personal_books`
   ADD CONSTRAINT `fk_personal_books_books1`
     FOREIGN KEY (`isbn`)
-    REFERENCES `usr_p180487_2`.`books` (`id_isbn`)
+    REFERENCES `cbooksch_dev`.`books` (`id_isbn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 ENGINE = InnoDB;
@@ -194,12 +194,12 @@ ALTER TABLE `lending_relations`
   ADD INDEX `fk_lending_relations_personal_books1_idx` (`item_id_personal_book` ASC),
   ADD CONSTRAINT `fk_relation_user2`
     FOREIGN KEY (`lender_id_user`)
-    REFERENCES `usr_p180487_2`.`cb_users` (`id_cb_user`)
+    REFERENCES `cbooksch_dev`.`cb_users` (`id_cb_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lending_relations_personal_books1`
     FOREIGN KEY (`item_id_personal_book`)
-    REFERENCES `usr_p180487_2`.`personal_books` (`id_personal_book`)
+    REFERENCES `cbooksch_dev`.`personal_books` (`id_personal_book`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 ENGINE = InnoDB;
@@ -212,12 +212,12 @@ ALTER TABLE `books_has_authors`
   ADD INDEX `fk_books_has_authors_books1_idx` (`books_id_isbn` ASC),
   ADD CONSTRAINT `fk_books_has_authors_books1`
     FOREIGN KEY (`books_id_isbn`)
-    REFERENCES `usr_p180487_2`.`books` (`id_isbn`)
+    REFERENCES `cbooksch_dev`.`books` (`id_isbn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_books_has_authors_authors1`
     FOREIGN KEY (`authors_id_author`)
-    REFERENCES `usr_p180487_2`.`authors` (`id_author`)
+    REFERENCES `cbooksch_dev`.`authors` (`id_author`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 ENGINE = InnoDB;
@@ -230,12 +230,12 @@ ALTER TABLE `books_has_categories`
   ADD INDEX `fk_books_has_categories_books1_idx` (`books_id_isbn` ASC),
   ADD CONSTRAINT `fk_books_has_categories_books1`
     FOREIGN KEY (`books_id_isbn`)
-    REFERENCES `usr_p180487_2`.`books` (`id_isbn`)
+    REFERENCES `cbooksch_dev`.`books` (`id_isbn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_books_has_categories_categories1`
     FOREIGN KEY (`categories_id_categories`)
-    REFERENCES `usr_p180487_2`.`categories` (`id_categories`)
+    REFERENCES `cbooksch_dev`.`categories` (`id_categories`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 ENGINE = InnoDB;
