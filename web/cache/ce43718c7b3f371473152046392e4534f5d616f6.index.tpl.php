@@ -5,33 +5,33 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ce43718c7b3f371473152046392e4534f5d616f6' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1412930141,
+      1 => 1413127346,
       2 => 'file',
     ),
     'b6733524be18c0f23311e74e9818c03ee8edd3d4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412835337,
+      1 => 1413135077,
       2 => 'file',
     ),
     '0debd65d8a9db561a3ba3fd862046bf4e41cc1db' => 
     array (
       0 => '.\\configs\\test.conf',
-      1 => 1411746821,
+      1 => 1413135076,
       2 => 'file',
     ),
   ),
   'nocache_hash' => '13193542a93cf9b7792-23545644',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_54379a62ba4966_56039025',
+  'unifunc' => 'content_543abcdc783e23_23290092',
   'variables' => 
   array (
     'alert_info' => 0,
   ),
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54379a62ba4966_56039025')) {function content_54379a62ba4966_56039025($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_543abcdc783e23_23290092')) {function content_543abcdc783e23_23290092($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -177,12 +177,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form">
-                                <input type="text" class="form-control" placeholder="Titel, ISBN oder Stichwort">
-                                <button type="button" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            <form role="form" action="searchBook.php" method="post">
+                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
-
+                        
                         <div class="tab-pane" id="browse">
                             <ul class="list-inline">
                                 <li>Kategorie</li>

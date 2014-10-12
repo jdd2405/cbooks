@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-10 10:35:46
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-12 19:39:40
          compiled from ".\templates\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13193542a93cf9b7792-23545644%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ce43718c7b3f371473152046392e4534f5d616f6' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1412930141,
+      1 => 1413127346,
       2 => 'file',
     ),
     'b6733524be18c0f23311e74e9818c03ee8edd3d4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412835337,
+      1 => 1413135077,
       2 => 'file',
     ),
   ),
@@ -184,12 +184,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form">
-                                <input type="text" class="form-control" placeholder="Titel, ISBN oder Stichwort">
-                                <button type="button" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            <form role="form" action="searchBook.php" method="post">
+                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
-
+                        
                         <div class="tab-pane" id="browse">
                             <ul class="list-inline">
                                 <li>Kategorie</li>
