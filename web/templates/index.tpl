@@ -40,15 +40,17 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Grosse Auswahl</h2>
-                    <table>
-                        {for $row=0 to $number-1}
-                            <tr>
-                            {for $col=0 to 3}   
-                            <td>{$array[$row][$col]}</td>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            {for $row=0 to $number-1}
+                                <tr>
+                                {for $col=0 to 3}   
+                                <td>{$array[$row][$col]}</td>
+                                {/for}
+                                </tr>
                             {/for}
-                            </tr>
-                        {/for}
-                    </table>
+                        </table>
+                    </div>
                     <dl class="dl-horizontal">
                         <dt>Registrierte Bücher</dt>
                         <dd>10</dd>

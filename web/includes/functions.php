@@ -34,8 +34,8 @@ function sec_session_start() {
 
 function login($email, $password, $mysqli) {
     // Das Benutzen vorbereiteter Statements verhindert SQL-Injektion.
-    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
-        FROM members
+    if ($stmt = $mysqli->prepare("SELECT id_user, email, pword, salt 
+        FROM user
        WHERE email = ?
         LIMIT 1")) {
         $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
@@ -43,7 +43,7 @@ function login($email, $password, $mysqli) {
         $stmt->store_result();
  
         // hole Variablen von result.
-        $stmt->bind_result($user_id, $username, $db_password, $salt);
+        $stmt->bind_result($user_id, $email, $db_password, $salt);
         $stmt->fetch();
  
         // hash das Passwort mit dem eindeutigen salt.

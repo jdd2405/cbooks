@@ -6,7 +6,7 @@ require_once 'includes/db.inc.php';
 
 $error_msg = "TEST";
 
-if (isset($_POST['email'], $_POST['password'])) {
+if (isset($_POST['email'], $_POST['p'])) {
     // Bereinige und überprüfe die Daten
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -15,7 +15,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         $error_msg .= '<p class="error">The email address you entered is not valid</p>';
     }
  
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
     if (strlen($password) != 128) {
         // Das gehashte Passwort sollte 128 Zeichen lang sein.
         // Wenn nicht, dann ist etwas sehr seltsames passiert
@@ -27,7 +27,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     // verletzt werden.
     //
  
-    $prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
+    $prep_stmt = "SELECT id FROM user WHERE email = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
     if ($stmt) {
@@ -56,7 +56,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         $password = hash('sha512', $password . $random_salt);
  
         // Trage den neuen Benutzer in die Datenbank ein 
-        if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, email, password, salt) VALUES (?, ?, ?, ?)")) {
+        if ($insert_stmt = $mysqli->prepare("INSERT INTO user (email, password, salt) VALUES (?, ?, ?)")) {
             $insert_stmt->bind_param('sss', $email, $password, $random_salt);
             // Führe die vorbereitete Anfrage aus.
             if (! $insert_stmt->execute()) {
