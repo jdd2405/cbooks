@@ -17,7 +17,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form" action="searchBook.php" method="post">
+                            <form role="form" action="searchBook.php" method="get">
                                 <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
                                 <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
