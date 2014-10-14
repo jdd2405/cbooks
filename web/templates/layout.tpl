@@ -82,9 +82,19 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="confirmpwd" class="col-sm-4 control-label">Password</label>
+                                                <div class="col-sm-8">
+                                                    <input type="password" class="form-control" name="confirmpwd" placeholder="Passwort" required>
+                                                    <span class="note"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="col-sm-offset-4 col-sm-8">
                                                     <div class="msg"></div>
-                                                    <button type="submit" class="btn btn-primary">Jetzt registrieren.</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="return regformhash(this.form,
+                                   this.form.email,
+                                   this.form.password,
+                                   this.form.confirmpwd);">Jetzt registrieren.</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -119,7 +129,7 @@
                                         <label class="sr-only" for="loginPassword">Passwort</label>
                                         <input type="password" class="form-control" id="loginPassword" name="password"  placeholder="Passwort">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary" onclick="formhash(this.form, this.form.password);">Login</button>
                                     <div class="msg"></div>
                                 </form>
 
@@ -156,6 +166,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/forms.js"></script>
     <script type="text/javascript">
         {literal}    
 //match email address
