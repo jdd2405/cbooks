@@ -5,7 +5,7 @@
  * @package Example-application
  */
 
-require_once 'includes/globals.php';
+require_once 'globals.php';
 require_once 'includes/db.inc.php';
 
 

@@ -5,8 +5,9 @@
  * @package Example-application
  */
 
-require_once 'includes/globals.php';
-require_once 'includes/db.inc.php';
+require_once 'globals.php';
+require_once '../includes/db.inc.php';
+require_once '../includes/functions.php';
 
 sec_session_start(); 
 if(login_check($mysqli) == true) {

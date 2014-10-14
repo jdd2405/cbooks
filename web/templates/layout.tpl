@@ -23,13 +23,20 @@
 
     </head>
     <body>
+        {if isset($alert_info) }
+            <div class="alert alert-info" role="alert">
+                {$alert_info}
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        {/if}
+        {if isset($alert_warning) }
+            <div class="alert alert-warning" role="alert">
+                {$alert_warning}
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        {/if}
         <div class="container">
-            {if isset($alert_info) }
-                <div class="alert alert-info" role="alert">
-                    {$alert_info}
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                </div>
-            {/if}
+            
 
             <header>
                 <div class="row">
@@ -66,7 +73,7 @@
                                         <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST">
+                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST" name="registration_form">
                                             <div class="form-group">
                                                 <label for="email" class="col-sm-4 control-label">E-Mail</label>
                                                 <div class="col-sm-8">
@@ -91,10 +98,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-offset-4 col-sm-8">
                                                     <div class="msg"></div>
-                                                    <button type="submit" class="btn btn-primary" onclick="return regformhash(this.form,
-                                   this.form.email,
-                                   this.form.password,
-                                   this.form.confirmpwd);">Jetzt registrieren.</button>
+                                                    <button type="submit" class="btn btn-primary">Jetzt registrieren.</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -122,14 +126,14 @@
                             <div class="modal-body">
                                 <form class="form-inline" role="form" action="login.php" method="post">
                                     <div class="form-group">
-                                        <label class="sr-only" for="loginUsername">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="email" placeholder="E-Mailadresse">
+                                        <label class="sr-only" for="loginEmail">Benutzername</label>
+                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="password"  placeholder="Passwort">
+                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
                                     </div>
-                                    <button type="submit" class="btn btn-primary" onclick="formhash(this.form, this.form.password);">Login</button>
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                     <div class="msg"></div>
                                 </form>
 
@@ -167,6 +171,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/js/bootstrap.min.js"></script>
     <script src="templates/js/forms.js"></script>
+    <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
         {literal}    
 //match email address
@@ -246,7 +251,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
 });
     });
 
-    function registr ate(){
+    function registrate(){
         $.ajax({
         type: "GET",
         url: "registrate.php",
