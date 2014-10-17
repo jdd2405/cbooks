@@ -15,7 +15,7 @@ if (isset($_POST['loginEmail'], $_POST['loginPassword'])) {
     
     if (login($email, $password, $mysqli) == true) {
         // Login erfolgreich 
-        header('Location: account/portal.php');
+        header('Location: portal.php');
     } else {
         // Login fehlgeschlagen 
         $smarty->assign("alert_warning", "Ooops! Da stimmt was nicht.");

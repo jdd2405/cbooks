@@ -17,8 +17,8 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form" action="searchBook.php" method="get">
-                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                            <form role="form" action="index.php" method="get">
+                                <input type="text" class="form-control" name="search_book" placeholder="Titel, ISBN oder Stichwort">
                                 <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
@@ -42,13 +42,11 @@
                     <h2>Grosse Auswahl</h2>
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            {for $row=0 to $number-1}
-                                <tr>
-                                {for $col=0 to 3}   
-                                <td>{$array[$row][$col]}</td>
-                                {/for}
-                                </tr>
-                            {/for}
+                            <tr> 
+                                {foreach $books as $value}
+                                <td>{$value}</td>
+                                {/foreach}
+                            </tr>
                         </table>
                     </div>
                     <dl class="dl-horizontal">

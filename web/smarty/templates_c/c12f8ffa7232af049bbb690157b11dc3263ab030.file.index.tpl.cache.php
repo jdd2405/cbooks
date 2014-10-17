@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-08 12:17:09
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-14 16:00:36
          compiled from ".\templates\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:77695425960f90d461-52234428%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c12f8ffa7232af049bbb690157b11dc3263ab030' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1412731570,
+      1 => 1413186937,
       2 => 'file',
     ),
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412733591,
+      1 => 1413295230,
       2 => 'file',
     ),
   ),
@@ -27,6 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'alert_info' => 0,
+    'alert_warning' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -55,14 +56,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     </head>
     <body>
-        <div class="container">
-            <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
-                <div class="alert alert-info" role="alert">
-                    <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
+            <div class="alert alert-info" role="alert">
+                <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
 
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                </div>
-            <?php }?>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        <?php }?>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_warning']->value)) {?>
+            <div class="alert alert-warning" role="alert">
+                <?php echo $_smarty_tpl->tpl_vars['alert_warning']->value;?>
+
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        <?php }?>
+        <div class="container">
+            
 
             <header>
                 <div class="row">
@@ -99,7 +108,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                         <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST">
+                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST" name="registration_form">
                                             <div class="form-group">
                                                 <label for="email" class="col-sm-4 control-label">E-Mail</label>
                                                 <div class="col-sm-8">
@@ -111,6 +120,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                                 <label for="password" class="col-sm-4 control-label">Password</label>
                                                 <div class="col-sm-8">
                                                     <input type="password" class="form-control" name="password" placeholder="Passwort" required>
+                                                    <span class="note"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirmpwd" class="col-sm-4 control-label">Password</label>
+                                                <div class="col-sm-8">
+                                                    <input type="password" class="form-control" name="confirmpwd" placeholder="Passwort" required>
                                                     <span class="note"></span>
                                                 </div>
                                             </div>
@@ -145,12 +161,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <div class="modal-body">
                                 <form class="form-inline" role="form" action="login.php" method="post">
                                     <div class="form-group">
-                                        <label class="sr-only" for="loginUsername">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="email" placeholder="E-Mailadresse">
+                                        <label class="sr-only" for="loginEmail">Benutzername</label>
+                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="password"  placeholder="Passwort">
+                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
                                     <div class="msg"></div>
@@ -184,12 +200,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form">
-                                <input type="text" class="form-control" placeholder="Titel, ISBN oder Stichwort">
-                                <button type="button" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            <form role="form" action="searchBook.php" method="get">
+                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
-
+                        
                         <div class="tab-pane" id="browse">
                             <ul class="list-inline">
                                 <li>Kategorie</li>
@@ -207,6 +223,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Grosse Auswahl</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <?php $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['row']->step = 1;$_smarty_tpl->tpl_vars['row']->total = (int) ceil(($_smarty_tpl->tpl_vars['row']->step > 0 ? $_smarty_tpl->tpl_vars['number']->value-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['number']->value-1)+1)/abs($_smarty_tpl->tpl_vars['row']->step));
+if ($_smarty_tpl->tpl_vars['row']->total > 0) {
+for ($_smarty_tpl->tpl_vars['row']->value = 0, $_smarty_tpl->tpl_vars['row']->iteration = 1;$_smarty_tpl->tpl_vars['row']->iteration <= $_smarty_tpl->tpl_vars['row']->total;$_smarty_tpl->tpl_vars['row']->value += $_smarty_tpl->tpl_vars['row']->step, $_smarty_tpl->tpl_vars['row']->iteration++) {
+$_smarty_tpl->tpl_vars['row']->first = $_smarty_tpl->tpl_vars['row']->iteration == 1;$_smarty_tpl->tpl_vars['row']->last = $_smarty_tpl->tpl_vars['row']->iteration == $_smarty_tpl->tpl_vars['row']->total;?>
+                                <tr>
+                                <?php $_smarty_tpl->tpl_vars['col'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['col']->step = 1;$_smarty_tpl->tpl_vars['col']->total = (int) ceil(($_smarty_tpl->tpl_vars['col']->step > 0 ? 3+1 - (0) : 0-(3)+1)/abs($_smarty_tpl->tpl_vars['col']->step));
+if ($_smarty_tpl->tpl_vars['col']->total > 0) {
+for ($_smarty_tpl->tpl_vars['col']->value = 0, $_smarty_tpl->tpl_vars['col']->iteration = 1;$_smarty_tpl->tpl_vars['col']->iteration <= $_smarty_tpl->tpl_vars['col']->total;$_smarty_tpl->tpl_vars['col']->value += $_smarty_tpl->tpl_vars['col']->step, $_smarty_tpl->tpl_vars['col']->iteration++) {
+$_smarty_tpl->tpl_vars['col']->first = $_smarty_tpl->tpl_vars['col']->iteration == 1;$_smarty_tpl->tpl_vars['col']->last = $_smarty_tpl->tpl_vars['col']->iteration == $_smarty_tpl->tpl_vars['col']->total;?>   
+                                <td><?php echo $_smarty_tpl->tpl_vars['array']->value[$_smarty_tpl->tpl_vars['row']->value][$_smarty_tpl->tpl_vars['col']->value];?>
+</td>
+                                <?php }} ?>
+                                </tr>
+                            <?php }} ?>
+                        </table>
+                    </div>
                     <dl class="dl-horizontal">
                         <dt>Registrierte Bücher</dt>
                         <dd>10</dd>
@@ -258,6 +292,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/forms.js"></script>
+    <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
             
 //match email address
@@ -337,7 +373,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
 });
     });
 
-    function registr ate(){
+    function registrate(){
         $.ajax({
         type: "GET",
         url: "registrate.php",

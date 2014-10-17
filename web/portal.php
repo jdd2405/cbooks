@@ -5,9 +5,9 @@
  * @package Example-application
  */
 
-require_once 'globals.php';
-require_once '../includes/db.inc.php';
-require_once '../includes/functions.php';
+require_once '../globals.php';
+require_once 'includes/db.inc.php';
+require_once 'includes/functions.php';
 
 sec_session_start(); 
 if(login_check($mysqli) == true) {
@@ -15,8 +15,8 @@ if(login_check($mysqli) == true) {
 
 
   $query = "SELECT * FROM books";  
-  $result = $GLOBALS['mysqli']->query($query);
-  $numberOfRows = mysqli_num_rows($result);
+  $result = $mysqli->query($query);
+  $numberOfRows = $result->num_rows;
   
   $summary= array(array(),array());
   $counter=0;

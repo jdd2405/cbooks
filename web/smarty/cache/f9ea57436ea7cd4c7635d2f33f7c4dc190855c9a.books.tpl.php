@@ -1,17 +1,17 @@
-<?php /*%%SmartyHeaderCode:15854543304f8604da6-25097191%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20407543cd00193b232-88247140%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '4253afb3894b7a9902785d07106d7d3552e79145' => 
+    'f9ea57436ea7cd4c7635d2f33f7c4dc190855c9a' => 
     array (
-      0 => '.\\templates\\portal.tpl',
-      1 => 1412711316,
+      0 => '.\\templates\\books.tpl',
+      1 => 1412950812,
       2 => 'file',
     ),
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412733591,
+      1 => 1413233849,
       2 => 'file',
     ),
     '0debd65d8a9db561a3ba3fd862046bf4e41cc1db' => 
@@ -21,13 +21,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '15854543304f8604da6-25097191',
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_543629443a5111_08387257',
+  'nocache_hash' => '20407543cd00193b232-88247140',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+  ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_543cd001b26a33_39641125',
   'cache_lifetime' => 120,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_543629443a5111_08387257')) {function content_543629443a5111_08387257($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_543cd001b26a33_39641125')) {function content_543cd001b26a33_39641125($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -88,7 +92,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                         <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST">
+                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST" name="registration_form">
                                             <div class="form-group">
                                                 <label for="email" class="col-sm-4 control-label">E-Mail</label>
                                                 <div class="col-sm-8">
@@ -100,6 +104,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                                 <label for="password" class="col-sm-4 control-label">Password</label>
                                                 <div class="col-sm-8">
                                                     <input type="password" class="form-control" name="password" placeholder="Passwort" required>
+                                                    <span class="note"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirmpwd" class="col-sm-4 control-label">Password</label>
+                                                <div class="col-sm-8">
+                                                    <input type="password" class="form-control" name="confirmpwd" placeholder="Passwort" required>
                                                     <span class="note"></span>
                                                 </div>
                                             </div>
@@ -141,7 +152,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                         <label class="sr-only" for="loginPassword">Passwort</label>
                                         <input type="password" class="form-control" id="loginPassword" name="password"  placeholder="Passwort">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary" onclick="formhash(this.form, this.form.password);">Login</button>
                                     <div class="msg"></div>
                                 </form>
 
@@ -159,9 +170,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         
 
-Herzlich willkommen.<br>
-Ihre E-Mail-Adresse: admin@realnet.ch
-<a href="logout.php">ausloggen</a>
+
+
+0
 
 
 
@@ -184,6 +195,8 @@ Ihre E-Mail-Adresse: admin@realnet.ch
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/forms.js"></script>
+    <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
             
 //match email address
@@ -263,7 +276,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
 });
     });
 
-    function registr ate(){
+    function registrate(){
         $.ajax({
         type: "GET",
         url: "registrate.php",

@@ -5,6 +5,7 @@
 
 
 
-{$test}
+    {$isbn}<br>
+    {$title}
 
 {/block}
