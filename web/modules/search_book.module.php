@@ -11,9 +11,8 @@
  *
  * @author Jonas
  */
-require_once 'modules/module.interface.php';
 
-class search_book implements module {
+class SearchBookModule{
 
     //put your code here
 

@@ -1,4 +1,38 @@
-{config_load file="test.conf" section="setup"}
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-17 18:46:01
+         compiled from ".\templates\portal.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:399554413399d47368-47407425%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4253afb3894b7a9902785d07106d7d3552e79145' => 
+    array (
+      0 => '.\\templates\\portal.tpl',
+      1 => 1413462512,
+      2 => 'file',
+    ),
+    '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
+    array (
+      0 => '.\\templates\\layout.tpl',
+      1 => 1413564289,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '399554413399d47368-47407425',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_5441339a01fe69_06165277',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+    'alert_warning' => 0,
+    'mainPage' => 0,
+    'isLoggedIn' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5441339a01fe69_06165277')) {function content_5441339a01fe69_06165277($_smarty_tpl) {?><?php  $_config = new Smarty_Internal_Config("test.conf", $_smarty_tpl->smarty, $_smarty_tpl);$_config->loadConfigVars("setup", 'local'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +57,20 @@
 
     </head>
     <body>
-        {if isset($alert_info) }
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
             <div class="alert alert-info" role="alert">
-                {$alert_info}
+                <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
+
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-        {/if}
-        {if isset($alert_warning) }
+        <?php }?>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_warning']->value)) {?>
             <div class="alert alert-warning" role="alert">
-                {$alert_warning}
+                <?php echo $_smarty_tpl->tpl_vars['alert_warning']->value;?>
+
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-        {/if}
+        <?php }?>
         <div class="container">
             
 
@@ -42,7 +78,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="{$mainPage}"><img src="img/v2.png" class="img-responsive"></a>
+                            <a href="<?php echo $_smarty_tpl->tpl_vars['mainPage']->value;?>
+"><img src="img/v2.png" class="img-responsive"></a>
                         </div>
                     </div>
                     <div class="col-md-9 ">
@@ -60,14 +97,14 @@
             <div class="row" id="banner">
                 <div class="col-md-12">
                     <div class="jumbotron">
-                        {block name=banner}{/block}
+                        
                             
 
 
 
                     </div>
                 </div>
-                {if !isset($isLoggedIn)}
+                <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
                 <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
                 <!-- Modal -->
                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -99,15 +136,39 @@
                     </div>
                 </div>
                 
-                {else}
+                <?php } else { ?>
                     <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                {/if}
+                <?php }?>
 
 
 
             </div>
 
-        {block name=body}{/block}
+        
+
+Herzlich willkommen.<br>
+<h2>Grosse Auswahl</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <?php $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['row']->step = 1;$_smarty_tpl->tpl_vars['row']->total = (int) ceil(($_smarty_tpl->tpl_vars['row']->step > 0 ? $_smarty_tpl->tpl_vars['number']->value-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['number']->value-1)+1)/abs($_smarty_tpl->tpl_vars['row']->step));
+if ($_smarty_tpl->tpl_vars['row']->total > 0) {
+for ($_smarty_tpl->tpl_vars['row']->value = 0, $_smarty_tpl->tpl_vars['row']->iteration = 1;$_smarty_tpl->tpl_vars['row']->iteration <= $_smarty_tpl->tpl_vars['row']->total;$_smarty_tpl->tpl_vars['row']->value += $_smarty_tpl->tpl_vars['row']->step, $_smarty_tpl->tpl_vars['row']->iteration++) {
+$_smarty_tpl->tpl_vars['row']->first = $_smarty_tpl->tpl_vars['row']->iteration == 1;$_smarty_tpl->tpl_vars['row']->last = $_smarty_tpl->tpl_vars['row']->iteration == $_smarty_tpl->tpl_vars['row']->total;?>
+                                <tr>
+                                <?php $_smarty_tpl->tpl_vars['col'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['col']->step = 1;$_smarty_tpl->tpl_vars['col']->total = (int) ceil(($_smarty_tpl->tpl_vars['col']->step > 0 ? 3+1 - (0) : 0-(3)+1)/abs($_smarty_tpl->tpl_vars['col']->step));
+if ($_smarty_tpl->tpl_vars['col']->total > 0) {
+for ($_smarty_tpl->tpl_vars['col']->value = 0, $_smarty_tpl->tpl_vars['col']->iteration = 1;$_smarty_tpl->tpl_vars['col']->iteration <= $_smarty_tpl->tpl_vars['col']->total;$_smarty_tpl->tpl_vars['col']->value += $_smarty_tpl->tpl_vars['col']->step, $_smarty_tpl->tpl_vars['col']->iteration++) {
+$_smarty_tpl->tpl_vars['col']->first = $_smarty_tpl->tpl_vars['col']->iteration == 1;$_smarty_tpl->tpl_vars['col']->last = $_smarty_tpl->tpl_vars['col']->iteration == $_smarty_tpl->tpl_vars['col']->total;?>   
+                                <td><?php echo $_smarty_tpl->tpl_vars['array']->value[$_smarty_tpl->tpl_vars['row']->value][$_smarty_tpl->tpl_vars['col']->value];?>
+</td>
+                                <?php }} ?>
+                                </tr>
+                            <?php }} ?>
+                        </table>
+                    </div>
+<a href="logout.php">ausloggen</a>
+
+
 
         <div class="row">
             <div class="col-md-12" id="message">
@@ -131,7 +192,7 @@
     <script src="templates/js/forms.js"></script>
     <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
-        {literal}    
+            
 //match email address
 var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$'; 
 //match credit card numbers
@@ -221,7 +282,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
       }
 
       $(".alert").alert();
-        {/literal}  
+          
     </script>
 </body>
-</html>
+</html><?php }} ?>
