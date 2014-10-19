@@ -11,6 +11,8 @@
  *
  * @author Jonas
  */
+require_once 'classes/User.class.php';
+
 class LoginModule {
 
     function __construct($smarty, $mysqli) {
@@ -131,7 +133,7 @@ class LoginModule {
             // Hole den user-agent string des Benutzers.
             $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-            if ($stmt = $this->mysqli->prepare("SELECT password 
+            if ($stmt = $this->mysqli->prepare("SELECT id_cb_user, email, password, first_name, family_name, street, zip, city, tel, reg_date, last_activity
                                       FROM cb_users 
                                       WHERE id_cb_user = ? LIMIT 1")) {
                 // Bind "$user_id" zum Parameter. 
@@ -141,13 +143,16 @@ class LoginModule {
 
                 if ($stmt->num_rows == 1) {
                     // Wenn es den Benutzer gibt, hole die Variablen von result.
-                    $stmt->bind_result($password);
+                    $stmt->bind_result($user_id, $email, $password, $first_name, $family_name, $street, $zip, $city, $tel, $reg_date, $last_activity);
                     $stmt->fetch();
                     $login_check = hash('sha512', $password . $user_browser);
 
                     if ($login_check == $login_string) {
                         // Eingeloggt!!!!
+                        
+                        $user = new User($user_id, $email, $password, $first_name, $family_name, $street, $zip, $city, $tel, $reg_date, $last_activity);
                         $this->smarty->assign("isLoggedIn", "true");
+                        $this->smarty->assign("user", $user);
                         return true;
                     } else {
                         // Nicht eingeloggt

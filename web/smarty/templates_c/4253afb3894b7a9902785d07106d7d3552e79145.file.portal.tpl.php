@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-17 18:46:01
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-19 22:48:30
          compiled from ".\templates\portal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:399554413399d47368-47407425%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4253afb3894b7a9902785d07106d7d3552e79145' => 
     array (
       0 => '.\\templates\\portal.tpl',
-      1 => 1413462512,
+      1 => 1413751705,
       2 => 'file',
     ),
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1413564289,
+      1 => 1413750142,
       2 => 'file',
     ),
   ),
@@ -98,75 +98,181 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <div class="col-md-12">
                     <div class="jumbotron">
                         
+
+    <h2>Herzlich Willkommen<?php if ($_smarty_tpl->tpl_vars['user']->value->first_name!='') {?>,<?php }?> <?php echo $_smarty_tpl->tpl_vars['user']->value->first_name;?>
+</h2>
+    <address>
+        <dl class="dl-horizontal">
+            <dt>Adresse</dt>
+            <dd>
+                <?php echo $_smarty_tpl->tpl_vars['user']->value->street;?>
+<br>
+                <?php echo $_smarty_tpl->tpl_vars['user']->value->zip;?>
+ <?php echo $_smarty_tpl->tpl_vars['user']->value->city;?>
+
+            </dd>
+            <dt>E-Mail</dt>
+            <dd><?php echo $_smarty_tpl->tpl_vars['user']->value->email;?>
+</dd>
+            <dt>Telefon</dt>
+            <dd><?php echo $_smarty_tpl->tpl_vars['user']->value->tel;?>
+</dd>
+            <dt></dt>
+            <dd><br><button type="button" class="btn btn-default"  data-toggle="modal" data-target="#changeAdressModal"><span class="glyphicon glyphicon-pencil"></span> Angaben ändern</button></dd>
+        </dl>
+    </address>
+
+    <!-- Modal -->
+    <div class="modal fade" id="changeAdressModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Angaben ändern</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" action="" method="POST" name="updateUser_form">
+                        <div class="form-group">
+                            <label for="updateName" class="col-sm-4 control-label">Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control " name="updateFirst_name" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->first_name;?>
+" required>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control " name="updateFamily_name" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->family_name;?>
+" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateStreet" class="col-sm-4 control-label">Strasse</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control " name="updateStreet" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->street;?>
+" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateCity" class="col-sm-4 control-label">Ort</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control " name="updateZIP" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->zip;?>
+" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control " name="updateCity" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->city;?>
+" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateEmail" class="col-sm-4 control-label">E-Mail</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control " name="updateEmail" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->email;?>
+" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTel" class="col-sm-4 control-label">Telefon</label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control " name="updateTel" placeholder="<?php echo $_smarty_tpl->tpl_vars['user']->value->tel;?>
+" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="msg"></div>
+                                <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
                             
 
 
 
                     </div>
                 </div>
-                <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
-                <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
-                <!-- Modal -->
-                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-inline" role="form" action="index.php" method="post">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginEmail">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                    <div class="msg"></div>
-                                </form>
+                <div class="login-buttons">
+                    <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
+                    <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-inline" role="form" action="index.php" method="post">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginEmail">Benutzername</label>
+                                            <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginPassword">Passwort</label>
+                                            <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <div class="msg"></div>
+                                    </form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <?php } else { ?>
-                    <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                <?php }?>
 
+                    <?php } else { ?>
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                        <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
+                    <?php }?>
+                </div>
 
 
             </div>
 
         
 
-Herzlich willkommen.<br>
-<h2>Grosse Auswahl</h2>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <?php $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['row']->step = 1;$_smarty_tpl->tpl_vars['row']->total = (int) ceil(($_smarty_tpl->tpl_vars['row']->step > 0 ? $_smarty_tpl->tpl_vars['number']->value-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['number']->value-1)+1)/abs($_smarty_tpl->tpl_vars['row']->step));
-if ($_smarty_tpl->tpl_vars['row']->total > 0) {
-for ($_smarty_tpl->tpl_vars['row']->value = 0, $_smarty_tpl->tpl_vars['row']->iteration = 1;$_smarty_tpl->tpl_vars['row']->iteration <= $_smarty_tpl->tpl_vars['row']->total;$_smarty_tpl->tpl_vars['row']->value += $_smarty_tpl->tpl_vars['row']->step, $_smarty_tpl->tpl_vars['row']->iteration++) {
-$_smarty_tpl->tpl_vars['row']->first = $_smarty_tpl->tpl_vars['row']->iteration == 1;$_smarty_tpl->tpl_vars['row']->last = $_smarty_tpl->tpl_vars['row']->iteration == $_smarty_tpl->tpl_vars['row']->total;?>
-                                <tr>
-                                <?php $_smarty_tpl->tpl_vars['col'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['col']->step = 1;$_smarty_tpl->tpl_vars['col']->total = (int) ceil(($_smarty_tpl->tpl_vars['col']->step > 0 ? 3+1 - (0) : 0-(3)+1)/abs($_smarty_tpl->tpl_vars['col']->step));
-if ($_smarty_tpl->tpl_vars['col']->total > 0) {
-for ($_smarty_tpl->tpl_vars['col']->value = 0, $_smarty_tpl->tpl_vars['col']->iteration = 1;$_smarty_tpl->tpl_vars['col']->iteration <= $_smarty_tpl->tpl_vars['col']->total;$_smarty_tpl->tpl_vars['col']->value += $_smarty_tpl->tpl_vars['col']->step, $_smarty_tpl->tpl_vars['col']->iteration++) {
-$_smarty_tpl->tpl_vars['col']->first = $_smarty_tpl->tpl_vars['col']->iteration == 1;$_smarty_tpl->tpl_vars['col']->last = $_smarty_tpl->tpl_vars['col']->iteration == $_smarty_tpl->tpl_vars['col']->total;?>   
-                                <td><?php echo $_smarty_tpl->tpl_vars['array']->value[$_smarty_tpl->tpl_vars['row']->value][$_smarty_tpl->tpl_vars['col']->value];?>
+    <h2>Grosse Auswahl</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Titel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php  $_smarty_tpl->tpl_vars['book'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['book']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['books']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['book']->key => $_smarty_tpl->tpl_vars['book']->value) {
+$_smarty_tpl->tpl_vars['book']->_loop = true;
+?>
+                    <tr> 
+                        <td><?php echo $_smarty_tpl->tpl_vars['book']->value['id_isbn'];?>
 </td>
-                                <?php }} ?>
-                                </tr>
-                            <?php }} ?>
-                        </table>
-                    </div>
-<a href="logout.php">ausloggen</a>
+                        <td><?php echo $_smarty_tpl->tpl_vars['book']->value['title'];?>
+</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 
 
 

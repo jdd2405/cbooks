@@ -31,7 +31,7 @@ header .logo {
 
 
 
-#loginBtn, #logoutBtn {
+div.login-buttons {
     position: absolute;
     right: 30px;
     top: 15px;

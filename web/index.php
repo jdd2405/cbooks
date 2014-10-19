@@ -31,6 +31,7 @@ $smarty->setCompileDir('smarty/templates_c/');
 $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
+
 // Logo-link
 $smarty->assign("mainPage", "index.php");
 /* 
@@ -53,7 +54,7 @@ if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
 
 // Check for error messages
 if (isset($_GET['err'])) {
-    $smarty->assign("alert_error", filter_input(INPUT_GET, 'error', FILTER_SANITIZE_STRING));
+    $smarty->assign("alert_warning", filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING));
 }
 
 // Check for called actions

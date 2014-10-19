@@ -67,42 +67,44 @@
 
                     </div>
                 </div>
-                {if !isset($isLoggedIn)}
-                <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
-                <!-- Modal -->
-                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-inline" role="form" action="index.php" method="post">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginEmail">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                    <div class="msg"></div>
-                                </form>
+                <div class="login-buttons">
+                    {if !isset($isLoggedIn)}
+                    <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-inline" role="form" action="index.php" method="post">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginEmail">Benutzername</label>
+                                            <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginPassword">Passwort</label>
+                                            <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <div class="msg"></div>
+                                    </form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                {else}
-                    <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                {/if}
 
+                    {else}
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                        <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
+                    {/if}
+                </div>
 
 
             </div>

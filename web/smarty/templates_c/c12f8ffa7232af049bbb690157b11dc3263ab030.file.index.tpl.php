@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-17 18:46:14
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-19 22:23:33
          compiled from ".\templates\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:688154406031bda950-11523684%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1413564289,
+      1 => 1413750142,
       2 => 'file',
     ),
   ),
@@ -155,42 +155,44 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
                     </div>
                 </div>
-                <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
-                <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
-                <!-- Modal -->
-                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-inline" role="form" action="index.php" method="post">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginEmail">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                    <div class="msg"></div>
-                                </form>
+                <div class="login-buttons">
+                    <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
+                    <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-inline" role="form" action="index.php" method="post">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginEmail">Benutzername</label>
+                                            <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginPassword">Passwort</label>
+                                            <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <div class="msg"></div>
+                                    </form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <?php } else { ?>
-                    <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                <?php }?>
 
+                    <?php } else { ?>
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                        <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
+                    <?php }?>
+                </div>
 
 
             </div>

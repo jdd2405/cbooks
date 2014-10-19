@@ -9,6 +9,9 @@ define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 
 define("SECURE", FALSE);    // NUR FÜR DIE ENTWICKLUNG!!!!
+
+
+
 // Setup DB
 $mysqli = new mysqli("194.126.200.55", "cbooksch_dev", "r34d_b00k$", "cbooksch_dev");
 
@@ -29,37 +32,45 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 
-// Check authentification always
+
+
+// Check authentification
 require_once 'modules/login.module.php';
 $login = new LoginModule($smarty, $mysqli);
 if ($login->check_login($mysqli) == true) {
 
-
-// Füge den Seiteninhalt hier ein!
-
     $smarty->assign("mainPage", "portal.php");
+    
 
-    $query = "SELECT * FROM books";
-    $result = $mysqli->query($query);
-    $numberOfRows = $result->num_rows;
+    
+    
+    
+    
+    if ($result = $mysqli->query("SELECT * FROM cb_users")) {
 
-    $summary = array(array(), array());
-    $counter = 0;
+        /* fetch value */   
+        $books = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($books);
+        $smarty->assign("books", $books);
 
-    while ($row = mysqli_fetch_array($result)) {
 
-        for ($i = 0; $i < 4; $i++) {
-            $summary[$counter][$i] = $row[$i];
-        }
-        $counter++;
+
+            /* close statement */
+        $result->close();
+    }
+    if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
+
+        /* fetch value */   
+        $books = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($books);
+        $smarty->assign("books", $books);
+
+
+
+            /* close statement */
+        $result->close();
     }
 
-
-
-
-    $smarty->assign('array', $summary);
-    $smarty->assign('number', $numberOfRows);
-    $smarty->assign('counter', $counter);
 
     $smarty->display('portal.tpl');
     
@@ -74,6 +85,5 @@ if ($login->check_login($mysqli) == true) {
     
     
 } else {
-    $smarty->assign("alert_error", "Sie wurden ausgeloggt.");
-    $smarty->display("index.tpl");
+    header("Location: index.php?err=Da ist etwas schief gelaufen.");
 }
