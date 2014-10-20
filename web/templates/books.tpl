@@ -3,8 +3,10 @@
 
 {block name=body}
 
-{$test1}
-Anzahl Resultate: {$test2}
+Result:
+{$isbn}
+{$title}
+
 
 
 {/block}
