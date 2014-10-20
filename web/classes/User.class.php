@@ -25,14 +25,13 @@ class User {
     private $last_activity;
 
  
-    public function __construct($user_id, $email, $password, $first_name, $family_name, $street, $street_num, $zip, $city, $tel, $reg_date, $last_activity) {
+    public function __construct($user_id, $email, $password, $first_name, $family_name, $street, $zip, $city, $tel, $reg_date, $last_activity) {
         $this->user_id = $user_id;
         $this->email = $email;
         $this->password = $password;
         $this->first_name = $first_name;
         $this->family_name = $family_name;
         $this->street = $street;
-        $this->street .= " ".$street_num;
         $this->zip = $zip;
         $this->city = $city;
         $this->tel = $tel;
