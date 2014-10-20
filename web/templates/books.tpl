@@ -3,8 +3,8 @@
 
 {block name=body}
 
+{$test1}
+Anzahl Resultate: {$test2}
 
-
-{$test}
 
 {/block}

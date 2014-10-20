@@ -18,7 +18,7 @@ require_once 'includes/db.inc.php';
   
   while($row = mysqli_fetch_array($result)){
     
-    for($i =0; $i<4;$i++){
+    for($i =0; $i<9;$i++){
         $summary[$counter][$i]=$row[$i];
      }
      $counter++;
@@ -29,7 +29,6 @@ require_once 'includes/db.inc.php';
   
   $smarty->assign('array', $summary);
   $smarty->assign('number', $numberOfRows);
-  $smarty->assign('counter', $counter);
      
 
       
