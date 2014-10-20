@@ -1,4 +1,38 @@
-{config_load file="test.conf" section="setup"}
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-19 22:23:33
+         compiled from ".\templates\index.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:688154406031bda950-11523684%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c12f8ffa7232af049bbb690157b11dc3263ab030' => 
+    array (
+      0 => '.\\templates\\index.tpl',
+      1 => 1413554416,
+      2 => 'file',
+    ),
+    '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
+    array (
+      0 => '.\\templates\\layout.tpl',
+      1 => 1413750142,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '688154406031bda950-11523684',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_54406031c930b9_03068634',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+    'alert_warning' => 0,
+    'mainPage' => 0,
+    'isLoggedIn' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_54406031c930b9_03068634')) {function content_54406031c930b9_03068634($_smarty_tpl) {?><?php  $_config = new Smarty_Internal_Config("test.conf", $_smarty_tpl->smarty, $_smarty_tpl);$_config->loadConfigVars("setup", 'local'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +57,20 @@
 
     </head>
     <body>
-        {if isset($alert_info) }
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
             <div class="alert alert-info" role="alert">
-                {$alert_info}
+                <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
+
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-        {/if}
-        {if isset($alert_warning) }
+        <?php }?>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_warning']->value)) {?>
             <div class="alert alert-warning" role="alert">
-                {$alert_warning}
+                <?php echo $_smarty_tpl->tpl_vars['alert_warning']->value;?>
+
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-        {/if}
+        <?php }?>
         <div class="container">
             
 
@@ -42,7 +78,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="{$mainPage}"><img src="img/v2.png" class="img-responsive"></a>
+                            <a href="<?php echo $_smarty_tpl->tpl_vars['mainPage']->value;?>
+"><img src="img/v2.png" class="img-responsive"></a>
                         </div>
                     </div>
                     <div class="col-md-9 ">
@@ -60,7 +97,58 @@
             <div class="row" id="banner">
                 <div class="col-md-12">
                     <div class="jumbotron">
-                        {block name=banner}{/block}
+                        
+
+    <h1>Bücher finden.</h1>
+    <p>Mach mit bei der Tausch-Platform für spannende Literatur.</p>
+    <p><a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#registrationModal">Jetzt mitmachen</a></p>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" action="index.php" method="POST" name="registration_form">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-4 control-label">E-Mail</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control " name="registrateEmail" placeholder="E-Mailadresse" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" name="registratePassword" placeholder="Passwort" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmpwd" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" name="registrateConfirmpwd" placeholder="Passwort" required>
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="msg"></div>
+                                <button type="submit" class="btn btn-primary">Jetzt registrieren.</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
                             
 
 
@@ -68,7 +156,7 @@
                     </div>
                 </div>
                 <div class="login-buttons">
-                    {if !isset($isLoggedIn)}
+                    <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
                     <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
                     <!-- Modal -->
                     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -100,16 +188,105 @@
                         </div>
                     </div>
 
-                    {else}
+                    <?php } else { ?>
                         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
                         <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                    {/if}
+                    <?php }?>
                 </div>
 
 
             </div>
 
-        {block name=body}{/block}
+        
+    <div class="row">
+        <div class="col-sm-4" id="findABook">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Buch finden</h2>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="toggleSearch">
+                        <li class="active"><a href="#search" data-toggle="tab">suchen</a></li>
+                        <li><a href="#browse" data-toggle="tab">schmökern</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="search">
+                            <form role="form" action="index.php" method="get">
+                                <input type="text" class="form-control" name="search_book" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane" id="browse">
+                            <ul class="list-inline">
+                                <li>Kategorie</li>
+                                <li>Alphabet</li>
+                                <li>Popularität</li>
+                            </ul>
+
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Grosse Auswahl</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ISBN</th>
+                                    <th>Titel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php  $_smarty_tpl->tpl_vars['book'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['book']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['books']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['book']->key => $_smarty_tpl->tpl_vars['book']->value) {
+$_smarty_tpl->tpl_vars['book']->_loop = true;
+?>
+                                    <tr> 
+                                        <td><?php echo $_smarty_tpl->tpl_vars['book']->value['id_isbn'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['book']->value['title'];?>
+</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" id="registerABook">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Statistik</h2>
+                    <dl class="dl-horizontal">
+                        <dt>Registrierte Bücher</dt>
+                        <dd>10</dd>
+                        <dt>Gelesene Bücher</dt>
+                        <dd>2</dd>
+                        <dt>Ausgeliehne Bücher</dt>
+                        <dd>5</dd>
+                        <dt>Ausgeliehne Bücher</dt>
+                        <dd>5</dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
         <div class="row">
             <div class="col-md-12" id="message">
@@ -133,7 +310,7 @@
     <script src="templates/js/forms.js"></script>
     <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
-        {literal}    
+            
 //match email address
 var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$'; 
 //match credit card numbers
@@ -223,7 +400,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
       }
 
       $(".alert").alert();
-        {/literal}  
+          
     </script>
 </body>
-</html>
+</html><?php }} ?>

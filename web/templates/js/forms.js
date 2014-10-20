@@ -33,13 +33,13 @@ function regformhash(form, email, password, conf) {
     }
  
     // Überprüfe den Benutzernamen
- 
+    /*
     re = /^\w+$/; 
     if(!re.test(form.username.value)) { 
         alert("Username must contain only letters, numbers and underscores. Please try again"); 
         form.username.focus();
         return false; 
-    }
+    }*/
  
     // Überprüfe, dass Passwort lang genug ist (min 6 Zeichen)
     // Die Überprüfung wird unten noch einmal wiederholt, aber so kann man dem 

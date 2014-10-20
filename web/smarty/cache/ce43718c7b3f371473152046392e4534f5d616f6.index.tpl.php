@@ -1,36 +1,37 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-08 22:45:06
-         compiled from ".\templates\portal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:15854543304f8604da6-25097191%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:13193542a93cf9b7792-23545644%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '4253afb3894b7a9902785d07106d7d3552e79145' => 
+    'ce43718c7b3f371473152046392e4534f5d616f6' => 
     array (
-      0 => '.\\templates\\portal.tpl',
-      1 => 1412711316,
+      0 => '.\\templates\\index.tpl',
+      1 => 1413127346,
       2 => 'file',
     ),
-    '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
+    'b6733524be18c0f23311e74e9818c03ee8edd3d4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412733591,
+      1 => 1413135077,
+      2 => 'file',
+    ),
+    '0debd65d8a9db561a3ba3fd862046bf4e41cc1db' => 
+    array (
+      0 => '.\\configs\\test.conf',
+      1 => 1413135076,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '15854543304f8604da6-25097191',
-  'function' => 
-  array (
-  ),
+  'nocache_hash' => '13193542a93cf9b7792-23545644',
+  'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_543304f8a51545_39953171',
+  'unifunc' => 'content_543abcdc783e23_23290092',
   'variables' => 
   array (
     'alert_info' => 0,
   ),
   'has_nocache_code' => false,
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_543304f8a51545_39953171')) {function content_543304f8a51545_39953171($_smarty_tpl) {?><?php  $_config = new Smarty_Internal_Config("test.conf", $_smarty_tpl->smarty, $_smarty_tpl);$_config->loadConfigVars("setup", 'local'); ?>
-
+),true); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_543abcdc783e23_23290092')) {function content_543abcdc783e23_23290092($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -55,14 +56,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </head>
     <body>
         <div class="container">
-            <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
-                <div class="alert alert-info" role="alert">
-                    <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
-
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                </div>
-            <?php }?>
-
+            
             <header>
                 <div class="row">
                     <div class="col-md-3">
@@ -168,11 +162,85 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </div>
 
         
+    <div class="row">
+        <div class="col-sm-4" id="findABook">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Buch finden</h2>
 
-Herzlich willkommen.<br>
-Ihre E-Mail-Adresse: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="toggleSearch">
+                        <li class="active"><a href="#search" data-toggle="tab">suchen</a></li>
+                        <li><a href="#browse" data-toggle="tab">schmökern</a></li>
+                    </ul>
 
-<a href="logout.php">ausloggen</a>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="search">
+                            <form role="form" action="searchBook.php" method="post">
+                                <input type="text" class="form-control" name="input" placeholder="Titel, ISBN oder Stichwort">
+                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+                            </form>
+                        </div>
+                        
+                        <div class="tab-pane" id="browse">
+                            <ul class="list-inline">
+                                <li>Kategorie</li>
+                                <li>Alphabet</li>
+                                <li>Popularität</li>
+                            </ul>
+
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Grosse Auswahl</h2>
+                    <table>
+                                                    <tr>
+                               
+                            <td>1</td>
+                               
+                            <td>978-3-16-1484</td>
+                               
+                            <td>Test Buch</td>
+                               
+                            <td>Irgend Wer</td>
+                                                        </tr>
+                                            </table>
+                    <dl class="dl-horizontal">
+                        <dt>Registrierte Bücher</dt>
+                        <dd>10</dd>
+                        <dt>Gelesene Bücher</dt>
+                        <dd>2</dd>
+                        <dt>Ausgeliehne Bücher</dt>
+                        <dd>5</dd>
+                        <dt>Ausgeliehne Bücher</dt>
+                        <dd>5</dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" id="registerABook">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Neues Buch registrieren</h2>
+                    <form role="form">
+                        <input type="text" class="form-control" placeholder="ISBN">
+                        <button type="button" class="btn btn-primary" id="btnRegisterBook">registrieren</button>
+                        <button type="button" class="btn btn-sm btn-default" id="btnNoISBN">keine ISBN?</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
 

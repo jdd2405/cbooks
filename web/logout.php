@@ -1,7 +1,7 @@
 <?php
 
-require_once '../includes/globals.php';
-include_once '../includes/functions.php';
+require_once 'globals.php';
+include_once 'includes/functions.php';
 
 
 sec_session_start();
@@ -22,7 +22,7 @@ setcookie(session_name(),
  
 // Vernichte die Session 
 session_destroy();
-header('Location: ../index.php');
+header('Location: index.php');
 
 
 

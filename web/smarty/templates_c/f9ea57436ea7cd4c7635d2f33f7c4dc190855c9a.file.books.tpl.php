@@ -1,33 +1,39 @@
-<?php /*%%SmartyHeaderCode:77695425960f90d461-52234428%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-17 18:58:03
+         compiled from ".\templates\books.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1950854406a784c1f93-67816313%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'c12f8ffa7232af049bbb690157b11dc3263ab030' => 
+    'f9ea57436ea7cd4c7635d2f33f7c4dc190855c9a' => 
     array (
-      0 => '.\\templates\\index.tpl',
-      1 => 1412731570,
+      0 => '.\\templates\\books.tpl',
+      1 => 1413509529,
       2 => 'file',
     ),
     '8620cc399623b7da78926aa888aaa5d8bcbb56e4' => 
     array (
       0 => '.\\templates\\layout.tpl',
-      1 => 1412733591,
-      2 => 'file',
-    ),
-    '0debd65d8a9db561a3ba3fd862046bf4e41cc1db' => 
-    array (
-      0 => '.\\configs\\test.conf',
-      1 => 1404158794,
+      1 => 1413564289,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '77695425960f90d461-52234428',
-  'cache_lifetime' => 120,
+  'nocache_hash' => '1950854406a784c1f93-67816313',
+  'function' => 
+  array (
+  ),
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_5437921aa3cc83_10531321',
+  'unifunc' => 'content_54406a785d08a0_43607908',
+  'variables' => 
+  array (
+    'alert_info' => 0,
+    'alert_warning' => 0,
+    'mainPage' => 0,
+    'isLoggedIn' => 0,
+  ),
   'has_nocache_code' => false,
-),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5437921aa3cc83_10531321')) {function content_5437921aa3cc83_10531321($_smarty_tpl) {?>
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_54406a785d08a0_43607908')) {function content_54406a785d08a0_43607908($_smarty_tpl) {?><?php  $_config = new Smarty_Internal_Config("test.conf", $_smarty_tpl->smarty, $_smarty_tpl);$_config->loadConfigVars("setup", 'local'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,13 +57,29 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     </head>
     <body>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_info']->value)) {?>
+            <div class="alert alert-info" role="alert">
+                <?php echo $_smarty_tpl->tpl_vars['alert_info']->value;?>
+
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        <?php }?>
+        <?php if (isset($_smarty_tpl->tpl_vars['alert_warning']->value)) {?>
+            <div class="alert alert-warning" role="alert">
+                <?php echo $_smarty_tpl->tpl_vars['alert_warning']->value;?>
+
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        <?php }?>
         <div class="container">
             
+
             <header>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="#"><img src="img/v2.png" class="img-responsive"></a>
+                            <a href="<?php echo $_smarty_tpl->tpl_vars['mainPage']->value;?>
+"><img src="img/v2.png" class="img-responsive"></a>
                         </div>
                     </div>
                     <div class="col-md-9 ">
@@ -75,54 +97,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="row" id="banner">
                 <div class="col-md-12">
                     <div class="jumbotron">
-                        <h1>Bücher finden.</h1>
-                        <p>Mach mit bei der Tausch-Platform für spannende Literatur.</p>
-                        <p><a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#registrationModal">Jetzt mitmachen</a></p>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" role="form" action="registrate.php" method="POST">
-                                            <div class="form-group">
-                                                <label for="email" class="col-sm-4 control-label">E-Mail</label>
-                                                <div class="col-sm-8">
-                                                    <input type="email" class="form-control " name="email" placeholder="E-Mailadresse" required>
-                                                    <span class="note"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password" class="col-sm-4 control-label">Password</label>
-                                                <div class="col-sm-8">
-                                                    <input type="password" class="form-control" name="password" placeholder="Passwort" required>
-                                                    <span class="note"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-4 col-sm-8">
-                                                    <div class="msg"></div>
-                                                    <button type="submit" class="btn btn-primary">Jetzt registrieren.</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
+                        
+                            
 
 
 
                     </div>
                 </div>
-                <button class="btn btn-warning" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
+                <?php if (!isset($_smarty_tpl->tpl_vars['isLoggedIn']->value)) {?>
+                <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
                 <!-- Modal -->
                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
                     <div class="modal-dialog">
@@ -132,14 +115,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                 <h4 class="modal-title" id="myModalLabel">Einloggen und mitmachen.</h4>
                             </div>
                             <div class="modal-body">
-                                <form class="form-inline" role="form" action="login.php" method="post">
+                                <form class="form-inline" role="form" action="index.php" method="post">
                                     <div class="form-group">
-                                        <label class="sr-only" for="loginUsername">Benutzername</label>
-                                        <input type="text" class="form-control" id="loginEmail" name="email" placeholder="E-Mailadresse">
+                                        <label class="sr-only" for="loginEmail">Benutzername</label>
+                                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="loginPassword">Passwort</label>
-                                        <input type="password" class="form-control" id="loginPassword" name="password"  placeholder="Passwort">
+                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
                                     <div class="msg"></div>
@@ -152,78 +135,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         </div>
                     </div>
                 </div>
+                
+                <?php } else { ?>
+                    <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
+                <?php }?>
 
 
 
             </div>
 
         
-    <div class="row">
-        <div class="col-sm-4" id="findABook">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Buch finden</h2>
 
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" id="toggleSearch">
-                        <li class="active"><a href="#search" data-toggle="tab">suchen</a></li>
-                        <li><a href="#browse" data-toggle="tab">schmökern</a></li>
-                    </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="search">
-                            <form role="form">
-                                <input type="text" class="form-control" placeholder="Titel, ISBN oder Stichwort">
-                                <button type="button" class="btn btn-primary" id="btnsearchBooks">suchen</button>
-                            </form>
-                        </div>
 
-                        <div class="tab-pane" id="browse">
-                            <ul class="list-inline">
-                                <li>Kategorie</li>
-                                <li>Alphabet</li>
-                                <li>Popularität</li>
-                            </ul>
-
-                        </div>
-                    </div> 
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Grosse Auswahl</h2>
-                    <dl class="dl-horizontal">
-                        <dt>Registrierte Bücher</dt>
-                        <dd>10</dd>
-                        <dt>Gelesene Bücher</dt>
-                        <dd>2</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
-
-                    </dl>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4" id="registerABook">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Neues Buch registrieren</h2>
-                    <form role="form">
-                        <input type="text" class="form-control" placeholder="ISBN">
-                        <button type="button" class="btn btn-primary" id="btnRegisterBook">registrieren</button>
-                        <button type="button" class="btn btn-sm btn-default" id="btnNoISBN">keine ISBN?</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <?php echo $_smarty_tpl->tpl_vars['isbn']->value;?>
+<br>
+    <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 
 
 
@@ -247,6 +174,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/forms.js"></script>
+    <script src="templates/js/sha512.js"></script>
     <script type="text/javascript">
             
 //match email address
@@ -326,7 +255,7 @@ var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
 });
     });
 
-    function registr ate(){
+    function registrate(){
         $.ajax({
         type: "GET",
         url: "registrate.php",
