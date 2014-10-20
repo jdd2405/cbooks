@@ -12,5 +12,40 @@
  * @author Jonas
  */
 class User {
-    private $cbName ="";
+    private $user_id;
+    private $email;
+    private $password;
+    private $first_name;
+    private $family_name;
+    private $street;
+    private $zip;
+    private $city;
+    private $tel;
+    private $reg_date;
+    private $last_activity;
+
+ 
+    public function __construct($user_id, $email, $password, $first_name, $family_name, $street, $street_num, $zip, $city, $tel, $reg_date, $last_activity) {
+        $this->user_id = $user_id;
+        $this->email = $email;
+        $this->password = $password;
+        $this->first_name = $first_name;
+        $this->family_name = $family_name;
+        $this->street = $street;
+        $this->street .= " ".$street_num;
+        $this->zip = $zip;
+        $this->city = $city;
+        $this->tel = $tel;
+        $this->reg_date = $reg_date;
+        $this->last_activity = $last_activity;
+    }
+    
+    
+    public function __get($name) {
+        return $this->$name;
+    }
+
+    public function __set($name, $value) {
+        $this->$name = $value;
+    }
 }
