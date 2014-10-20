@@ -12,5 +12,5 @@
  * @author Jonas
  */
 class User {
-    //put your code here
+    private $cbName ="";
 }
