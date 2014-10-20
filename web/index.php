@@ -124,6 +124,8 @@ else {
   /*
   $smarty->assign('array', $summary);
   $smarty->assign('number', $numberOfRows);
+   * 
+   */
      
 
       
