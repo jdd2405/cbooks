@@ -61,6 +61,7 @@ if (isset($_GET['err'])) {
 if (isset($_GET['search_book'])) {
     include_once 'modules/search_book.module.php';
     $search_term = filter_input(INPUT_GET, 'search_book', FILTER_SANITIZE_STRING);
+    
     $search_book = new SearchBookModule($search_term);
     $search_book->start($smarty, $mysqli);
 }

@@ -13,6 +13,8 @@
  */
 
 class SearchBookModule{
+    
+    private $search_term;
 
     //put your code here
 
@@ -27,7 +29,7 @@ class SearchBookModule{
         if ($stmt = $mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ?")) {
 
             /* bind parameters for markers */
-            $stmt->bind_param("s", $this->search_term);
+            $stmt->bind_param('s', $this->search_term);
 
             /* execute query */
             $stmt->execute();
@@ -44,6 +46,7 @@ class SearchBookModule{
 
         $smarty->assign("isbn", $isbn);
         $smarty->assign("title", $title);
+        
         $smarty->display("books.tpl");
 
 
