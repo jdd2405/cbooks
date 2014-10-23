@@ -51,7 +51,7 @@ class SearchBookModule{
         
         
         
-        $this->smarty->display("books.tpl");
+        $this->smarty->display("book_list.tpl");
 
 
         /* close connection */

@@ -84,17 +84,21 @@ if ($user->isLoggedIn == true) {
         }
     }
     
-    if(isset($_POST['updateUser'])){
+    else if(isset($_POST['updateUser'])){
         require_once 'modules/registrate_user.module.php';
         $registrateUserModule = new RegistrateUserModule($smarty, $mysqli);
         $registrateUserModule->updateUser($user);
     }
     
-    if(isset($_POST['searchBook'], $_POST['searchTerm'])){
+    else if(isset($_POST['searchBook'], $_POST['searchTerm'])){
         require_once 'modules/search_book.module.php';
         $registrateUserModule = new SearchBookModule($smarty, $mysqli);
         
         $registrateUserModule->search(filter_input(INPUT_POST, 'searchTerm', FILTER_SANITIZE_STRING));
+    }
+    
+    else {
+        $smarty->display('portal.tpl');
     }
     
     
@@ -103,4 +107,3 @@ if ($user->isLoggedIn == true) {
     header("Location: index.php?err=Da ist etwas schief gelaufen.");
 }
 
-$smarty->display('portal.tpl');

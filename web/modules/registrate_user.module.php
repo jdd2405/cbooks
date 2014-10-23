@@ -125,21 +125,25 @@ class RegistrateUserModule {
                 if ($stmt->execute()) {
                     echo "Deine Angaben wurden gespeichert.";
                     $this->smarty->assign('alert_success', "Deine Angaben wurden gespeichert.");
+                    $smarty->display('portal.tpl');
                 }
                 
                 else {
                     echo "Da ist etwas schief gegangen.";
                     $this->smarty->assign('alert_warning', "Da ist etwas schief gegangen.");
+                    $smarty->display('portal.tpl');
                 }
             }
             else {
                 echo "Statement failed";
                 $this->smarty->assign('alert_warning', "Statement failed");
+                $smarty->display('portal.tpl');
             }
         }
         else {
             echo "No values inserted.";
             $this->smarty->assign('alert_warning', "No values inserted.");
+            $smarty->display('portal.tpl');
         }
     }
 
