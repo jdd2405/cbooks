@@ -14,49 +14,48 @@
 
 class SearchBookModule{
     
-    private $search_term;
 
     //put your code here
 
-    function __construct($search_term) {
-        $this->search_term = $search_term;
+    function __construct($smarty, $mysqli) {
+        $this->smarty = $smarty;
+        $this->mysqli = $mysqli;
     }
 
-    function start($smarty, $mysqli) {
+    function search($search_term) {
 
 
         /* create a prepared statement */
-        if ($stmt = $mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?")) {
+        if ($stmt = $this->mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?")) {
 
             /* bind parameters for markers */
-            $preparedValue = "%".$this->search_term."%";
-            $stmt->bind_param('ss', $this->search_term, $preparedValue);
+            $preparedValue = "%".$search_term."%";
+            $stmt->bind_param('ss', $search_term, $preparedValue);
 
 
             /* execute query */
             $stmt->execute();
 
             /* bind result variables */
-            $result=$stmt->get_result();
+            $stmt->bind_result($isbn, $title);
 
             /* fetch value */
-            $result->fetch_array(MYSQLI_ASSOC);
+            $stmt->fetch();
 
             /* close statement */
-            $result->close();
+            $stmt->close();
         }
-        
-        $smarty->assign("result",$result);
-        //$smarty->assign("isbn", $isbn);
-        //$smarty->assign("title", $title);
-        
+
+        $this->smarty->assign("isbn", $isbn);
+        $this->smarty->assign("title", $title);
         
         
-        $smarty->display("books.tpl");
+        
+        $this->smarty->display("books.tpl");
 
 
         /* close connection */
-        $mysqli->close();
+        $this->mysqli->close();
     }
 
 }
