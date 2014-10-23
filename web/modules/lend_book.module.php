@@ -12,5 +12,14 @@
  * @author Theresa
  */
 class lendBook {
-    //put your code here
+    
+    private $smarty;
+    private $mysqli;
+    
+    function __construct($smarty, $mysqli) {
+        $this->smarty=$smarty;
+        $this->mysqli=$mysqli;
+    }
+    
+    
 }
