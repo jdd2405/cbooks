@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="msg"></div>
-                                        <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+                                        <button type="submit" name="updateUser" class="btn btn-primary">Änderungen speichern</button>
                                     </div>
                                 </div>
                             </form>

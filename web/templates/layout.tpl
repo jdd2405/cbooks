@@ -35,6 +35,12 @@
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
         {/if}
+        {if isset($alert_success) }
+            <div class="alert alert-success" role="alert">
+                {$alert_success}
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        {/if}
         <div class="container">
             
 

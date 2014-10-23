@@ -13,7 +13,7 @@
  */
 require_once 'classes/User.class.php';
 
-class RegistrateModule {
+class RegistrateUserModule {
 
     private $smarty;
     private $mysqli;
@@ -100,20 +100,46 @@ class RegistrateModule {
         }
     }
 
-    function updateUser() {
+    function updateUser($user) {
         
         if(isset($_POST['updateFirstName'], $_POST['updateFamilyName'], $_POST['updateStreet'], $_POST['updateZIP'], $_POST['updateCity'], $_POST['updateEmail'], $_POST['updateTel'])){
+            $user->first_name = filter_input(INPUT_POST, 'updateFirstName', FILTER_SANITIZE_STRING);
+            $user->family_name = filter_input(INPUT_POST, 'updateFamilytName', FILTER_SANITIZE_STRING);
+            $user->street = filter_input(INPUT_POST, 'updateStreet', FILTER_SANITIZE_STRING);
+            $user->zip = filter_input(INPUT_POST, 'updateZIP', FILTER_SANITIZE_NUMBER_INT);
+            $user->city = filter_input(INPUT_POST, 'updateCity', FILTER_SANITIZE_STRING);
+            $user->email = filter_input(INPUT_POST, 'updateEmail', FILTER_SANITIZE_EMAIL);
+            $user->tel = filter_input(INPUT_POST, 'updateTel', FILTER_SANITIZE_STRING);
+            
+            
+            
             if ($stmt = $this->mysqli->prepare("
-                UPDATE id_cb_user, email, password, first_name, family_name, street, zip, city, tel, reg_date, last_activity
-                FROM cb_users 
-                WHERE id_cb_user = ? LIMIT 1")) {
+                    UPDATE cb_users 
+                    SET email=?, first_name=?, family_name=?, street=?, zip=?, city=?, tel=?
+                    WHERE id_cb_user = ?
+                ")) {
+                
                 // Bind "$user_id" zum Parameter. 
-                $stmt->bind_param('isssssisiss', $user->user_id, $user->email, $user->password, $user->first_name, $user->family_name, $user->street, $user->zip, $user->city, $user->tel, $user->reg_date, $user->last_activity);
+                $stmt->bind_param('ssssisii', $user->email, $user->first_name, $user->family_name, $user->street, $user->zip, $user->city, $user->tel, $user->user_id);
 
-                if (!$stmt->execute()) {
-                    $this->smarty->assign('alert_warning', "Da ist etwas schief gelaufen.");
+                if ($stmt->execute()) {
+                    echo "Deine Angaben wurden gespeichert.";
+                    $this->smarty->assign('alert_success', "Deine Angaben wurden gespeichert.");
+                }
+                
+                else {
+                    echo "Da ist etwas schief gegangen.";
+                    $this->smarty->assign('alert_warning', "Da ist etwas schief gegangen.");
                 }
             }
+            else {
+                echo "Statement failed";
+                $this->smarty->assign('alert_warning', "Statement failed");
+            }
+        }
+        else {
+            echo "No values inserted.";
+            $this->smarty->assign('alert_warning', "No values inserted.");
         }
     }
 

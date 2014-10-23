@@ -74,7 +74,7 @@ if ($user->isLoggedIn == true) {
     }
 
 
-    $smarty->display('portal.tpl');
+    
     
     
     if(isset($_GET['logout'])){
@@ -84,9 +84,10 @@ if ($user->isLoggedIn == true) {
         }
     }
     
-    if(isset($_GET['updateUser'])){
-        $registrateModule = new RegistrateModule($smarty, $mysqli);
-        $registrateModule->updateUser();
+    if(isset($_POST['updateUser'])){
+        require_once 'modules/registrate_user.module.php';
+        $registrateUserModule = new RegistrateUserModule($smarty, $mysqli);
+        $registrateUserModule->updateUser($user);
     }
     
     
@@ -94,3 +95,5 @@ if ($user->isLoggedIn == true) {
 } else {
     header("Location: index.php?err=Da ist etwas schief gelaufen.");
 }
+
+$smarty->display('portal.tpl');
