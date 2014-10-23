@@ -90,6 +90,13 @@ if ($user->isLoggedIn == true) {
         $registrateUserModule->updateUser($user);
     }
     
+    if(isset($_POST['searchBook'], $_POST['searchTerm'])){
+        require_once 'modules/search_book.module.php';
+        $registrateUserModule = new SearchBookModule($smarty, $mysqli);
+        
+        $registrateUserModule->search(filter_input(INPUT_POST, 'searchTerm', FILTER_SANITIZE_STRING));
+    }
+    
     
     
 } else {

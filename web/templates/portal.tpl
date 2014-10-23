@@ -92,20 +92,41 @@
 {block name=body}
     <div class="row">
         <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
 
-                    <h2>neues Buch registrieren</h2>
-                    <form class="form-inline" role="form" action="" method="POST" name="updateUser_form">
-                        <input type="text" class="form-control " name="updateFirst_name" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            <h2>Buch suchen</h2>
+                            <form class="form-inline" role="form" action="" method="POST" name="searchBook">
+                                <input type="text" class="form-control " name="searchTerm" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary" name="searchBook"><span class="glyphicon glyphicon-search"></span></button>
 
-                    </form>
-                    <a href="#">Keine ISBN vorhanden?</a>
+                            </form>
 
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <h2>neues Buch registrieren</h2>
+                            <form class="form-inline" role="form" action="" method="POST" name="updateUser_form">
+                                <input type="text" class="form-control " name="updateFirst_name" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+
+                            </form>
+                            <a href="#">Keine ISBN vorhanden?</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-sm-4">
+
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2>Deine Bücher</h2>
