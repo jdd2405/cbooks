@@ -59,13 +59,12 @@
             </header>
             <div class="row" id="banner">
                 <div class="col-md-12">
-                    <div class="jumbotron">
+                    
                         {block name=banner}{/block}
                             
 
 
 
-                    </div>
                 </div>
                 <div class="login-buttons">
                     {if !isset($isLoggedIn)}
@@ -88,7 +87,7 @@
                                             <label class="sr-only" for="loginPassword">Passwort</label>
                                             <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="Passwort">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <button type="submit" class="btn btn-primary" name="login">Login</button>
                                         <div class="msg"></div>
                                     </form>
 

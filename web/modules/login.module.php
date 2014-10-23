@@ -149,11 +149,12 @@ class LoginModule {
 
                     if ($login_check == $login_string) {
                         // Eingeloggt!!!!
-                        
-                        $user = new User($user_id, $email, $password, $first_name, $family_name, $street, $zip, $city, $tel, $reg_date, $last_activity);
+                        $isLoggedIn = true;
+                        $user = new User();
+                        $user->fillObject($isLoggedIn, $user_id, $email, $password, $first_name, $family_name, $street, $zip, $city, $tel, $reg_date, $last_activity);
                         $this->smarty->assign("isLoggedIn", "true");
                         $this->smarty->assign("user", $user);
-                        return true;
+                        return $user;
                     } else {
                         // Nicht eingeloggt
                         header("Location: ../index.php?err=Could not initiate a safe session (ini_set)");

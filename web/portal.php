@@ -36,8 +36,10 @@ $smarty->setCacheDir('smarty/cache/');
 
 // Check authentification
 require_once 'modules/login.module.php';
+require_once 'classes/User.class.php';
 $login = new LoginModule($smarty, $mysqli);
-if ($login->check_login($mysqli) == true) {
+$user = $login->check_login();
+if ($user->isLoggedIn == true) {
 
     $smarty->assign("mainPage", "portal.php");
     
@@ -80,6 +82,11 @@ if ($login->check_login($mysqli) == true) {
         if($logout==true){
             $login->logout();
         }
+    }
+    
+    if(isset($_GET['updateUser'])){
+        $registrateModule = new RegistrateModule($smarty, $mysqli);
+        $registrateModule->updateUser();
     }
     
     

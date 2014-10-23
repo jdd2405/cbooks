@@ -65,7 +65,7 @@ if (isset($_GET['search_book'])) {
     $search_book->start($smarty, $mysqli);
 }
 
-else if((isset($_POST['loginEmail'], $_POST['loginPassword']))){
+else if(isset($_POST['login'])){
     include_once 'modules/login.module.php';
     
     $email = filter_input(INPUT_POST, 'loginEmail', FILTER_SANITIZE_STRING);
@@ -75,10 +75,10 @@ else if((isset($_POST['loginEmail'], $_POST['loginPassword']))){
     $login->login($email, $password);
 }
 
-else if((isset($_POST['registrateEmail'], $_POST['registratePassword']))){
-    include_once 'modules/registrate.module.php';
-    $registrate = new RegistrateModule();
-    $registrate->start($smarty, $mysqli);
+else if(isset($_POST['registrateUser'])){
+    include_once 'modules/registrate_user.module.php';
+    $registrate = new RegistrateModule($smarty, $mysqli);
+    $registrate->registrateUser();
 }
 
 else if(isset($_GET['logout'])){

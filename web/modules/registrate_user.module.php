@@ -11,11 +11,19 @@
  *
  * @author Jonas
  */
+require_once 'classes/User.class.php';
+
 class RegistrateModule {
 
-    //put your code here
+    private $smarty;
+    private $mysqli;
 
-    function start($smarty, $mysqli) {
+    function __construct($smarty, $mysqli) {
+        $this->smarty = $smarty;
+        $this->mysqli = $mysqli;
+    }
+
+    function registrateUser() {
 
         if (isset($_POST['registrateEmail'], $_POST['registratePassword'], $_POST['registrateConfirmpwd'])) {
             // Bereinige und überprüfe die Daten
@@ -50,7 +58,7 @@ class RegistrateModule {
 
 
 
-                if ($result = $mysqli->query("SELECT user_id FROM cb_users WHERE email = " . $email . " LIMIT 1")) {
+                if ($result = $this->mysqli->query("SELECT user_id FROM cb_users WHERE email = " . $email . " LIMIT 1")) {
                     if ($result->num_rows == 1) {
                         // Ein Benutzer mit dieser E-Mail-Adresse existiert schon
                         $error_msg .= '<p class="error">A user with this email address already exists.</p>';
@@ -76,19 +84,36 @@ class RegistrateModule {
                 // Trage den neuen Benutzer in die Datenbank ein 
 
 
-                if ($mysqli->query("INSERT INTO cb_users (email, password, salt) VALUES ('" . $email . "', '" . $password . "', '" . $random_salt . "')") === FALSE) {
+                if ($this->mysqli->query("INSERT INTO cb_users (email, password, salt) VALUES ('" . $email . "', '" . $password . "', '" . $random_salt . "')") === FALSE) {
                     $error_msg = "Registration failure: INSERT";
-                    $smarty->assign("alert_warning", $error_msg);
-                    $smarty->display("index.tpl");
+                    $this->smarty->assign("alert_warning", $error_msg);
+                    $this->smarty->display("index.tpl");
                 } else {
 
                     $info_msg = "Ihre Registration war erfolgreich. Herzlich Willkommen bei cBooks.ch.";
-                    $smarty->assign("alert_info", $info_msg);
-                    $smarty->display("index.tpl");
+                    $this->smarty->assign("alert_info", $info_msg);
+                    $this->smarty->display("index.tpl");
                 }
             }
         } else {
             echo "WTF!";
+        }
+    }
+
+    function updateUser() {
+        
+        if(isset($_POST['updateFirstName'], $_POST['updateFamilyName'], $_POST['updateStreet'], $_POST['updateZIP'], $_POST['updateCity'], $_POST['updateEmail'], $_POST['updateTel'])){
+            if ($stmt = $this->mysqli->prepare("
+                UPDATE id_cb_user, email, password, first_name, family_name, street, zip, city, tel, reg_date, last_activity
+                FROM cb_users 
+                WHERE id_cb_user = ? LIMIT 1")) {
+                // Bind "$user_id" zum Parameter. 
+                $stmt->bind_param('isssssisiss', $user->user_id, $user->email, $user->password, $user->first_name, $user->family_name, $user->street, $user->zip, $user->city, $user->tel, $user->reg_date, $user->last_activity);
+
+                if (!$stmt->execute()) {
+                    $this->smarty->assign('alert_warning', "Da ist etwas schief gelaufen.");
+                }
+            }
         }
     }
 
