@@ -13,6 +13,8 @@
  */
 
 class SearchBookModule{
+    
+    private $search_term;
 
     //put your code here
 
@@ -24,26 +26,32 @@ class SearchBookModule{
 
 
         /* create a prepared statement */
-        if ($stmt = $mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ?")) {
+        if ($stmt = $mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?")) {
 
             /* bind parameters for markers */
-            $stmt->bind_param("s", $this->search_term);
+            $preparedValue = "%".$this->search_term."%";
+            $stmt->bind_param('ss', $this->search_term, $preparedValue);
+
 
             /* execute query */
             $stmt->execute();
 
             /* bind result variables */
-            $stmt->bind_result($isbn, $title);
+            $result=$stmt->get_result();
 
             /* fetch value */
-            $stmt->fetch();
+            $result->fetch_array(MYSQLI_ASSOC);
 
             /* close statement */
-            $stmt->close();
+            $result->close();
         }
-
-        $smarty->assign("isbn", $isbn);
-        $smarty->assign("title", $title);
+        
+        $smarty->assign("result",$result);
+        //$smarty->assign("isbn", $isbn);
+        //$smarty->assign("title", $title);
+        
+        
+        
         $smarty->display("books.tpl");
 
 
