@@ -36,18 +36,27 @@ class SearchBookModule{
             /* execute query */
             $stmt->execute();
 
-            /* bind result variables */
-            $stmt->bind_result($isbn, $title);
-
             /* fetch value */
-            $stmt->fetch();
+            $meta = $stmt->result_metadata(); 
+
+            while ($field = $meta->fetch_field()) { 
+                $params[] = &$row[$field->name]; 
+            } 
+
+            call_user_func_array(array($stmt, 'bind_result'), $params); 
+            while ($stmt->fetch()) { 
+                foreach($row as $key => $val) { 
+                    $book[$key] = $val; 
+                } 
+                $searchResult[] = $book; 
+            }
 
             /* close statement */
             $stmt->close();
         }
 
-        $this->smarty->assign("isbn", $isbn);
-        $this->smarty->assign("title", $title);
+        $this->smarty->assign("searchResult", $searchResult);
+        $this->smarty->assign("searchTerm", $search_term);
         
         
         

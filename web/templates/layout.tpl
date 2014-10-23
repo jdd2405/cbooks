@@ -106,7 +106,7 @@
                     </div>
 
                     {else}
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                        <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
                         <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
                     {/if}
                 </div>
