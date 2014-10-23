@@ -4,9 +4,12 @@
 {block name=body}
 
 Result:
-{$isbn}
-{$title}
+<!--{$isbn}
+{$title}-->
 
+{foreach $result as $key => $value}
+    {$value}
+{/foreach}
 
 
 
