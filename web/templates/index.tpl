@@ -71,7 +71,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
                             <form role="form" action="index.php" method="get">
-                                <input type="text" class="form-control" name="search_book" placeholder="Titel, ISBN oder Stichwort">
+                                <input type="text" class="form-control" name="search_book" placeholder="Titel, ISBN oder Stichwort" required>
                                 <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
