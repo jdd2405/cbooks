@@ -78,7 +78,7 @@ else if(isset($_POST['login'])){
 
 else if(isset($_POST['registrateUser'])){
     include_once 'modules/registrate_user.module.php';
-    $registrate = new RegistrateModule($smarty, $mysqli);
+    $registrate = new RegistrateUserModule($smarty, $mysqli);
     $registrate->registrateUser();
 }
 
