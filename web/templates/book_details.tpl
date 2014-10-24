@@ -2,9 +2,7 @@
 
 {block name=body}
 
-
-
-
+    
 
 
 {/block}
