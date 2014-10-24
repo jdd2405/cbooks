@@ -157,7 +157,7 @@ class LoginModule {
                         return $user;
                     } else {
                         // Nicht eingeloggt
-                        header("Location: ../index.php?err=Could not initiate a safe session (ini_set)");
+                        header("Location: ../index.php?err=Es konnte keine sichere Session gestartet werden.");
                     }
                 } else {
                     // Nicht eingeloggt

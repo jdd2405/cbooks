@@ -60,18 +60,7 @@ if ($user->isLoggedIn == true) {
             /* close statement */
         $result->close();
     }
-    if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
 
-        /* fetch value */   
-        $books = $result->fetch_all(MYSQLI_ASSOC);
-        //print_r($books);
-        $smarty->assign("books", $books);
-
-
-
-            /* close statement */
-        $result->close();
-    }
 
 
     
