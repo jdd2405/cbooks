@@ -23,12 +23,12 @@ class DetailBook {
     }
     
     function details($book_id){
-        $bookID = substr($book_id, 7);
+        $bookID = substr($book_id, 8);
         
-        $result = $this->mysqli->query("SELECT * FROM books WHERE id_isbn = $bookID"); 
+        $result = $this->mysqli->query("SELECT * FROM books WHERE id_isbn = '$bookID'"); 
         
         /* fetch value */   
-        $details = $result->fetch_all(MYSQLI_ASSOC);
+        $details = $result->fetch_array(MYSQLI_ASSOC);
         
         $this->smarty->assign("details", $details);
         $this->smarty->display('book_details.tpl');
