@@ -48,7 +48,7 @@ if ($user->isLoggedIn == true) {
     
     
     
-    if ($result = $mysqli->query("SELECT * FROM cb_users")) {
+    if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
 
         /* fetch value */   
         $books = $result->fetch_all(MYSQLI_ASSOC);
@@ -84,6 +84,12 @@ if ($user->isLoggedIn == true) {
         $registrateUserModule = new SearchBookModule($smarty, $mysqli);
         
         $registrateUserModule->search(filter_input(INPUT_POST, 'searchTerm', FILTER_SANITIZE_STRING));
+    }
+    
+    else if(!empty($_SERVER['QUERY_STRING'])){
+        require_once 'modules/detail_book.module.php';
+        $registrateUserModule = new DetailBook($smarty, $mysqli);
+        $registrateUserModule->details($_SERVER['QUERY_STRING']);
     }
     
     else {
