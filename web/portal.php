@@ -90,6 +90,7 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/detail_book.module.php';
         $registrateUserModule = new DetailBook($smarty, $mysqli);
         $registrateUserModule->details($_SERVER['QUERY_STRING']);
+      
     }
     
     else {

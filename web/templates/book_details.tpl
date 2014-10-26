@@ -4,6 +4,7 @@
 
 <h2>Details zum Buch: "{$details["title"]}"</h2>
 <div>
+    <div>
     <div class="table-responsive">
         <table class="table table-striped">
             <tbody>
@@ -30,7 +31,22 @@
             </tbody>    
         </table>     
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lendingBook">Buch ausleihen</button>
+    </div>
+                <div>
+                    {if isset($isLoggedIn)}
+                        <div>
+                            {$besitzerdaten}
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lendingBook">Buch ausleihen</button>
+                        </div>
+                    {/if}
+                </div>
+                
+                
+                
+                
+    
     
     <!--Modal-->
     <div class="modal fade" id="lendingBook" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">

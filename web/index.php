@@ -90,6 +90,13 @@ else if(isset($_GET['logout'])){
     $smarty->display('index.tpl');
 }
 
+else if(!empty($_SERVER['QUERY_STRING'])){
+        require_once 'modules/detail_book.module.php';
+        $showDetail = new DetailBook($smarty, $mysqli);
+        $showDetail->details($_SERVER['QUERY_STRING']);
+    }
+
+
 // If no action is called
 else {
 

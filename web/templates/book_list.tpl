@@ -13,12 +13,22 @@
                 </tr>
             </thead>
             <tbody>
+                {if isset($isLoggedIn)}
                 {foreach $searchResult as $book}
                     <tr onclick="document.location = 'portal.php?book_id={$book.id_isbn}';"> 
                         <td>{$book.id_isbn}</td>
                         <td>{$book.title}</td>
                     </tr>
                 {/foreach}
+                {else}
+                    {foreach $searchResult as $book}
+                    <tr onclick="document.location = 'index.php?book_id={$book.id_isbn}';"> 
+                        <td>{$book.id_isbn}</td>
+                        <td>{$book.title}</td>
+                    </tr>
+                    {/foreach}
+                {/if}
+                    
             </tbody>
         </table>
     </div>

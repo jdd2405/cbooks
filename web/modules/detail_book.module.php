@@ -30,7 +30,11 @@ class DetailBook {
         /* fetch value */   
         $details = $result->fetch_array(MYSQLI_ASSOC);
         
+        $result->free();
+        $besitzerdaten= "hier erscheinen die Besitzerdaten";
         $this->smarty->assign("details", $details);
+        $this->smarty->assign("besitzerdaten", $besitzerdaten);
+        
         $this->smarty->display('book_details.tpl');
         
         
