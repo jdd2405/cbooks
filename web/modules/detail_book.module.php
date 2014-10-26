@@ -31,7 +31,14 @@ class DetailBook {
         $details = $result->fetch_array(MYSQLI_ASSOC);
         
         $result->free();
-        $besitzerdaten= "hier erscheinen die Besitzerdaten";
+        
+        
+        $result = $this->mysqli->query("SELECT first_name, family_name FROM cb_users WHERE id_cb_user IN (SELECT owner_id_user FROM personal_books WHERE isbn ='$bookID')");
+        $besitzerdaten= $result->fetch_all(MYSQLI_ASSOC);
+        
+        $result->close();
+        
+        
         $this->smarty->assign("details", $details);
         $this->smarty->assign("besitzerdaten", $besitzerdaten);
         

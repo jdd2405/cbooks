@@ -4,7 +4,10 @@
 
 <h2>Details zum Buch: "{$details["title"]}"</h2>
 <div>
-    <div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
     <div class="table-responsive">
         <table class="table table-striped">
             <tbody>
@@ -31,18 +34,32 @@
             </tbody>    
         </table>     
     </div>
-    </div>
-                <div>
-                    {if isset($isLoggedIn)}
+                </div>
+                </div>
+        </div>
+        {if isset($isLoggedIn)}
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                
+                    
                         <div>
-                            {$besitzerdaten}
+                            {foreach $besitzerdaten as $besitzer} 
+                                        <p>{$besitzer.first_name} {$besitzer.family_name}</p>
+                                        <br>
+
+                            {/foreach}
+                                        
                         </div>
                         <div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lendingBook">Buch ausleihen</button>
                         </div>
-                    {/if}
+                    
                 </div>
-                
+            </div>
+        </div>
+        {/if}
+    </div>
                 
                 
                 
