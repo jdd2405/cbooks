@@ -15,7 +15,7 @@
                         <h4 class="modal-title" id="myModalLabel">Registrieren und mitmachen.</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form" action="index.php" method="POST" name="registration_form">
+                        <form class="form-horizontal" role="form" action="{$path}" method="POST" name="registration_form">
                             <div class="form-group">
                                 <label for="email" class="col-sm-4 control-label">E-Mail</label>
                                 <div class="col-sm-8">
@@ -70,8 +70,8 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form" action="index.php" method="get">
-                                <input type="text" class="form-control" name="search_book" placeholder="Titel, ISBN oder Stichwort" required>
+                            <form role="form" action="{$path}" method="get">
+                                <input type="text" class="form-control"  name="searchBook" placeholder="Titel, ISBN oder Stichwort" required>
                                 <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
                             </form>
                         </div>
@@ -103,7 +103,7 @@
                             </thead>
                             <tbody>
                                 {foreach $books as $book}
-                                    <tr onclick="document.location = 'index.php?book_id={$book.id_isbn}';"> 
+                                    <tr onclick="document.location = '{$path}?book_id={$book.id_isbn}';"> 
                                         <td>{$book.id_isbn}</td>
                                         <td>{$book.title}</td>
                                     </tr>

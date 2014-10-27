@@ -41,7 +41,7 @@ $login = new LoginModule($smarty, $mysqli);
 $user = $login->check_login();
 if ($user->isLoggedIn == true) {
 
-    $smarty->assign("mainPage", "portal.php");
+    $smarty->assign("path", "portal.php");
     
 
     

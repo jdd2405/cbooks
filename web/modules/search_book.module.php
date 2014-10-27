@@ -26,7 +26,15 @@ class SearchBookModule{
 
 
         /* create a prepared statement */
-        if ($stmt = $this->mysqli->prepare("SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?")) {
+        // fallback: "SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?"
+        $query = "SELECT b.id_isbn, b.title, u.zip, u.city, pb.id_personal_book
+            FROM books b
+            INNER JOIN personal_books pb
+            ON b.id_isbn=pb.isbn
+            INNER JOIN cb_users u
+            ON pb.owner_id_user=u.id_cb_user
+            WHERE b.id_isbn = ? OR b.title LIKE ?";
+        if ($stmt = $this->mysqli->prepare($query)) {
 
             /* bind parameters for markers */
             $preparedValue = "%".$search_term."%";
@@ -55,7 +63,9 @@ class SearchBookModule{
             $stmt->close();
         }
 
-        $this->smarty->assign("searchResult", $searchResult);
+        if(!empty($searchResult)){
+            $this->smarty->assign("searchResult", $searchResult);
+        }
         $this->smarty->assign("searchTerm", $search_term);
         
         
