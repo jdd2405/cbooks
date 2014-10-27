@@ -86,16 +86,16 @@ if ($user->isLoggedIn == true) {
         $registrateUserModule->search(filter_input(INPUT_POST, 'searchTerm', FILTER_SANITIZE_STRING));
     }
     
-    else if(!empty($_SERVER['QUERY_STRING'])){
+    else if(!empty($_GET['book_id'])){
         require_once 'modules/detail_book.module.php';
-        $registrateUserModule = new DetailBook($smarty, $mysqli);
-        $registrateUserModule->details($_SERVER['QUERY_STRING']);
+        $detailBookModule = new DetailBook($smarty, $mysqli);
+        $detailBookModule->details($_GET['book_id']);
       
     }
     else if(isset($_GET['duration'])){
         require_once 'modules/lend_book.module.php';
-        $registrateUserModule = new LendBook($smarty, $mysqli);
-        $registrateUserModule->request(filter_input(INPUT_GET, 'duration',FILTER_SANITIZE_NUMBER_INT));
+        $lendBookModule = new LendBook($smarty, $mysqli);
+        $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else {

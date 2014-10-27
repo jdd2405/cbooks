@@ -87,7 +87,7 @@
                                                             <option>8</option>
                                                         </select>
                                  <div class="modal-footer">
-                                    <button type="submit" name="durationButton" class="btn btn-primary" data-dismiss="modal">Ausleihe anfragen</button>
+                                    <button type="submit" class="btn btn-primary" >Ausleihe anfragen</button>
                                 </div>
                             </form>
                             
