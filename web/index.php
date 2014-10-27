@@ -33,7 +33,7 @@ $smarty->setCacheDir('smarty/cache/');
 
 
 // Logo-link
-$smarty->assign("mainPage", "index.php");
+$smarty->assign("path", "index.php");
 /* 
  * index.tpl requires Database informations 
  * for displaying latest books ans statistics
@@ -58,9 +58,9 @@ if (isset($_GET['err'])) {
 }
 
 // Check for called actions
-if (isset($_GET['search_book'])) {
+if (isset($_GET['searchBook'])) {
     include_once 'modules/search_book.module.php';
-    $search_term = filter_input(INPUT_GET, 'search_book', FILTER_SANITIZE_STRING);
+    $search_term = filter_input(INPUT_GET, 'searchBook', FILTER_SANITIZE_STRING);
     
     $search_book = new SearchBookModule($smarty, $mysqli);
     $search_book->search($search_term);

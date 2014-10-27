@@ -48,15 +48,15 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="{$mainPage}"><img src="img/v2.png" class="img-responsive"></a>
+                            <a href="{$path}"><img src="img/v2.png" class="img-responsive"></a>
                         </div>
                     </div>
                     <div class="col-md-9 ">
                         <nav role="navigation" id="metaNav">
                             <ul class="nav nav-pills">
-                                <li><a href="#">Startseite</a></li>
-                                <li><a href="#">Impressum</a></li>
-                                <li><a href="#">Hauftungsausschuss</a></li>
+                                <li><a href="{$path}">Startseite</a></li>
+                                <li><a href="{$path}">Impressum</a></li>
+                                <li><a href="{$path}">Hauftungsausschuss</a></li>
                             </ul>
                         </nav>
                     </div>
