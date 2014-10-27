@@ -11,7 +11,7 @@
  *
  * @author Theresa
  */
-class lendBook {
+class LendBook {
     
     private $smarty;
     private $mysqli;
@@ -21,6 +21,11 @@ class lendBook {
         $this->mysqli=$mysqli;
     }
     
+    //Objekt lending_relations instanzieren und in DB eintragen und Mail versenden
+    function request($weeksOfDuration){
+        $this->smarty->assign("weeksOfDuration",$weeksOfDuration);
+        $this->smarty->display("just_for_testing.tpl");
+    }
     
     
     

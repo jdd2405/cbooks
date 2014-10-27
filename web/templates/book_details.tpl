@@ -74,11 +74,25 @@
                             <h4 class="modal-title" id="myModalLabel">Buch ausleihen</h4>
                         </div>
                         <div class="modal-body">
-                            {$details["title"]}
+                            
+                            <form class="form-inline" role="form" action="portal.php" method="GET">
+                                Ausleihdauer in Wochen:
+                                
+                                <select class="form-control" name="duration">
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                            <option>7</option>
+                                                            <option>8</option>
+                                                        </select>
+                                 <div class="modal-footer">
+                                    <button type="submit" name="durationButton" class="btn btn-primary" data-dismiss="modal">Ausleihe anfragen</button>
+                                </div>
+                            </form>
+                            
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name= "request" data-dismiss="modal">Ausleihe anfragen</button>
-                        </div>
+                       
                     </div>
                 </div>
     </div>

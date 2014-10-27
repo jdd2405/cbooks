@@ -92,6 +92,11 @@ if ($user->isLoggedIn == true) {
         $registrateUserModule->details($_SERVER['QUERY_STRING']);
       
     }
+    else if(isset($_GET['duration'])){
+        require_once 'modules/lend_book.module.php';
+        $registrateUserModule = new LendBook($smarty, $mysqli);
+        $registrateUserModule->request(filter_input(INPUT_GET, 'duration',FILTER_SANITIZE_NUMBER_INT));
+    }
     
     else {
         $smarty->display('portal.tpl');
