@@ -90,10 +90,10 @@ else if(isset($_GET['logout'])){
     $smarty->display('index.tpl');
 }
 
-else if(!empty($_SERVER['QUERY_STRING'])){
+else if(!empty($_GET['book_id'])){
         require_once 'modules/detail_book.module.php';
         $showDetail = new DetailBook($smarty, $mysqli);
-        $showDetail->details($_SERVER['QUERY_STRING']);
+        $showDetail->details(filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_NUMBER_INT));
     }
 
 

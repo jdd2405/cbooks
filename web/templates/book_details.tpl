@@ -13,24 +13,29 @@
             <tbody>
                 <tr>
                     <th>ISBN</th>
-                    <td>{$details["id_isbn"]}</td>
+                    <td>{$details["isbn"]}</td>
                 </tr>
                 <tr>
                     <th>Titel</th>
                     <td>{$details["title"]}</td>
                 </tr>
                 <tr>
-                    <th>Subtitle</th>
+                    <th>Untertitel</th>
                     <td>{$details["subtitle"]}</td>
                 </tr>
                 <tr>
-                    <th>Blurb</th>
+                    <th>Klappentext</th>
                     <td>{$details["blurb"]}</td>
                 </tr>
                 <tr>
-                    <th>Reg-Date</th>
-                    <td>{$details["reg_date"]}</td>
+                    <th>Beschreibung</th>
+                    <td>{$details["description"]}</td>
                 </tr>
+                <tr>
+                    <th>Availability</th>
+                    <td>{$details["availability"]}</td>
+                </tr>
+               
             </tbody>    
         </table>     
     </div>

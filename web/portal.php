@@ -89,7 +89,7 @@ if ($user->isLoggedIn == true) {
     else if(!empty($_GET['book_id'])){
         require_once 'modules/detail_book.module.php';
         $detailBookModule = new DetailBook($smarty, $mysqli);
-        $detailBookModule->details($_GET['book_id']);
+        $detailBookModule->details(filter_input(INPUT_GET,'book_id', FILTER_SANITIZE_NUMBER_INT));
       
     }
     else if(isset($_GET['duration'])){
