@@ -38,8 +38,8 @@ class DetailBook {
         $result->free();
         
         
-        $result = $this->mysqli->query("SELECT first_name, family_name FROM cb_users WHERE id_cb_user IN (SELECT owner_id_user FROM personal_books WHERE isbn ='$book_id')");
-        $besitzerdaten= $result->fetch_all(MYSQLI_ASSOC);
+        $result = $this->mysqli->query("SELECT first_name, city FROM cb_users INNER JOIN personal_books ON id_cb_user = owner_id_user WHERE id_personal_book ='$book_id'");
+        $besitzerdaten= $result->fetch_array(MYSQLI_ASSOC);
         
         $result->close();
         

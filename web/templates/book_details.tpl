@@ -49,11 +49,9 @@
                 
                     
                         <div>
-                            {foreach $besitzerdaten as $besitzer} 
-                                        <p>{$besitzer.first_name} {$besitzer.family_name}</p>
-                                        <br>
-
-                            {/foreach}
+                            <h4>Daten des Besitzers</h4>
+                            <p>Name: {$besitzerdaten["first_name"]}<br>
+                                Ort: {$besitzerdaten["city"]}</p>
                                         
                         </div>
                         <div>
@@ -65,6 +63,8 @@
         </div>
         {/if}
     </div>
+    
+    <a href="javascript:history.back()">Zurück zur Suche</a>
                 
                 
                 
