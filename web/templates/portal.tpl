@@ -152,25 +152,57 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Deine Statistik</h2>
-                    <dl class="dl-horizontal">
-                        <dt>Registrierte Bücher</dt>
-                        <dd>10</dd>
-                        <dt>Gelesene Bücher</dt>
-                        <dd>2</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>Deine Statistik</h2>
+                                <dl class="dl-horizontal">
+                                <dt>Registrierte Bücher</dt>
+                                <dd>10</dd>
+                                <dt>Gelesene Bücher</dt>
+                                <dd>2</dd>
+                                <dt>Ausgeliehne Bücher</dt>
+                                <dd>5</dd>
+                                <dt>Ausgeliehne Bücher</dt>
+                                <dd>5</dd>
 
-                    </dl>
+                                </dl>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>Angefragte Bücher</h2>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID Ausleihrelation</th>
+                                            <th>Anfragedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach $requests as $request}
+                                            <tr> 
+                                            <td>{$request.id_lending_relation}</td>
+                                            <td>{$request.requestDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        
     </div>
 
 {/block}

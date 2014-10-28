@@ -25,13 +25,25 @@ class LendBook {
     }
     
     //Objekt lending_relations instanzieren und in DB eintragen und Mail versenden
-    function request($duration){
-        //$lend = new LendingRelations();
-        //$lend->
+    function request($duration, $id_personal_book){
+        $timestamp = time();
+        $datum = date("Y.m.d", $timestamp);
+        $state = "r";
+        $user_id = $_SESSION['user_id'];
+        
+        //$lend = new LendingRelations($datum, $duration, $state, $id_personal_book );
+       
+        $this->mysqli->query("INSERT INTO `lending_relations` (duration, state,lender_id_user, item_id_personal_book) VALUES ( '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
         
         
-        $this->smarty->assign("weeksOfDuration",$duration);
-        $this->smarty->display("just_for_testing.tpl");
+        
+                
+        //$this->smarty->assign("date", $datum);
+        //$this->smarty->assign("id", $id_personal_book);
+        //$this->smarty->assign("weeksOfDuration",$duration);
+        //$this->smarty->assign("test", $user_id);
+        //$this->smarty->display("just_for_testing.tpl");
+        $this->smarty->display("portal.tpl");
     }
     
     

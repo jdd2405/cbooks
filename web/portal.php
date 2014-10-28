@@ -60,6 +60,20 @@ if ($user->isLoggedIn == true) {
             /* close statement */
         $result->close();
     }
+    $id=$_SESSION['user_id'];
+    if ($result = $mysqli->query("SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate FROM lending_relations WHERE lender_id_user = $id AND state = 'r'")) {
+
+        /* fetch value */   
+        $requests = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($books);
+        $smarty->assign("requests", $requests);
+
+
+
+            /* close statement */
+        $result->close();
+    }
+    
 
 
 
@@ -92,10 +106,10 @@ if ($user->isLoggedIn == true) {
         $detailBookModule->details(filter_input(INPUT_GET,'book_id', FILTER_SANITIZE_NUMBER_INT));
       
     }
-    else if(isset($_GET['duration'])){
+    else if(isset($_GET['duration'], $_GET['id_personal_book'])){
         require_once 'modules/lend_book.module.php';
         $lendBookModule = new LendBook($smarty, $mysqli);
-        $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT));
+        $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else {

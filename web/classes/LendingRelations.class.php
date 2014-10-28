@@ -15,6 +15,7 @@ class LendingRelations {
     //put your code here
     private $id_lending_relation;
     private $requestDate;
+    private $duration;
     private $authorizationDate;
     private $returnDate;
     private $state;
@@ -22,11 +23,12 @@ class LendingRelations {
     private $item_id_personal_book;
     
     
-    function __construct($requestDate, $state, $lender_id_user, $item_id_personal_book) {
+    function __construct($requestDate, $duration, $state, /*$lender_id_user,*/ $item_id_personal_book) {
         $this->requestDate=$requestDate;
+        $this->duration=$duration;
         $this->state=$state;
-        $this->lender_id_user=$lender_id_user;
-        $this->item_id_personal_book=$lender_id_user;
+        //$this->lender_id_user=$lender_id_user;
+        $this->item_id_personal_book=$item_id_personal_book;
         
     }
     

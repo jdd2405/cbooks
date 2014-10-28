@@ -32,7 +32,7 @@
                     <td>{$details["description"]}</td>
                 </tr>
                 <tr>
-                    <th>Availability</th>
+                    <th>Verfügbarkeit</th>
                     <td>{$details["availability"]}</td>
                 </tr>
                
@@ -91,6 +91,8 @@
                                                             <option>7</option>
                                                             <option>8</option>
                                                         </select>
+                                <input type="hidden" name="id_personal_book" value="{$details["id_personal_book"]}"/>
+                                
                                  <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" >Ausleihe anfragen</button>
                                 </div>
