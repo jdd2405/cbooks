@@ -98,8 +98,8 @@
                         <div class="panel-body">
 
                             <h2>Buch suchen</h2>
-                            <form class="form-inline" role="form" action="" method="POST" name="searchBook">
-                                <input type="text" class="form-control " name="searchTerm" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary" name="searchBook"><span class="glyphicon glyphicon-search"></span></button>
+                            <form class="form-inline" role="form" action="" method="GET" name="searchBook">
+                                <input type="text" class="form-control " name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 
                             </form>
 

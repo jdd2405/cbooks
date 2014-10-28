@@ -42,7 +42,7 @@
             </div>
         {/if}
         <div class="container">
-            
+
 
             <header>
                 <div class="row">
@@ -65,15 +65,15 @@
             </header>
             <div class="row" id="banner">
                 <div class="col-md-12">
-                    
-                        {block name=banner}{/block}
-                            
+
+                {block name=banner}{/block}
 
 
 
-                </div>
-                <div class="login-buttons">
-                    {if !isset($isLoggedIn)}
+
+            </div>
+            <div class="login-buttons">
+                {if !isset($isLoggedIn)}
                     <button class="btn btn-success" id="loginBtn" data-toggle="modal" data-target="#loginModal">Anmelden</button>
                     <!-- Modal -->
                     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -105,130 +105,123 @@
                         </div>
                     </div>
 
-                    {else}
-                        <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
-                        <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
-                    {/if}
-                </div>
-
-
-            </div>
-
-        {block name=body}{/block}
-
-        <div class="row">
-            <div class="col-md-12" id="message">
-
+                {else}
+                    <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                    <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
+                {/if}
             </div>
 
 
-            <footer>
+        </div>
+
+    {block name=body}{/block}
+
+    <div class="row">
+
+
+        <footer>
+            <div class="col-md-12">
                 <div class="text-right" id="madeBy">
                     <a href="http://www.realnet.ch" target="_blank"><img src="img/logo.png"></a>
                 </div>
-            </footer>
+            </div>
+        </footer>
 
-        </div>
     </div>
+</div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="templates/js/bootstrap.min.js"></script>
-    <script src="templates/js/forms.js"></script>
-    <script src="templates/js/sha512.js"></script>
-    <script type="text/javascript">
-        {literal}    
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="templates/js/bootstrap.min.js"></script>
+<script src="templates/js/forms.js"></script>
+<script src="templates/js/sha512.js"></script>
+<script type="text/javascript">
+    {literal}    
 //match email address
-var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$'; 
+                var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$';
 //match credit card numbers
-var creditCardRegex = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$'; 
+                var creditCardRegex = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$';
 //match username
-var usernameRegex = '/^[a-z0-9_-]{3,16}$/'; 
+                var usernameRegex = '/^[a-z0-9_-]{3,16}$/';
 //match password
-var passwordRegex = '/^[a-z0-9_-]{6,18}$/'; 
+                var passwordRegex = '/^[a-z0-9_-]{6,18}$/';
 //Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords).
-var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm; 
+                var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
 //match elements that could contain a phone number
-    var phoneNumber = /[0-9-()+]{3,20}/; 
+                var phoneNumber = /[0-9-()+]{3,20}/;
+                $(document).ready(fun ct ion(){
 
-    $(document).ready(fun ct ion(){
-    
         $('#toggleSearch a').click(function (e) {
         e.preventDefault();
-    $(this).tab('show');
+                $(this).tab('show');
         });
-    
-        $("input").prop('requi red',true).blur(fun ction() {
-        
-        var key = $(this).prop('name');
-        var value = $(this).val();     
-             if($(this).val().l e ngth<3 || $(this ). val==$(this).attr('placehold er')){
-            
-            var msg;
-                var type =  $(this).prop('name');
-            
-                if (t ype=='email' && value.match(emailRe gex)){
-            msg='Bitte geben Sie eine gültige E-Mail-Adresse an.';
-            }
-                el se if (t ype=='usern ame'){
-            msg='Bitte wählen Sie einen Benutzernamen.';
-            }
-                el se if (t ype=='passw ord'){
-            msg='Bitte wählen Sie ein Passwort.';
-            }
-                else{
-            msg='Bitte füllen Sie dieses Feld korrekt aus.';
-                }
-            
+                $("input").prop('requi red', true).blur(fun ction() {
 
-            $(this).next('span.note').addClass('text-danger');
-            $(this).next('span.note').html(msg);
-        $(this).parents("div.form-group").addClass('has-error');
-            }
-        
-            else {
-            
-            $(this).next('span.note').removeClass('text-danger');
-            $(this).next('span.note').html("");
-            $(this).parents("div.form-group").removeClass('has-error');
-                errorCount[$(this).index("#registrationModal [require d] ")]==0;
-            
+        var key = $(this).prop('name');
+                var value = $(this).val();
+                if ($(this).val().l e ngth < 3 || $(this).val == $(this).attr('placehold er')){
+
+        var msg;
+                var type = $(this).prop('name');
+                if (t ype == 'email' && value.match(emailRe gex)){
+        msg = 'Bitte geben Sie eine gültige E-Mail-Adresse an.';
+        }
+        el se if (t ype == 'usern ame'){
+        msg = 'Bitte wählen Sie einen Benutzernamen.';
+        }
+        el se if (t ype == 'passw ord'){
+        msg = 'Bitte wählen Sie ein Passwort.';
+        }
+        else{
+        msg = 'Bitte füllen Sie dieses Feld korrekt aus.';
+        }
+
+
+        $(this).next('span.note').addClass('text-danger');
+                $(this).next('span.note').html(msg);
+                $(this).parents("div.form-group").addClass('has-error');
+        }
+
+        else {
+
+        $(this).next('span.note').removeClass('text-danger');
+                $(this).next('span.note').html("");
+                $(this).parents("div.form-group").removeClass('has-error');
+                errorCount[$(this).index("#registrationModal [require d] ")] == 0;
                 $.ajax({
                 type: "GET",
-                url: "isAvailable.php",
-                data: {key: key, value: value},
-                    beforeSend: fun ction(html) { // this happen before actual call
+                        url: "isAvailable.php",
+                        data: {key: key, value: value},
+                        beforeSend: fun ction(html) { // this happen before actual call
                 $(this).next('span.note').html('');
                 },
-                    success: fun ction(re sult){ // this happen after we get result
-                        if(r es ult!= true){
-                        $("#registrationModal input[na m e='"+r e sult+"']").next('span.note').html("bereits registriert");
-                        $("#registrationModal input[na m e='"+r e sult+"']").next('span.note').addClass('text-danger');
-                        $("#registrationModal input[na m e='"+r e sult+"']").next('span.note').html(msg);
-                    $("#registrationModal input[na m e='"+r e sult+"']").parents("div.form-group").addClass('has-error');
+                        success: fun ction(re sult){ // this happen after we get result
+                if (r es ult != true){
+                $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').html("bereits registriert");
+                        $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').addClass('text-danger');
+                        $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').html(msg);
+                        $("#registrationModal input[na m e='" + r e sult + "']").parents("div.form-group").addClass('has-error');
                 }
-            }
+                }
                 });
-        
-            }
-    
-});
-    });
+        }
 
-    function registrate(){
-        $.ajax({
-        type: "GET",
-        url: "registrate.php",
-    data: { email: $("#registrationModal input[name='email']").val(), username: $("#registrationModal input[name='username']").val(), password: $("#registrationModal input[name='password']").val() }
-            })
-                .done(fun ction( msg ) {
-            alert( msg );
-});
-      }
+        });
+        });
+                function registrate(){
+                $.ajax({
+                type: "GET",
+                        url: "registrate.php",
+                        data: { email: $("#registrationModal input[name='email']").val(), username: $("#registrationModal input[name='username']").val(), password: $("#registrationModal input[name='password']").val() }
+                })
+                        .done(fun ction(msg) {
+                        alert(msg);
+                                });
+                }
 
-      $(".alert").alert();
-        {/literal}  
-    </script>
+        $(".alert").alert();
+    {/literal}  
+</script>
 </body>
 </html>

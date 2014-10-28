@@ -70,10 +70,11 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="search">
-                            <form role="form" action="{$path}" method="get">
-                                <input type="text" class="form-control"  name="searchBook" placeholder="Titel, ISBN oder Stichwort" required>
-                                <button type="submit" class="btn btn-primary" id="btnsearchBooks">suchen</button>
+
+                            <form class="form-inline" role="form" action="{$path}" method="GET">
+                                <input type="text" class="form-control " name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
                             </form>
+
                         </div>
 
                         <div class="tab-pane" id="browse">

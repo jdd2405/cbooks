@@ -58,13 +58,12 @@ if (isset($_GET['err'])) {
 }
 
 // Check for called actions
-if (isset($_GET['searchBook'])) {
-    include_once 'modules/search_book.module.php';
-    $search_term = filter_input(INPUT_GET, 'searchBook', FILTER_SANITIZE_STRING);
-    
-    $search_book = new SearchBookModule($smarty, $mysqli);
-    $search_book->search($search_term);
-}
+    if(isset($_GET['searchBook'])){
+        require_once 'modules/search_book.module.php';
+        $searchBookModule = new SearchBookModule($smarty, $mysqli);
+
+        $searchBookModule->search(filter_input(INPUT_GET, 'searchBook', FILTER_SANITIZE_STRING));
+    }
 
 else if(isset($_POST['login'])){
     include_once 'modules/login.module.php';
