@@ -35,7 +35,7 @@ class LendBook {
 
        
         $this->mysqli->query("INSERT INTO `lending_relations` (duration, state,lender_id_user, item_id_personal_book) VALUES ( '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
-        
+        $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='". $id_personal_book ."'");
         
         
                 

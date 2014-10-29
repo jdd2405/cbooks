@@ -42,7 +42,7 @@
                 </div>
                 </div>
         </div>
-        {if isset($isLoggedIn)}
+        {if isset($isLoggedIn) and $details["availability"]==a}
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-body">

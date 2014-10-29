@@ -54,12 +54,11 @@ if ($user->isLoggedIn == true) {
         $books = $result->fetch_all(MYSQLI_ASSOC);
         //print_r($books);
         $smarty->assign("books", $books);
-
-
-
             /* close statement */
         $result->close();
     }
+    
+    //Angefragte Bücher
     $id=$_SESSION['user_id'];
     if ($result = $mysqli->query("SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate FROM lending_relations WHERE lender_id_user = $id AND state = 'r'")) {
 
@@ -67,9 +66,21 @@ if ($user->isLoggedIn == true) {
         $requests = $result->fetch_all(MYSQLI_ASSOC);
         //print_r($books);
         $smarty->assign("requests", $requests);
+            /* close statement */
+        $result->close();
+    }
+    
+    //Anfragen deiner Bücher
+    $query= "SELECT *FROM lending_relations l JOIN personal_books p
+            ON l.item_id_personal_book = p.id_personal_book
+            WHERE l.state ='r' AND p.owner_id_user =$id";
+    
+    if ($result = $mysqli->query($query)) {
 
-
-
+        /* fetch value */   
+        $confirms = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($books);
+        $smarty->assign("confirms", $confirms);
             /* close statement */
         $result->close();
     }

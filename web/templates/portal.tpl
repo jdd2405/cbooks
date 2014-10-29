@@ -178,7 +178,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <h2>Angefragte Bücher</h2>
+                                <h3>Angefragte Bücher</h3>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -197,10 +197,30 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <h3>Anfragen deiner Bücher</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID Ausleihrelation</th>
+                                            <th>Anfragedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach $confirms as $confirm}
+                                            <tr> 
+                                            <td>{$confirm.id_lending_relation}</td>
+                                            <td>{$confirm.requestDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         
     </div>
