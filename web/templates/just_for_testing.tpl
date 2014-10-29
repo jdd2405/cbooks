@@ -2,12 +2,7 @@
 
 {block name=body}
     
-{$weeksOfDuration}
-<br>
-{$id}
-<br>
-{$date}
-<br>
+
 {$test}
 
     

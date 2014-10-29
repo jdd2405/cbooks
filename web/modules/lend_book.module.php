@@ -32,6 +32,7 @@ class LendBook {
         $user_id = $_SESSION['user_id'];
         
         //$lend = new LendingRelations($datum, $duration, $state, $id_personal_book );
+
        
         $this->mysqli->query("INSERT INTO `lending_relations` (duration, state,lender_id_user, item_id_personal_book) VALUES ( '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
         
@@ -43,7 +44,7 @@ class LendBook {
         //$this->smarty->assign("weeksOfDuration",$duration);
         //$this->smarty->assign("test", $user_id);
         //$this->smarty->display("just_for_testing.tpl");
-        $this->smarty->display("portal.tpl");
+        header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
     }
     
     
