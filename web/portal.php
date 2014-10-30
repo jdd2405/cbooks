@@ -71,25 +71,22 @@ if ($user->isLoggedIn == true) {
     }
     
     //Anfragen deiner Bücher
-    $query= "SELECT *FROM lending_relations l JOIN personal_books p
-            ON l.item_id_personal_book = p.id_personal_book
-            WHERE l.state ='r' AND p.owner_id_user =$id";
+    $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
     
     if ($result = $mysqli->query($query)) {
 
         /* fetch value */   
         $confirms = $result->fetch_all(MYSQLI_ASSOC);
-        //print_r($books);
+      
         $smarty->assign("confirms", $confirms);
             /* close statement */
         $result->close();
     }
     
 
-
-
-    
-    
     
     if(isset($_GET['logout'])){
         $logout = filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING);
@@ -121,6 +118,12 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/lend_book.module.php';
         $lendBookModule = new LendBook($smarty, $mysqli);
         $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
+    }
+    
+    else if(isset($_POST['lendingRelation'])){
+        require_once 'modules/lend_book.module.php';
+        $acceptRequest = new LendBook($smarty, $mysqli);
+        $acceptRequest->accept(filter_input(INPUT_POST, 'lendingRelation', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else {

@@ -183,7 +183,7 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>ID Ausleihrelation</th>
+                                            <th>ID</th>
                                             <th>Anfragedatum</th>
                                         </tr>
                                         </thead>
@@ -202,7 +202,7 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>ID Ausleihrelation</th>
+                                            <th>ID</th>
                                             <th>Anfragedatum</th>
                                         </tr>
                                         </thead>
@@ -211,11 +211,39 @@
                                             <tr> 
                                             <td>{$confirm.id_lending_relation}</td>
                                             <td>{$confirm.requestDate}</td>
+                                            <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#acceptRequest"><span class="glyphicon glyphicon-ok"></span></button></td>
                                             </tr>
                                             {/foreach}
                                         </tbody>
                                     </table>
                                 </div>
+                                <!--Modal-->
+                                <div class="modal fade" id="acceptRequest" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Buchanfrage akzeptieren</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" role="form" action="portal.php" method="POST">
+                                                {$confirm.id_lending_relation}<br>
+                                                {$confirm.title}<br>
+                                                {$confirm.id_isbn}<br>
+                                                {$confirm.first_name}
+                                                <input type="hidden" name="lendingRelation" value="{$confirm.item_id_personal_book}"/>
+
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Buchanfrage bestätigen</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Modal Ende-->
                             </div>
                         </div>
                     </div>
