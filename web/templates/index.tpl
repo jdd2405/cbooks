@@ -103,11 +103,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {foreach $books as $book}
-                                    <tr onclick="document.location = '{$path}?book_id={$book.id_isbn}';"> 
-                                        <td>{$book.id_isbn}</td>
-                                        <td>{$book.title}</td>
+                                {foreach $newestBooks as $book}
+                                    <tr onclick="document.location = '{$path}?book_id={$book.isbn}';"> 
+                                        <td>{$book[0]}</td>
+                                        <td>{$book[1]}</td>
                                     </tr>
+                                {foreachelse}
+                                    Keine Bücher
                                 {/foreach}
                             </tbody>
                         </table>
@@ -122,13 +124,11 @@
                     <h2>Statistik</h2>
                     <dl class="dl-horizontal">
                         <dt>Registrierte Bücher</dt>
-                        <dd>10</dd>
-                        <dt>Gelesene Bücher</dt>
-                        <dd>2</dd>
+                        <dd>{$nofRegBooks}</dd>
+                        <dt>Registrierte Benutzer</dt>
+                        <dd>{$nofRegUsers}</dd>
                         <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>5</dd>
+                        <dd>{$nofLends}</dd>
 
                     </dl>
                 </div>

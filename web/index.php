@@ -38,19 +38,18 @@ $smarty->assign("path", "index.php");
  * index.tpl requires Database informations 
  * for displaying latest books ans statistics
  */
-if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
-        
-    /* fetch value */   
+/* if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
+         
     $books = $result->fetch_all(MYSQLI_ASSOC);
     //print_r($books);
     $smarty->assign("books", $books);
 
-
-        
-        /* close statement */
     $result->close();
-}
+}*/
 
+require_once 'modules/statistics.module.php';
+$statisticsModule = new statisticsModule($smarty, $mysqli);
+$statisticsModule->getPublicStats();
 
 // Check for error messages
 if (isset($_GET['err'])) {

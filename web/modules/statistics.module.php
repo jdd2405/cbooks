@@ -20,12 +20,42 @@ class statisticsModule {
         $this->smarty = $smarty;
         $this->mysqli = $mysqli;
     }
-    
+     
+
     public function getPublicStats(){
         
+    
+        if ($result = $this->mysqli->query("SELECT * FROM personal_books")) {
+            $nofRegBooks = $result->num_rows;
+            $this->smarty->assign("nofRegBooks", $nofRegBooks);
+            $result->close();
+        }
+        
+        if ($result = $this->mysqli->query("SELECT * FROM cb_users")) {
+            $nofRegUsers = $result->num_rows;
+            $this->smarty->assign("nofRegUsers", $nofRegUsers);
+            $result->close();
+        }
+        
+        if ($result = $this->mysqli->query("SELECT * FROM lending_relations")) {
+            $nofLends = $result->num_rows;
+            $this->smarty->assign("nofLends", $nofLends);
+            $result->close();
+        }
+        
+
+        if ($result = $this->mysqli->query("SELECT pb.isbn, title
+            FROM personal_books pb
+            JOIN books b ON pb.isbn = b.id_isbn
+            ORDER BY pb.reg_date DESC 
+            LIMIT 5")) {
+
+            $newestBooks = $result->fetch_all();
+            $this->smarty->assign("newestBooks", $newestBooks);
+        }
+        
+        
     }
-    
-    
-    
-    
+     
 }
+
