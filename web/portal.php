@@ -126,6 +126,12 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->accept(filter_input(INPUT_POST, 'lendingRelation', FILTER_SANITIZE_NUMBER_INT));
     }
     
+    else if(isset($_GET['isbn'])){
+        require_once 'modules/registrate_book.module.php';
+        $registrateBookModule = new registrateBookModule($smarty, $mysqli);
+        $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'isbn', FILTER_DEFAULT));
+    }
+    
     else {
         $smarty->display('portal.tpl');
     }
