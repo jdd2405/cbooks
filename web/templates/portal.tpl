@@ -113,8 +113,8 @@
                         <div class="panel-body">
 
                             <h2>neues Buch registrieren</h2>
-                            <form class="form-inline" role="form" action="" method="POST" name="updateUser_form">
-                                <input type="text" class="form-control " name="updateFirst_name" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
+                                <input type="text" class="form-control " name="isbn" placeholder="ISBN" required> <button type="submit" class="btn btn-primary" name="registrateBook"><span class="glyphicon glyphicon-arrow-right"></span></button>
 
                             </form>
                             <a href="#">Keine ISBN vorhanden?</a>
