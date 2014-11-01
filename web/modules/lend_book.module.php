@@ -12,7 +12,6 @@
  * @author Theresa
  */
 
-require_once 'classes/LendingRelations.class.php';
 
 class LendBook {
     
