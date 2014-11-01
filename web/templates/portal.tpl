@@ -188,12 +188,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {foreach $requests as $request}
-                                            <tr> 
-                                            <td>{$request.id_lending_relation}</td>
-                                            <td>{$request.requestDate}</td>
-                                            </tr>
-                                            {/foreach}
+                                            {if isset($requests)}
+                                                {foreach $requests as $request}
+                                                <tr> 
+                                                <td>{$request.id_lending_relation}</td>
+                                                <td>{$request.requestDate}</td>
+                                                </tr>
+                                                {/foreach}
+                                            {/if}
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -207,6 +210,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                            {if isset($confirms)}
                                             {foreach $confirms as $confirm}
                                             <tr> 
                                             <td>{$confirm.id_lending_relation}</td>
@@ -214,6 +218,49 @@
                                             <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#acceptRequest"><span class="glyphicon glyphicon-ok"></span></button></td>
                                             </tr>
                                             {/foreach}
+                                            {/if}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h3>Ausgeliehene Bücher</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Rückgabedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {if isset($borrowed)}
+                                            {foreach $borrowed as $borrow}
+                                            <tr> 
+                                            <td>{$borrow.id_lending_relation}</td>
+                                            <td>{$borrow.returnDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                            {/if}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h3>Meine geliehenen Bücher</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Rückgabedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {if isset($lended)}
+                                            {foreach $lended as $lend}
+                                            <tr> 
+                                            <td>{$lend.id_lending_relation}</td>
+                                            <td>{$lend.returnDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                            {/if}
                                         </tbody>
                                     </table>
                                 </div>

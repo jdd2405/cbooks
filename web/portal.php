@@ -45,7 +45,7 @@ if ($user->isLoggedIn == true) {
 
     $smarty->assign("path", "portal.php");
     
-
+    require_once 'modules/lend_book.module.php';
     
     
     
@@ -60,36 +60,11 @@ if ($user->isLoggedIn == true) {
         $result->close();
     }
     
-    //Angefragte Bücher
-    $id=$_SESSION['user_id'];
-    if ($result = $mysqli->query("SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate FROM lending_relations WHERE lender_id_user = $id AND state = 'r'")) {
-
-        /* fetch value */   
-        $requests = $result->fetch_all(MYSQLI_ASSOC);
-        //print_r($books);
-        $smarty->assign("requests", $requests);
-            /* close statement */
-        $result->close();
-    }
-    
-    //Anfragen deiner Bücher
-    $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
-            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
-            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
-    
-    if ($result = $mysqli->query($query)) {
-
-        /* fetch value */   
-        $confirms = $result->fetch_all(MYSQLI_ASSOC);
-      
-        $smarty->assign("confirms", $confirms);
-            /* close statement */
-        $result->close();
-    }
+    //Datenbankabfragen
+    $DB = new LendBook($smarty, $mysqli);
+    $DB->DB();
     
 
-    
     if(isset($_GET['logout'])){
         $logout = filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING);
         if($logout==true){
