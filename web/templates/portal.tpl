@@ -188,12 +188,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {foreach $requests as $request}
-                                            <tr> 
-                                            <td>{$request.id_lending_relation}</td>
-                                            <td>{$request.requestDate}</td>
-                                            </tr>
-                                            {/foreach}
+                                            {if isset($requests)}
+                                                {foreach $requests as $request}
+                                                <tr> 
+                                                <td>{$request.id_lending_relation}</td>
+                                                <td>{$request.requestDate}</td>
+                                                </tr>
+                                                {/foreach}
+                                            {/if}
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -207,6 +210,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                            {if isset($confirms)}
                                             {foreach $confirms as $confirm}
                                             <tr> 
                                             <td>{$confirm.id_lending_relation}</td>
@@ -214,6 +218,7 @@
                                             <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#acceptRequest"><span class="glyphicon glyphicon-ok"></span></button></td>
                                             </tr>
                                             {/foreach}
+                                            {/if}
                                         </tbody>
                                     </table>
                                 </div>

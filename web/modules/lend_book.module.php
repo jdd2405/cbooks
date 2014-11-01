@@ -34,9 +34,38 @@ class LendBook {
         $this->mysqli->query("INSERT INTO `lending_relations` (requestDate, duration, state,lender_id_user, item_id_personal_book) VALUES ('" . $date . "', '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
         $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='". $id_personal_book ."'");
         
-
         header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
     }
+    
+    
+    function DB(){
+        //Angefragte Bücher
+        $id=$_SESSION['user_id'];
+        $result = $this->mysqli->query("SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate FROM lending_relations WHERE lender_id_user = $id AND state = 'r'");
+
+        /* fetch value */   
+        $requests = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($books);
+        $this->smarty->assign("requests", $requests);
+            /* close statement */
+        $result->close();
+        
+        //Anfragen deiner Bücher
+        $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
+    
+        $result = $this->mysqli->query($query);
+
+        /* fetch value */   
+        $confirms = $result->fetch_all(MYSQLI_ASSOC);
+      
+        $this->smarty->assign("confirms", $confirms);
+            /* close statement */
+        $result->close();
+    }
+    
     
     
     function accept($lendingRelation){
