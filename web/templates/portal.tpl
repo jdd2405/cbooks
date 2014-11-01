@@ -222,6 +222,48 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <h3>Ausgeliehene Bücher</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Rückgabedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {if isset($borrowed)}
+                                            {foreach $borrowed as $borrow}
+                                            <tr> 
+                                            <td>{$borrow.id_lending_relation}</td>
+                                            <td>{$borrow.returnDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                            {/if}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h3>Meine geliehenen Bücher</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Rückgabedatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {if isset($lended)}
+                                            {foreach $lended as $lend}
+                                            <tr> 
+                                            <td>{$lend.id_lending_relation}</td>
+                                            <td>{$lend.returnDate}</td>
+                                            </tr>
+                                            {/foreach}
+                                            {/if}
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!--Modal-->
                                 <div class="modal fade" id="acceptRequest" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
                                     <div class="modal-dialog">

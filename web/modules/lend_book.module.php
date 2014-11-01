@@ -24,7 +24,7 @@ class LendBook {
         $this->mysqli=$mysqli;
     }
     
-    //Objekt lending_relations instanzieren und in DB eintragen und Mail versenden
+    //in DB eintragen und Mail versenden
     function request($duration, $id_personal_book){
         $timestamp= time();
         $date=  date('Y-m-d',$timestamp);
@@ -36,9 +36,25 @@ class LendBook {
         
         header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
     }
+
+    
+    function accept($lendingRelation){
+        $state= "l";
+        
+        $this->mysqli->query("UPDATE lending_relations l, personal_books p "
+                . "SET l.authorizationDate = CURDATE(), l.state = '" . $state . "', p.availability = '". $state . "' "
+                . "WHERE l.item_id_personal_book = p.id_personal_book "
+                . "AND l.item_id_personal_book = '". $lendingRelation ."'");
+        $this->mysqli->query("UPDATE lending_relations SET returnDate = DATE_ADD(authorizationDate, INTERVAL duration WEEK)"
+                . " WHERE item_id_personal_book = '". $lendingRelation ."'");
+        
+        header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
+       
+    }
     
     
-    function DB(){
+    
+        function DB(){
         //Angefragte Bücher
         $id=$_SESSION['user_id'];
         $result = $this->mysqli->query("SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate FROM lending_relations WHERE lender_id_user = $id AND state = 'r'");
@@ -64,22 +80,36 @@ class LendBook {
         $this->smarty->assign("confirms", $confirms);
             /* close statement */
         $result->close();
-    }
-    
-    
-    
-    function accept($lendingRelation){
-        $state= "l";
         
-        $this->mysqli->query("UPDATE lending_relations l, personal_books p "
-                . "SET l.authorizationDate = CURDATE(), l.state = '" . $state . "', p.availability = '". $state . "' "
-                . "WHERE l.item_id_personal_book = p.id_personal_book "
-                . "AND l.item_id_personal_book = '". $lendingRelation ."'");
-        $this->mysqli->query("UPDATE lending_relations SET returnDate = DATE_ADD(authorizationDate, INTERVAL duration WEEK)"
-                . " WHERE item_id_personal_book = '". $lendingRelation ."'");
+        //Ausgeliehene Bücher
+        $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(returnDate, '%d.%m.%Y') AS returnDate, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND l.lender_id_user =$id";
+    
+        $result = $this->mysqli->query($query);
+
+        /* fetch value */   
+        $borrowed = $result->fetch_all(MYSQLI_ASSOC);
+      
+        $this->smarty->assign("borrowed", $borrowed);
+            /* close statement */
+        $result->close();
         
-        header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
-       
+        //Meine geliehenen Bücher
+        $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(returnDate, '%d.%m.%Y') AS returnDate, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND p.owner_id_user =$id";
+    
+        $result = $this->mysqli->query($query);
+
+        /* fetch value */   
+        $lended = $result->fetch_all(MYSQLI_ASSOC);
+      
+        $this->smarty->assign("lended", $lended);
+            /* close statement */
+        $result->close();
     }
     
     
