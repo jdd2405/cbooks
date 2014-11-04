@@ -5,7 +5,7 @@
  *
  * @package Example-application
  */
-
+header("Content-Type: text/html; charset=utf-8");
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 
@@ -14,6 +14,7 @@ define("SECURE", FALSE);    // NUR FÜR DIE ENTWICKLUNG!!!!
 
 // Setup DB
 $mysqli = new mysqli("194.126.200.55",  "cbooksch_dev", "r34d_b00k$", "cbooksch_dev");
+$mysqli->query("SET NAMES 'utf8'");
 
 /* check connection */
 if (mysqli_connect_errno()) {

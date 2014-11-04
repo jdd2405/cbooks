@@ -114,7 +114,7 @@
 
                             <h2>neues Buch registrieren</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
-                                <input type="text" class="form-control " name="isbn" placeholder="ISBN" required> <button type="submit" class="btn btn-primary" name="registrateBook"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
 
                             </form>
                             <a href="#">Keine ISBN vorhanden?</a>
@@ -139,11 +139,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {foreach $books as $book}
-                                    <tr onclick="document.location = 'portal.php?book_id={$book.id_isbn}';"> 
-                                        <td>{$book.id_isbn}</td>
+                                {foreach $newestBooks as $book}
+                                    <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
+                                        <td>{$book.isbn}</td>
                                         <td>{$book.title}</td>
                                     </tr>
+                                {foreachelse}
+                                    <tr><td colspan="2">Noch keine Bücher registriert</td></tr>
                                 {/foreach}
                             </tbody>
                         </table>
@@ -160,13 +162,11 @@
                                 <h2>Deine Statistik</h2>
                                 <dl class="dl-horizontal">
                                 <dt>Registrierte Bücher</dt>
-                                <dd>10</dd>
-                                <dt>Gelesene Bücher</dt>
-                                <dd>2</dd>
-                                <dt>Ausgeliehne Bücher</dt>
-                                <dd>5</dd>
-                                <dt>Ausgeliehne Bücher</dt>
-                                <dd>5</dd>
+                        <dd>{$nofRegBooks}</dd>
+                        <dt>Registrierte Benutzer</dt>
+                        <dd>{$nofRegUsers}</dd>
+                        <dt>Ausgeliehne Bücher</dt>
+                        <dd>{$nofLends}</dd>
 
                                 </dl>
 
@@ -206,7 +206,7 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Anfragedatum</th>
+                                            <th colspan="2">Anfragedatum</th>
                                         </tr>
                                         </thead>
                                         <tbody>

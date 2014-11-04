@@ -5,6 +5,7 @@
  *
  * @package Example-application
  */
+header("Content-Type: text/html; charset=utf-8");
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 
@@ -14,6 +15,7 @@ define("SECURE", FALSE);    // NUR FÜR DIE ENTWICKLUNG!!!!
 
 // Setup DB
 $mysqli = new mysqli("194.126.200.55", "cbooksch_dev", "r34d_b00k$", "cbooksch_dev");
+$mysqli->query("SET NAMES 'utf8'");
 
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -44,7 +46,10 @@ if ($user->isLoggedIn == true) {
     $smarty->assign("path", "portal.php");
     
     require_once 'modules/lend_book.module.php';
+    require_once 'modules/statistics.module.php';
     
+    $privateStats = new statisticsModule($smarty, $mysqli);
+    $privateStats->getPrivateStats();
     
     
     
@@ -101,10 +106,10 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->accept(filter_input(INPUT_POST, 'lendingRelation', FILTER_SANITIZE_NUMBER_INT));
     }
     
-    else if(isset($_GET['isbn'])){
+    else if(isset($_GET['registrateBookWithISBN'])){
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
-        $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'isbn', FILTER_DEFAULT));
+        $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
     
     else {

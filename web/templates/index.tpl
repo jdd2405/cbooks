@@ -104,12 +104,10 @@
                             </thead>
                             <tbody>
                                 {foreach $newestBooks as $book}
-                                    <tr onclick="document.location = '{$path}?book_id={$book.isbn}';"> 
-                                        <td>{$book[0]}</td>
+                                    <tr onclick="document.location = '{$path}?book_id={$book[0]}';"> 
                                         <td>{$book[1]}</td>
+                                        <td>{$book[2]}</td>
                                     </tr>
-                                {foreachelse}
-                                    Keine Bücher
                                 {/foreach}
                             </tbody>
                         </table>

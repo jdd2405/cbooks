@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of lend_book
+ * This Module handels the act of lending a book.
  *
  * @author Theresa
  */
