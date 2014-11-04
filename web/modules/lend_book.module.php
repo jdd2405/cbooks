@@ -34,6 +34,10 @@ class LendBook {
         $this->mysqli->query("INSERT INTO `lending_relations` (requestDate, duration, state,lender_id_user, item_id_personal_book) VALUES ('" . $date . "', '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
         $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='". $id_personal_book ."'");
         
+        //mail
+        //$text= "Hallo \n Sie haben eine Buchanfrage erhalten.";
+        //mail('t547490@hotmail.com', 'Testmail', $text);
+        
         header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
     }
 

@@ -258,13 +258,14 @@
                                             <tr> 
                                             <td>{$lend.id_lending_relation}</td>
                                             <td>{$lend.returnDate}</td>
+                                            <td><button type="submit" class="btn btn-primary" name= "returned"><span class="glyphicon glyphicon-ok"></span></button></td>
                                             </tr>
                                             {/foreach}
                                             {/if}
                                         </tbody>
                                     </table>
                                 </div>
-                                <!--Modal-->
+                                <!--Modal for confirming-->
                                 <div class="modal fade" id="acceptRequest" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -282,6 +283,31 @@
 
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-primary">Buchanfrage bestätigen</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Modal Ende-->
+                                <!--Modal for returning-->
+                                <div class="modal fade" id="returning" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Buchrückgabe</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" role="form" action="portal.php" method="POST">
+                                                    <p>Durch drücken des unteren Buttons, betätigen Sie, dass 
+                                                        Ihr Buch wieder zurück gebracht wurden und es wieder frei zur Ausleihe steht.</p>
+                                                <input type="hidden" name="return" value="{$lend.item_id_personal_book}"/>
+
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Akzeptieren</button>
                                                     </div>
                                                 </form>
 
