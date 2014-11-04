@@ -3,6 +3,8 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <h2>Herzlich Willkommen{if $user->first_name != ""},{/if} {$user->first_name}</h2>
+            <div class="row">
+                <div class="col-md-9">
             <address>
                 <dl class="dl-horizontal">
                     <dt>Adresse</dt>
@@ -18,6 +20,21 @@
                     <dd><br><button type="button" class="btn btn-default"  data-toggle="modal" data-target="#changeAdressModal"><span class="glyphicon glyphicon-pencil"></span> Angaben ändern</button></dd>
                 </dl>
             </address>
+                </div>
+                    <div class="col-md-3">
+                       <dl class="dl-horizontal">
+                        <dt>Empfangene Anfragen</dt>
+                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dt>Offene Anfragen</dt>
+                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dt>Geliehene Bücher</dt>
+                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dt>Verliehene Bücher</dt>
+                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                       </dl>
+                    </div>
+            </div>
+
 
             <!-- Modal -->
             <div class="modal fade" id="changeAdressModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">

@@ -1,8 +1,15 @@
 {extends file="layout.tpl"}
 
+{block name="banner"}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Details zum Buch: "{$details["title"]}"</h2>
+        </div>
+    </div>
+{/block}
+
 {block name=body}
 
-<h2>Details zum Buch: "{$details["title"]}"</h2>
 <div>
     <div class="row">
         <div class="col-sm-8">
