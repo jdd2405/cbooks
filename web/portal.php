@@ -62,10 +62,7 @@ if ($user->isLoggedIn == true) {
             /* close statement */
         $result->close();
     }
-    
-    //Datenbankabfragen
-    $DB = new LendBook($smarty, $mysqli);
-    $DB->DB();
+
     
 
     if(isset($_GET['logout'])){
@@ -111,6 +108,14 @@ if ($user->isLoggedIn == true) {
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
+    
+    else if(isset($_GET['click'])){
+        require_once 'modules/lend_book.module.php';
+        $acceptRequest = new LendBook($smarty, $mysqli);
+        $acceptRequest->statement(filter_input(INPUT_GET, 'click', FILTER_SANITIZE_NUMBER_INT));
+    }
+    
+    
     
     else {
         $smarty->display('portal.tpl');

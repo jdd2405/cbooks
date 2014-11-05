@@ -22,16 +22,18 @@
             </address>
                 </div>
                     <div class="col-md-3">
-                       <dl class="dl-horizontal">
+                        <form role="form" methode="GET">
+                        <dl class="dl-horizontal">
                         <dt>Empfangene Anfragen</dt>
-                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dd><button type="submit" class="btn btn-default btn-xs" name="click" value="1"><span class="glyphicon glyphicon-list"></span></button></dd>
                         <dt>Offene Anfragen</dt>
-                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dd><button type="submit" class="btn btn-default btn-xs" name="click" value="2"><span class="glyphicon glyphicon-list"></span></button></dd>
                         <dt>Geliehene Bücher</dt>
-                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        <dd><button type="submit" class="btn btn-default btn-xs" name="click" value="3"><span class="glyphicon glyphicon-list"></span></button></dd>
                         <dt>Verliehene Bücher</dt>
-                        <dd><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></button></dd>
-                       </dl>
+                        <dd><button type="submit" class="btn btn-default btn-xs" name="click" value="4"><span class="glyphicon glyphicon-list"></span></button></dd>
+                        </dl>
+                        </form>
                     </div>
             </div>
 

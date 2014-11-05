@@ -10,8 +10,16 @@
 
 {block name=body}
     
+    {if isset($test123)}
+        {foreach $test123 as $test}
+            <tr> 
+                <td>{$test.id_lending_relation}</td>
+                <td>{$test.requestDate}</td>
+            </tr>
+        {/foreach}
+    {/if}
 
-    
+
     
     
     
