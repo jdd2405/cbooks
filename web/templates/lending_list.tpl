@@ -3,24 +3,35 @@
 {block name="banner"}
     <div class="panel panel-default">
         <div class="panel-body">
-            <h2>Lendingrelation</h2>
+            <h2>{$lendingListTitle}</h2>
         </div>
     </div>
 {/block}
 
 {block name=body}
     
-    {if isset($test123)}
-        {foreach $test123 as $test}
-            <tr> 
-                <td>{$test.id_lending_relation}</td>
-                <td>{$test.requestDate}</td>
-            </tr>
-        {/foreach}
-    {/if}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Titel</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {foreach $test123 as $test}
+                    <tr> 
+                        <td>{$test.requestDate}</td>
+                        <td>{$test.state}</td>
+                    </tr>
+                {/foreach}
 
 
-    
-    
+            </tbody>
+        </table>
+    </div>
+
+
     
 {/block}

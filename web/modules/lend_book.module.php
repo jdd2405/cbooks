@@ -68,21 +68,25 @@ class LendBook {
             
             $result = $this->mysqli->query($query);
             $test123 = $result->fetch_all(MYSQLI_ASSOC);
-      
+           
             $this->smarty->assign("test123", $test123);
             $result->close();
+            
+            $lendingListTitle= "Empfangene Anfragen";    
         }
         
         //Offene Anfragen
         else if($number==2){
-            $query= "SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate "
+            $query= "SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate , duration, state "
                     . "FROM lending_relations WHERE lender_id_user = $id AND state = 'r'";
             
             $result = $this->mysqli->query($query);
             $requests = $result->fetch_all(MYSQLI_ASSOC);
             
             $this->smarty->assign("test123", $requests);
-            $result->close();   
+            $result->close();
+            
+            $lendingListTitle= "Offene Anfragen";
         }
         
         //Geliehene Bücher
@@ -97,6 +101,8 @@ class LendBook {
             
             $this->smarty->assign("test123", $borrowed);
             $result->close();
+            
+            $lendingListTitle= "Geliehene Bücher";
         }
         
         //Verliehene Bücher
@@ -110,9 +116,12 @@ class LendBook {
             $lended = $result->fetch_all(MYSQLI_ASSOC);
             
             $this->smarty->assign("test123", $lended);
-            $result->close(); 
-        }
+            $result->close();
             
+            $lendingListTitle= "Verliehene Bücher";
+        }
+        
+        $this->smarty->assign("lendingListTitle", $lendingListTitle);
         $this->smarty->display('lending_list.tpl');
         
     }      
