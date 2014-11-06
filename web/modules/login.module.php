@@ -43,7 +43,7 @@ class LoginModule {
 
                 if ($this->checkbrute($user_id, $this->mysqli) == true) {
                     // Konto ist blockiert 
-                    // Schicke E-Mail an Benutzer, dass Konto blockiert ist
+                    // To Do: Schicke E-Mail an Benutzer, dass Konto blockiert ist
                     return false;
                 } else {
                     // Überprüfe, ob das Passwort in der Datenbank mit dem vom
