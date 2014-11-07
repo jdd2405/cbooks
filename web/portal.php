@@ -116,7 +116,6 @@ if ($user->isLoggedIn == true) {
         $smarty->display("registrate_book.tpl");
     }
     
-    else if(isset($_GET['click'])){
     else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
         $acceptRequest = new LendBook($smarty, $mysqli);
