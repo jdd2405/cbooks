@@ -97,11 +97,7 @@ if ($user->isLoggedIn == true) {
         $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
     }
     
-    else if(isset($_POST['lendingRelation'])){
-        require_once 'modules/lend_book.module.php';
-        $acceptRequest = new LendBook($smarty, $mysqli);
-        $acceptRequest->accept(filter_input(INPUT_POST, 'lendingRelation', FILTER_SANITIZE_NUMBER_INT));
-    }
+    
     
     else if(isset($_GET['registrateBookWithISBN'])){
         require_once 'modules/registrate_book.module.php';
@@ -115,6 +111,11 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->statement(filter_input(INPUT_GET, 'click', FILTER_SANITIZE_NUMBER_INT));
     }
     
+    else if(isset($_GET['accept'])){
+        require_once 'modules/lend_book.module.php';
+        $acceptRequest = new LendBook($smarty, $mysqli);
+        $acceptRequest->accept(filter_input(INPUT_GET, 'accept', FILTER_SANITIZE_NUMBER_INT));
+    }
     
     
     else {

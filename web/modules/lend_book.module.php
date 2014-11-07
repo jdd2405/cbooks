@@ -61,7 +61,7 @@ class LendBook {
         
         //Empfangene Anfragen
         if($number==1){
-            $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
@@ -77,8 +77,10 @@ class LendBook {
         
         //Offene Anfragen
         else if($number==2){
-            $query= "SELECT id_lending_relation, DATE_FORMAT(requestDate,'%d.%m.%Y') AS requestDate , duration, state "
-                    . "FROM lending_relations WHERE lender_id_user = $id AND state = 'r'";
+            $query= "SELECT * FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND l.lender_id_user =$id";
             
             $result = $this->mysqli->query($query);
             $requests = $result->fetch_all(MYSQLI_ASSOC);
@@ -91,7 +93,7 @@ class LendBook {
         
         //Geliehene Bücher
         else if ($number==3) {
-            $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(returnDate, '%d.%m.%Y') AS returnDate, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND l.lender_id_user =$id";
@@ -107,7 +109,7 @@ class LendBook {
         
         //Verliehene Bücher
         else{
-            $query= "SELECT title, id_isbn, first_name, city, duration, id_lending_relation, item_id_personal_book, DATE_FORMAT(returnDate, '%d.%m.%Y') AS returnDate, DATE_FORMAT(requestDate, '%d.%m.%Y') AS requestDate FROM lending_relations l "
+            $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND p.owner_id_user =$id";
