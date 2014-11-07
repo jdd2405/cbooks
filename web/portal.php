@@ -105,10 +105,10 @@ if ($user->isLoggedIn == true) {
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
     
-    else if(isset($_GET['click'])){
+    else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
         $acceptRequest = new LendBook($smarty, $mysqli);
-        $acceptRequest->statement(filter_input(INPUT_GET, 'click', FILTER_SANITIZE_NUMBER_INT));
+        $acceptRequest->statement(filter_input(INPUT_GET, 'list', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else if(isset($_GET['accept'])){

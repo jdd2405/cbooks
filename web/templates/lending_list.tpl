@@ -17,19 +17,21 @@
                     <th>ISBN</th>
                     <th>Titel</th>
                     <th>Untertitel</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
             <script language="JavaScript" type="text/javascript">
                 {literal}
-                    function moreDetails(detail, action){
+                    function moreDetails(detail){
                         var detail = document.getElementById(detail);
-                        if(action==1){
+                        
+                        if(detail.style.display == 'none'){
                              detail.style.display = '';
+                             document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-up";
                         }
                         else{
                             detail.style.display = 'none';
+                            document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-down";
                         }
                     }
                 {/literal}
@@ -42,11 +44,45 @@
                         <td>{$test.isbn}</td>
                         <td>{$test.title}</td>
                         <td>{$test.subtitle}</td>
-                        <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail}, '1'); return false;"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail}); return false;"><span id="collapseBtn" class="glyphicon glyphicon-chevron-down"></span></button></td>
                     </tr>
-
+                    
+                    {if $lendingListTitle == "Empfangene Anfragen"}
                     <tr id="{$detail}" style="display:none">
-                        <td colspan="3">
+                        <td colspan="4">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <dl class="dl-horizontal">
+                                        <h4>Buchdetails</h4>
+                                        <dt>Titel: </dt>
+                                        <dd>{$test.title}</dd>
+                                        <dt>Untertitel: </dt>
+                                        <dd>{$test.subtitle}</dd>
+                                        <dt>Klappentext: </dt>
+                                        <dd>{$test.blurb}</dd>
+                                        
+                                    </dl>
+                                </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <dl class="dl-horizontal">
+                                            <h4>Anfrageinfos</h4>
+                                            <dt>Vorname: </dt>
+                                            <dd>{$test.first_name}</dd>
+                                            <dt>Postleitzahl und Ort: </dt>
+                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dt>Anfragedatum: </dt>
+                                            <dd>{$test.requestDate}</dd>
+                                            <dt>Ausleihedauer: </dt>
+                                            <dd>{$test.duration}</dd>
+                                            <form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}">Ausleihe akzeptieren</button></form>
+                                        </dl>
+                                    </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {elseif $lendingListTitle == "Offene Anfragen"}
+                    <tr id="{$detail}" style="display:none">
+                        <td colspan="4">
                             <div class="row">
                                 <div class="col-md-5">
                                     <dl class="dl-horizontal">
@@ -72,8 +108,73 @@
                                     </div>
                             </div>
                         </td>
-                        <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail}, '2'); return false;"><span class="glyphicon glyphicon-chevron-up"></span></button></td>
                     </tr>
+                    {elseif $lendingListTitle == "Geliehene Bücher"}
+                    <tr id="{$detail}" style="display:none">
+                        <td colspan="4">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <dl class="dl-horizontal">
+                                        <dt>Title: </dt>
+                                        <dd>{$test.title}</dd>
+                                        <dt>Untertitel: </dt>
+                                        <dd>{$test.subtitle}</dd>
+                                        <dt>Klappentext: </dt>
+                                        <dd>{$test.blurb}</dd>
+                                    </dl>
+                                </div>
+                                    <div class="col-md-5">
+                                        <dl class="dl-horizontal">
+                                            <dt>Titel: </dt>
+                                            <dd>{$test.title}</dd>
+                                            <dt>Untertitel: </dt>
+                                            <dd>{$test.subtitle}</dd>
+                                            <dt>Klappentext: </dt>
+                                            <dd>{$test.blurb}</dd>
+                                            <dt>Ausleihe akzeptieren: </dt>
+                                            <dd><form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}"><span class="glyphicon glyphicon-ok"></span></button></form></dd>
+                                        </dl>
+                                    </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {else}
+                    <tr id="{$detail}" style="display:none">
+                        <td colspan="4">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <dl class="dl-horizontal">
+                                        <dt>Title: </dt>
+                                        <dd>{$test.title}</dd>
+                                        <dt>Untertitel: </dt>
+                                        <dd>{$test.subtitle}</dd>
+                                        <dt>Klappentext: </dt>
+                                        <dd>{$test.blurb}</dd>
+                                    </dl>
+                                </div>
+                                    <div class="col-md-5">
+                                        <dl class="dl-horizontal">
+                                            <dt>Titel: </dt>
+                                            <dd>{$test.title}</dd>
+                                            <dt>Untertitel: </dt>
+                                            <dd>{$test.subtitle}</dd>
+                                            <dt>Klappentext: </dt>
+                                            <dd>{$test.blurb}</dd>
+                                            <dt>Ausleihe akzeptieren: </dt>
+                                            <dd><form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}"><span class="glyphicon glyphicon-ok"></span></button></form></dd>
+                                        </dl>
+                                    </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {/if}
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 {/foreach}
 
 

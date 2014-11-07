@@ -68,6 +68,7 @@ class LendBook {
             
             $result = $this->mysqli->query($query);
             $test123 = $result->fetch_all(MYSQLI_ASSOC);
+            
            
             $this->smarty->assign("test123", $test123);
             $result->close();
