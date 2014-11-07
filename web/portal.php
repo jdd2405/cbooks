@@ -78,6 +78,12 @@ if ($user->isLoggedIn == true) {
         $registrateUserModule->updateUser($user);
     }
     
+    else if(isset($_POST['changePassword'])){
+        require_once 'modules/settings.module.php';
+        $settingsModule = new SettingsModule($smarty, $mysqli);
+        $settingsModule->changePassword(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), filter_input(INPUT_POST, 'confirmPwd', FILTER_SANITIZE_STRING));
+    }
+    
     else if(isset($_GET['searchBook'])){
         require_once 'modules/search_book.module.php';
         $searchBookModule = new SearchBookModule($smarty, $mysqli);
@@ -105,6 +111,12 @@ if ($user->isLoggedIn == true) {
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
     
+    else if(isset($_GET['registrateBook'])){
+        require_once 'modules/registrate_book.module.php';
+        $smarty->display("registrate_book.tpl");
+    }
+    
+    else if(isset($_GET['click'])){
     else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
         $acceptRequest = new LendBook($smarty, $mysqli);

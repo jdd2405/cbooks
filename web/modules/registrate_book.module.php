@@ -14,11 +14,15 @@ class registrateBookModule {
     }
 
     function searchBookByIsbn($isbn) {
+        
+        $this->smarty->assign("isbn_input", $isbn);
+        
         $query = "SELECT id_isbn, title
             FROM books WHERE id_isbn = '".$isbn."' LIMIT 1";
         if ($result = $this->mysqli->query($query)) {
             $book = $result->fetch_assoc();
             $this->smarty->assign("book", $book);
+            
         }
 
 

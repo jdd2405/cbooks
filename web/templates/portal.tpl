@@ -37,7 +37,7 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="changeAdressModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+            <div class="modal fade" id="changeAdressModal" tabindex="-1" role="dialog" aria-labelledby="changeAdressModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -134,7 +134,7 @@
                                 <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
 
                             </form>
-                            <a href="#">Keine ISBN vorhanden?</a>
+                            <a href="{$path}?registrateBook">Keine ISBN vorhanden?</a>
 
                         </div>
                     </div>

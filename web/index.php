@@ -75,6 +75,15 @@ else if(isset($_POST['login'])){
     $login->login($email, $password);
 }
 
+else if(isset($_POST['resetPassword'])){
+    include_once 'modules/login.module.php';
+    
+    $email = filter_input(INPUT_POST, 'loginEmail', FILTER_SANITIZE_STRING);
+    
+    $login = new LoginModule($smarty, $mysqli);
+    $login->resetPassword($email);
+}
+
 else if(isset($_POST['registrateUser'])){
     include_once 'modules/registrate_user.module.php';
     $registrate = new RegistrateUserModule($smarty, $mysqli);
