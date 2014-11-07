@@ -136,7 +136,7 @@
                                 <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
 
                             </form>
-                            <a href="#">Keine ISBN vorhanden?</a>
+                            <a href="{$path}?registrateBook">Keine ISBN vorhanden?</a>
 
                         </div>
                     </div>
