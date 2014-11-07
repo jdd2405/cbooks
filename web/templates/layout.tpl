@@ -132,7 +132,34 @@
                     </div>
 
                 {else}
-                    <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                    <button type="button" class="btn btn-default" id="settingsBtn" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span> Einstellungen</button>
+                    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Passwort ändern</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" action="{$path}" method="post">
+                                        <div class="form-group">
+                                            <label for="password" >Neues Passwort</label>
+                                            <input type="password" class="form-control" id="loginEmail" name="password" placeholder="Neues Passwort">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirmPwd" >Passwort bestätigen</label>
+                                            <input type="password" class="form-control" id="loginEmail" name="confirmPwd" placeholder="Passwort bestätigen">
+                                        </div>
+                                        <button type="submit" class="btn btn-warning" name="changePassword">Passwort ändern</button>
+                                        <div class="msg"></div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <a href="index.php?logout=true" class="btn btn-warning" id="logoutBtn" role="button">Abmelden</a>
                 {/if}
             </div>
