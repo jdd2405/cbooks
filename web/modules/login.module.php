@@ -11,7 +11,9 @@
  *
  * @author Jonas
  */
-require_once 'classes/User.class.php';
+require_once('classes/User.class.php');
+require_once('mail/class.phpmailer.php');
+require_once('mail/class.smtp.php');
 
 class LoginModule {
 
@@ -171,6 +173,62 @@ class LoginModule {
             // Nicht eingeloggt
             return false;
         }
+    }
+    
+    function resetPassword($email){
+        if ($stmt = $this->mysqli->prepare("UPDATE cb_users
+                                      SET password=?, salt=?
+                                      WHERE email = ?")) {
+            
+        
+            $random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+            $random_password = $this->randomPassword();
+            try {
+                        $mail = new PHPMailer();
+                        $mail->IsSMTP();    // Klasse nutzt SMTP
+                        $mail->SMTPAuth = true; // für SMTP Authentifizierung  
+                        $mail->SMTPSecure = "ssl"; // setzt Präfix 
+                        $mail->Host = 'mail.cbooks.ch'; // // setzt GMX als SMTP server
+                        $mail->Port = '465'; // setzt den SMTP port (=> Port 993 ist nötig für eine SSL Verbindung)
+                        $mail->Username = "info@cbooks.ch";
+                        $mail->Password = "r34dB00ks";
+                        $mail->CharSet = 'utf-8';
+                        $mail->SMTPDebug = 0; //    für SMTP debug information (für Testen) 1 = errors and messages 2 = messages only
+                        $this->smarty->assign("password", $random_password);
+                        $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+                        $mail->AddAddress($email, "");  // Empfänger information
+                        $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse
+                        //$mail->AddCC("jonas.daester@gmail.com");   // CC Information 
+                        $mail->Subject = "Dein Passwort bei cBooks.ch wurde zurückgesetzt";
+                        $mail->AltBody = "Dein neues Passwort lautet: ".$random_password; // Plain-text message body, falls kein HTML email viewer vorhanden
+                        $mail->Body = "Dein neues Passwort lautet: ".$random_password;
+                        //$mail->AddAttachment("img/v2.png");      // Attachment
+                        $mail->send();
+                    } catch (phpmailerException $e) {   // PHP Mailer Exception
+                        $e->errorMessage();
+                    } catch (Exception $e) {
+                        echo $e->errorMessage();        // allg. Exception
+                    }
+            // Erstelle zufälliges saltet Passwort 
+            $password = hash('sha512', $random_password . $random_salt);
+        
+                // Bind "$user_id" zum Parameter. 
+                $stmt->bind_param('sss', $password, $random_salt, $email);
+                $stmt->execute();   // Execute the prepared query.
+                $this->smarty->assign("alert_info", "Dein Passwort wurde zurückgesetzt und an deine E-Mail-Adresse geschickt.");
+                $this->smarty->display("index.tpl");
+        }
+    }
+    
+    function randomPassword() {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 
     function logout() {

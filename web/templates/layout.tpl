@@ -99,6 +99,32 @@
 
                                 </div>
                                 <div class="modal-footer">
+                                    <a class="pull-left" id="resetPasswordBtn" data-toggle="modal" data-target="#resetPasswordModal" data-sidmiss="modal">Passwort vergessen?</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPassword" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Passwort zurücksetzen</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="info">Bitte gib deine E-Mail-Adresse an. Das neue Passwort wird dir dann zugestellt.</p>
+                                    <form class="form-inline" role="form" action="index.php" method="post">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="loginEmail">E-Mail</label>
+                                            <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="E-Mailadresse">
+                                        </div>
+                                        <button type="submit" class="btn btn-danger" name="resetPassword">Passwort zurücksetzen</button>
+                                        <div class="msg"></div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
