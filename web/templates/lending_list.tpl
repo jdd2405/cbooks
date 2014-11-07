@@ -15,8 +15,8 @@
             <thead>
                 <tr>
                     <th>ISBN</th>
-                    <th>Title</th>
-                    <th>Untertitle</th>
+                    <th>Titel</th>
+                    <th>Untertitel</th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,7 +60,7 @@
                                 </div>
                                     <div class="col-md-5">
                                         <dl class="dl-horizontal">
-                                            <dt>Title: </dt>
+                                            <dt>Titel: </dt>
                                             <dd>{$test.title}</dd>
                                             <dt>Untertitel: </dt>
                                             <dd>{$test.subtitle}</dd>
