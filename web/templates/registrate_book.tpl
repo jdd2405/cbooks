@@ -44,6 +44,20 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="run" class="col-sm-4 control-label">Auflage</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="run" placeholder="Auflage">
+                                <span class="note"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="volume" class="col-sm-4 control-label">Band</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="volume" placeholder="Band">
+                                <span class="note"></span>
+                            </div>
+                        </div>    
+                        <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8">
                                 <div class="msg"></div>
                                 <button type="submit" name="registrateBook" class="btn btn-primary">Jetzt registrieren.</button>
