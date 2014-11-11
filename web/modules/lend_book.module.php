@@ -42,19 +42,45 @@ class LendBook {
     }
 
     
-    function accept($lendingRelation){
+    function accept($idPersonalBook){
         $state= "l";
         
         $this->mysqli->query("UPDATE lending_relations l, personal_books p "
                 . "SET l.authorizationDate = CURDATE(), l.state = '" . $state . "', p.availability = '". $state . "' "
                 . "WHERE l.item_id_personal_book = p.id_personal_book "
-                . "AND l.item_id_personal_book = '". $lendingRelation ."'");
+                . "AND l.item_id_personal_book = '". $idPersonalBook ."' AND l.state != 'p'");
         $this->mysqli->query("UPDATE lending_relations SET returnDate = DATE_ADD(authorizationDate, INTERVAL duration WEEK)"
-                . " WHERE item_id_personal_book = '". $lendingRelation ."'");
+                . " WHERE item_id_personal_book = '". $idPersonalBook ."' AND state != 'p'");
         
         header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
        
     }
+    
+    function removeOrReturn($idPersonalBook, $returnOrRemove){
+        
+        $this->mysqli->query("UPDATE personal_books SET availability= 'a' WHERE id_personal_book = $idPersonalBook");
+        $this->mysqli->query("UPDATE lending_relations SET state = 'p' WHERE item_id_personal_book = $idPersonalBook");
+                
+        if ($returnOrRemove=="remove"){
+            header("Location: portal.php?err=Buchantrag wurde gelöscht.");
+        }
+        else{
+            header("Location: portal.php?err=Buch wurde zurückgebracht.");
+        }
+
+        
+    }
+    
+    function extend($idPersonalBook){
+        
+        
+    }
+    
+   
+    
+    
+    
+    
     
     function statement($number){
         $id=$_SESSION['user_id'];

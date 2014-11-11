@@ -118,8 +118,8 @@ if ($user->isLoggedIn == true) {
     
     else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
-        $acceptRequest = new LendBook($smarty, $mysqli);
-        $acceptRequest->statement(filter_input(INPUT_GET, 'list', FILTER_SANITIZE_NUMBER_INT));
+        $listdetails = new LendBook($smarty, $mysqli);
+        $listdetails->statement(filter_input(INPUT_GET, 'list', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else if(isset($_GET['accept'])){
@@ -128,6 +128,23 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->accept(filter_input(INPUT_GET, 'accept', FILTER_SANITIZE_NUMBER_INT));
     }
     
+    else if(isset($_GET['RemoveOrReturn'], $_GET['ID'])){
+        require_once 'modules/lend_book.module.php';
+        $removeRequest = new LendBook($smarty, $mysqli);
+        $removeRequest->removeOrReturn(filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'RemoveOrReturn', FILTER_SANITIZE_STRING));
+    }
+    
+    else if(isset($_GET['extend'])){
+        require_once 'modules/lend_book.module.php';
+        $extendRequest = new LendBook($smarty, $mysqli);
+        $extendRequest->extend(filter_input(INPUT_GET, 'extend', FILTER_SANITIZE_NUMBER_INT));
+    }
+    
+    else if(isset($_GET['return'])){
+        require_once 'modules/lend_book.module.php';
+        $returnRequest = new LendBook($smarty, $mysqli);
+        $returnRequest->returned(filter_input(INPUT_GET, 'return', FILTER_SANITIZE_NUMBER_INT));
+    }
     
     else {
         $smarty->display('portal.tpl');

@@ -23,20 +23,20 @@
             <script language="JavaScript" type="text/javascript">
                 {literal}
                     function moreDetails(detail){
-                        var detail = document.getElementById(detail);
+                        var d = document.getElementById(detail);
                         
-                        if(detail.style.display == 'none'){
-                             detail.style.display = '';
+                        if(d.style.display == 'none'){
+                             d.style.display = '';
                              document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-up";
                         }
                         else{
-                            detail.style.display = 'none';
+                            d.style.display = 'none';
                             document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-down";
                         }
                     }
                 {/literal}
             </script>
-                
+            
                 <!--{$detail=0}-->
                 {foreach $test123 as $test}
                     <!--{$detail++}-->
@@ -47,7 +47,7 @@
                         <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail}); return false;"><span id="collapseBtn" class="glyphicon glyphicon-chevron-down"></span></button></td>
                     </tr>
                     
-                    {if $lendingListTitle == "Empfangene Anfragen"}
+                    
                     <tr id="{$detail}" style="display:none">
                         <td colspan="4">
                             <div class="row">
@@ -63,121 +63,69 @@
                                         
                                     </dl>
                                 </div>
+                                {if $lendingListTitle == "Empfangene Anfragen"}
                                     <div class="col-md-5 col-md-offset-1">
                                         <dl class="dl-horizontal">
-                                            <h4>Anfrageinfos</h4>
-                                            <dt>Vorname: </dt>
+                                            <h4>Zusatzinformationen</h4>
+                                            <dt>Antragsperson: </dt>
                                             <dd>{$test.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Anfragedatum: </dt>
                                             <dd>{$test.requestDate}</dd>
                                             <dt>Ausleihedauer: </dt>
-                                            <dd>{$test.duration}</dd>
-                                            <form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}">Ausleihe akzeptieren</button></form>
+                                            <dd>{$test.duration}</dd><br>
+                                            <a href="{$path}?accept={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe akzeptieren</a>
                                         </dl>
                                     </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {elseif $lendingListTitle == "Offene Anfragen"}
-                    <tr id="{$detail}" style="display:none">
-                        <td colspan="4">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <dl class="dl-horizontal">
-                                        <dt>Title: </dt>
-                                        <dd>{$test.title}</dd>
-                                        <dt>Untertitel: </dt>
-                                        <dd>{$test.subtitle}</dd>
-                                        <dt>Klappentext: </dt>
-                                        <dd>{$test.blurb}</dd>
-                                    </dl>
-                                </div>
-                                    <div class="col-md-5">
+                                {elseif $lendingListTitle == "Offene Anfragen"}
+                                    <div class="col-md-5 col-md-offset-1">
                                         <dl class="dl-horizontal">
-                                            <dt>Titel: </dt>
-                                            <dd>{$test.title}</dd>
-                                            <dt>Untertitel: </dt>
-                                            <dd>{$test.subtitle}</dd>
-                                            <dt>Klappentext: </dt>
-                                            <dd>{$test.blurb}</dd>
-                                            <dt>Ausleihe akzeptieren: </dt>
-                                            <dd><form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}"><span class="glyphicon glyphicon-ok"></span></button></form></dd>
+                                            <h4>Zusatzinformationen</h4>
+                                            <dt>Bucheigentümer: </dt>
+                                            <dd>{$test.first_name}</dd>
+                                            <dt>Postleitzahl und Ort: </dt>
+                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dt>Anfragedatum: </dt>
+                                            <dd>{$test.requestDate}</dd>
+                                            <dt>Ausleihedauer: </dt>
+                                            <dd>{$test.duration}</dd><br>
+                                            <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=remove" class="btn btn-primary">Anfrage zurücknehmen</a>
                                         </dl>
                                     </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {elseif $lendingListTitle == "Geliehene Bücher"}
-                    <tr id="{$detail}" style="display:none">
-                        <td colspan="4">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <dl class="dl-horizontal">
-                                        <dt>Title: </dt>
-                                        <dd>{$test.title}</dd>
-                                        <dt>Untertitel: </dt>
-                                        <dd>{$test.subtitle}</dd>
-                                        <dt>Klappentext: </dt>
-                                        <dd>{$test.blurb}</dd>
-                                    </dl>
-                                </div>
-                                    <div class="col-md-5">
+                                
+                                {elseif $lendingListTitle == "Geliehene Bücher"}
+                                    <div class="col-md-5 col-md-offset-1">
                                         <dl class="dl-horizontal">
-                                            <dt>Titel: </dt>
-                                            <dd>{$test.title}</dd>
-                                            <dt>Untertitel: </dt>
-                                            <dd>{$test.subtitle}</dd>
-                                            <dt>Klappentext: </dt>
-                                            <dd>{$test.blurb}</dd>
-                                            <dt>Ausleihe akzeptieren: </dt>
-                                            <dd><form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}"><span class="glyphicon glyphicon-ok"></span></button></form></dd>
+                                            <h4>Zusatzinformationen</h4>
+                                            <dt>Bucheigentümer: </dt>
+                                            <dd>{$test.first_name}</dd>
+                                            <dt>Postleitzahl und Ort: </dt>
+                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dt>Rückgabedatum: </dt>
+                                            <dd>{$test.returnDate}</dd><br>
+                                            <a href="{$path}?extend={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe verlängern</a>
                                         </dl>
                                     </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {else}
-                    <tr id="{$detail}" style="display:none">
-                        <td colspan="4">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <dl class="dl-horizontal">
-                                        <dt>Title: </dt>
-                                        <dd>{$test.title}</dd>
-                                        <dt>Untertitel: </dt>
-                                        <dd>{$test.subtitle}</dd>
-                                        <dt>Klappentext: </dt>
-                                        <dd>{$test.blurb}</dd>
-                                    </dl>
-                                </div>
-                                    <div class="col-md-5">
+                                    
+                                {else}
+                                    <div class="col-md-5 col-md-offset-1">
                                         <dl class="dl-horizontal">
-                                            <dt>Titel: </dt>
-                                            <dd>{$test.title}</dd>
-                                            <dt>Untertitel: </dt>
-                                            <dd>{$test.subtitle}</dd>
-                                            <dt>Klappentext: </dt>
-                                            <dd>{$test.blurb}</dd>
-                                            <dt>Ausleihe akzeptieren: </dt>
-                                            <dd><form role="form" action="portal.php" methode="GET"><button type="submit" class="btn btn-primary" name="accept" value="{$test.item_id_personal_book}"><span class="glyphicon glyphicon-ok"></span></button></form></dd>
+                                            <h4>Zusatzinformationen</h4>
+                                            <dt>Vorname: </dt>
+                                            <dd>{$test.first_name}</dd>
+                                            <dt>Postleitzahl und Ort: </dt>
+                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dt>Rückgabedatum: </dt>
+                                            <dd>{$test.returnDate}</dd><br>
+                                            <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=return" class="btn btn-primary">Buchrückgabe bestätigen</a>
                                         </dl>
                                     </div>
+                                {/if}
                             </div>
                         </td>
-                    </tr>
-                    {/if}
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    </tr> 
                 {/foreach}
-
-
             </tbody>
         </table>
     </div>
