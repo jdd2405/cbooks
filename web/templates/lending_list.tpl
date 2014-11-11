@@ -24,27 +24,29 @@
                 {literal}
                     function moreDetails(detail){
                         var d = document.getElementById(detail);
+                        var c = document.getElementById('collapseBtn');
                         
                         if(d.style.display == 'none'){
                              d.style.display = '';
-                             document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-up";
+                             c.className='glyphicon glyphicon-chevron-up';
                         }
                         else{
                             d.style.display = 'none';
-                            document.getElementById('collapseBtn').className="glyphicon glyphicon-chevron-down";
+                            c.className='glyphicon glyphicon-chevron-down';
                         }
                     }
                 {/literal}
             </script>
             
                 <!--{$detail=0}-->
+            
                 {foreach $test123 as $test}
                     <!--{$detail++}-->
                     <tr> 
                         <td>{$test.isbn}</td>
                         <td>{$test.title}</td>
                         <td>{$test.subtitle}</td>
-                        <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail}); return false;"><span id="collapseBtn" class="glyphicon glyphicon-chevron-down"></span></button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail});  return false;"><span id="collapseBtn" class="glyphicon glyphicon-chevron-down"></span></button></td>
                     </tr>
                     
                     
