@@ -30,5 +30,33 @@ class registrateBookModule {
 
         $this->smarty->display("registrate_book.tpl");
     }
+    
+    function insertPersonalBook(){
+        $isbn       =   $_POST['isbn'];
+        $title      =   $_POST['title'];
+        $subtitle   =   $_POST['subtitle'];
+        $run        =   $_POST['run'];
+                
+        $queryAddBook = "INSERT books"
+                . "(id_isbn, title, subtitle) values"
+                . "('". $_POST['isbn']."','"
+                . "('". $_POST['title']."','"
+                . "('". $_POST['subtitle']."');"
+                . "";
+        $queryAddPersonalBook = "INSERT personal_books"
+                . "(isbn, run, description) values"
+                . "('". $_POST['isbn']."','"
+                . "('". $_POST['run']."','"
+                . "('". $_POST['description']."');"
+                . "";
+        
+        
+        
+        
+       /* $queryPersonalBook
+        * 
+        */
+        
+    }
 
 }
