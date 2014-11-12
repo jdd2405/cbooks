@@ -25,33 +25,37 @@ class registrateBookModule {
             
         }
 
-
         /* Template aufrufen mit Smarty */
 
         $this->smarty->display("registrate_book.tpl");
     }
     
     function insertPersonalBook(){
-        $isbn       =   $_POST['isbn'];
-        $title      =   $_POST['title'];
-        $subtitle   =   $_POST['subtitle'];
-        $run        =   $_POST['run'];
-                
-        $queryAddBook = "INSERT books"
-                . "(id_isbn, title, subtitle) values"
-                . "('". $_POST['isbn']."','"
-                . "('". $_POST['title']."','"
-                . "('". $_POST['subtitle']."');"
+                        
+        $queryAddBook = "INSERT INTO books"
+                . "(id_isbn, title, subtitle) values ("
+                . "'". $_POST['isbn']."', "
+                . "'". $_POST['title']."', "
+                . "'". $_POST['subtitle']."');"
                 . "";
-        $queryAddPersonalBook = "INSERT personal_books"
-                . "(isbn, run, description) values"
-                . "('". $_POST['isbn']."','"
-                . "('". $_POST['run']."','"
-                . "('". $_POST['description']."');"
+        $queryAddPersonalBook = "INSERT INTO personal_books"
+                . "(isbn, run, description, owner_id_user) values ("
+                . "'". $_POST['isbn']."', "
+                . "'". $_POST['run']."', "
+                . "'". $_POST['description']."', "
+                . "'18');"
                 . "";
         
+        echo "Query Book: ".$queryAddPersonalBook."</br>";
+        echo "Query Pers Book: ".$queryAddBook;
+        
+        $this->mysqli->query($queryAddBook);
+        $this->mysqli->query($queryAddPersonalBook);
         
         
+        /* Template aufrufen mit Smarty */
+        
+        $this->smarty->display("portal.tpl");
         
        /* $queryPersonalBook
         * 
