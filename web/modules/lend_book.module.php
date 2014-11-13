@@ -35,7 +35,6 @@ class LendBook {
         $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='" . $id_personal_book . "'");
         $result=$this->mysqli->query("SELECT email FROM cb_users JOIN personal_books ON id_cb_user = owner_id_user WHERE id_personal_book = $id_personal_book");
         $email = $result->fetch_assoc();
-        $mailadress= $email['email'];
         $result->close();
         
         
@@ -47,7 +46,7 @@ class LendBook {
             $body = file_get_contents('templates/requestMail.html');
             $body = stripslashes($body);    // Backslashes enfernt
             $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
-            $mail->AddAddress($mailadress);  // Empfänger information
+            $mail->AddAddress($email['email']);  // Empfänger information
             $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
             $mail->Subject = "Empfangene Anfrage";
             $mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
@@ -148,11 +147,19 @@ class LendBook {
         
     }
     
-   
-    
-    
-    
-    
+    function alert(){
+        $query= "SELECT title, DATE_FORMAT(returnDate,'%d.%m.%Y') AS returnDate, id_personal_book FROM lending_relations JOIN personal_books ON item_id_personal_book = id_personal_book"
+                . " JOIN books ON isbn = id_isbn WHERE lender_id_user = '".$_SESSION['user_id']."' AND"
+                . " returnDate BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
+            
+            $result = $this->mysqli->query($query);
+            $alertbooks = $result->fetch_all(MYSQLI_ASSOC);
+            
+           
+            $this->smarty->assign("alertbooks", $alertbooks);
+            $result->close();
+    }
+
     
     function statement($number){
         $id=$_SESSION['user_id'];

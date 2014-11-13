@@ -40,8 +40,8 @@
                 </tr>
                 <tr>
                     <th>Verfügbarkeit</th>
-                    <td>{$details["availability"]}</td>
-                </tr>
+                    <td>{if $details["availability"] == l}ausgeliehen</td></tr>
+                <tr><th>Rückgabedatum</th><td>{$returnDate['returnDate']}</td></tr>{elseif $details["availability"] == a}verfügbar {else}zur Zeit nicht verfügbar{/if}
                
             </tbody>    
         </table>     

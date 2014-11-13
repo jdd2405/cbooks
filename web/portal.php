@@ -51,19 +51,9 @@ if ($user->isLoggedIn == true) {
     $privateStats = new statisticsModule($smarty, $mysqli);
     $privateStats->getPrivateStats();
     
-    
-    
-    if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
-
-        /* fetch value */   
-        $books = $result->fetch_all(MYSQLI_ASSOC);
-        //print_r($books);
-        $smarty->assign("books", $books);
-            /* close statement */
-        $result->close();
-    }
-
-    
+    $alert = new LendBook($smarty, $mysqli);
+    $alert->alert();
+   
 
     if(isset($_GET['logout'])){
         $logout = filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING);
