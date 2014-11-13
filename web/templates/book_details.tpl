@@ -49,7 +49,7 @@
                 </div>
                 </div>
         </div>
-        {if isset($isLoggedIn) and $details["availability"]==a}
+        {if isset($isLoggedIn) and $details["availability"]==a and $details["owner_id_user"] != {$smarty.session.user_id}}
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-body">

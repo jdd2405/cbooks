@@ -24,13 +24,13 @@ class DetailBook {
     
     function details($book_id){
         
-        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book
+        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book, p.owner_id_user
             FROM personal_books p
             INNER JOIN books b
             ON p.isbn=b.id_isbn
             WHERE p.id_personal_book = '$book_id'";
         
-        $result = $this->mysqli->query($query); 
+        $result = $this->mysqli->query($query);
         
         /* fetch value */   
         $details = $result->fetch_array(MYSQLI_ASSOC);
