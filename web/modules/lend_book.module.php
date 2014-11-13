@@ -89,7 +89,7 @@ class LendBook {
             $mail = new PHPMailer();
             $mail->IsSMTP();    // Klasse nutzt SMTP
             $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
-            $mail->AddAddress("'".$lender['email']."'");  // Empfänger information
+            $mail->AddAddress($lender['email']);  // Empfänger information
             $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
             $mail->Subject = "Anfrage wurde bestätigt";
             //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
@@ -107,12 +107,12 @@ class LendBook {
             $mail = new PHPMailer();
             $mail->IsSMTP();    // Klasse nutzt SMTP
             $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
-            $mail->AddAddress("'".$owner['email']."'");  // Empfänger information
+            $mail->AddAddress($owner['email']);  // Empfänger information
             $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
             $mail->Subject = "Abwicklung der Ausleihe";
             //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
             $mail->Body="Die Antragsperson ist ".$lender['first_name'].".\n ".$lender['first_name']." hat deine Emailadresse erhalten und wird sich mit dir in Verbindung setzen. \n"
-                    . "Falls du nichts hörst, kannst du auch per Mail mit ".$lender['first_name']. " in Kontakt treten.";
+                    . "Falls du nichts hörst, kannst du auch unter folgender Mailadresse ".$lender['email']." mit ".$lender['first_name']. " in Kontakt treten.";
             $mail->send();
         } catch (phpmailerException $e) {   // PHP Mailer Exception
             $e->errorMessage();
