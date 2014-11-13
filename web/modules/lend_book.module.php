@@ -75,6 +75,52 @@ class LendBook {
         $this->mysqli->query("UPDATE lending_relations SET returnDate = DATE_ADD(authorizationDate, INTERVAL duration WEEK)"
                 . " WHERE item_id_personal_book = '". $idPersonalBook ."' AND state != 'p'");
         
+        $result=$this->mysqli->query("SELECT first_name, email FROM cb_users WHERE id_cb_user = '".$_SESSION['user_id']."'");
+        $owner = $result->fetch_assoc();
+        $result->free();
+        $result=$this->mysqli->query("SELECT first_name, email FROM cb_users JOIN lending_relations ON id_cb_user = lender_id_user WHERE item_id_personal_book = $idPersonalBook");
+        $lender = $result->fetch_assoc();
+
+        $result->close();
+        
+        
+        //mail an ausleihender
+        try {
+            $mail = new PHPMailer();
+            $mail->IsSMTP();    // Klasse nutzt SMTP
+            $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+            $mail->AddAddress("'".$lender['email']."'");  // Empfänger information
+            $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
+            $mail->Subject = "Anfrage wurde bestätigt";
+            //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
+            $mail->Body="Besitzer des Buches ist ".$owner['first_name'].".\n Bitte nimm mit ihm über die folgende Mailadresse Kontakt auf: ".$owner['email'].". \n"
+                    . "Vielen Dank und viel Spass beim Lesen.";
+            $mail->send();
+        } catch (phpmailerException $e) {   // PHP Mailer Exception
+            $e->errorMessage();
+        } catch (Exception $e) {
+            echo $e->errorMessage();        // allg. Exception
+        }
+        
+        //mail an besitzer
+        try {
+            $mail = new PHPMailer();
+            $mail->IsSMTP();    // Klasse nutzt SMTP
+            $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+            $mail->AddAddress("'".$owner['email']."'");  // Empfänger information
+            $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
+            $mail->Subject = "Abwicklung der Ausleihe";
+            //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
+            $mail->Body="Die Antragsperson ist ".$lender['first_name'].".\n ".$lender['first_name']." hat deine Emailadresse erhalten und wird sich mit dir in Verbindung setzen. \n"
+                    . "Falls du nichts hörst, kannst du auch per Mail mit ".$lender['first_name']. " in Kontakt treten.";
+            $mail->send();
+        } catch (phpmailerException $e) {   // PHP Mailer Exception
+            $e->errorMessage();
+        } catch (Exception $e) {
+            echo $e->errorMessage();        // allg. Exception
+        }
+        
+        
         $this->smarty->assign("alert_success", "Buch wurde zur Ausleihe akzeptiert.");
         $this->smarty->display("portal.tpl");
        
