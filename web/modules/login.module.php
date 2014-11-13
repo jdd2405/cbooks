@@ -186,14 +186,6 @@ class LoginModule {
             try {
                         $mail = new PHPMailer();
                         $mail->IsSMTP();    // Klasse nutzt SMTP
-                        $mail->SMTPAuth = true; // für SMTP Authentifizierung  
-                        $mail->SMTPSecure = "ssl"; // setzt Präfix 
-                        $mail->Host = 'mail.cbooks.ch'; // // setzt GMX als SMTP server
-                        $mail->Port = '465'; // setzt den SMTP port (=> Port 993 ist nötig für eine SSL Verbindung)
-                        $mail->Username = "info@cbooks.ch";
-                        $mail->Password = "r34dB00ks";
-                        $mail->CharSet = 'utf-8';
-                        $mail->SMTPDebug = 0; //    für SMTP debug information (für Testen) 1 = errors and messages 2 = messages only
                         $this->smarty->assign("password", $random_password);
                         $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
                         $mail->AddAddress($email, "");  // Empfänger information
