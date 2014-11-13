@@ -103,18 +103,29 @@ if ($user->isLoggedIn == true) {
         $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
     }
     
-    
-    
     else if(isset($_GET['registrateBookWithISBN'])){
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
     
+    else if(isset($_POST['registrateBook'])){
+        require_once 'modules/registrate_book.module.php';
+        $insertBook = new registrateBookModule($smarty, $mysqli);
+        $insertBook->insertPersonalBook();
+       
+    }
+    
+    /*
+     * Konzeptionell kein buch registrierbar ohne ISBN
+     * 
+     * 
     else if(isset($_GET['registrateBook'])){
         require_once 'modules/registrate_book.module.php';
         $smarty->display("registrate_book.tpl");
     }
+     * 
+     */
     
     else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
