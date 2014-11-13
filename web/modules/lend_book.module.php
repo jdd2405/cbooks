@@ -26,22 +26,45 @@ class LendBook {
     
     //in DB eintragen und Mail versenden
     function request($duration, $id_personal_book){
-        $timestamp= time();
-        $date=  date('Y-m-d',$timestamp);
+        $timestamp = time();
+        $date = date('Y-m-d', $timestamp);
         $state = "r";
         $user_id = $_SESSION['user_id'];
-       
+
         $this->mysqli->query("INSERT INTO `lending_relations` (requestDate, duration, state,lender_id_user, item_id_personal_book) VALUES ('" . $date . "', '" . $duration . "', '" . $state . "','" . $user_id . "', '" . $id_personal_book . "')");
-        $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='". $id_personal_book ."'");
+        $this->mysqli->query("UPDATE personal_books SET availability= '" . $state . "' WHERE id_personal_book ='" . $id_personal_book . "'");
+        $result=$this->mysqli->query("SELECT email FROM cb_users JOIN personal_books ON id_cb_user = owner_id_user WHERE id_personal_book = $id_personal_book");
+        $email = $result->fetch_assoc();
+        $mailadress= $email['email'];
+        $result->close();
+        
+        
         
         //mail
-        //$text= "Hallo \n Sie haben eine Buchanfrage erhalten.";
-        //mail('t547490@hotmail.com', 'Testmail', $text);
-        
-        header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
+        try {
+            $mail = new PHPMailer();
+            $mail->IsSMTP();    // Klasse nutzt SMTP
+            $body = file_get_contents('templates/requestMail.html');
+            $body = stripslashes($body);    // Backslashes enfernt
+            $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+            $mail->AddAddress($mailadress);  // Empfänger information
+            $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
+            $mail->Subject = "Empfangene Anfrage";
+            $mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
+            $mail->MsgHTML($body);
+            $mail->send();
+        } catch (phpmailerException $e) {   // PHP Mailer Exception
+            $e->errorMessage();
+        } catch (Exception $e) {
+            echo $e->errorMessage();        // allg. Exception
+        }
+
+
+
+        $this->smarty->assign("alert_success", "Buch wurde angefragt.");
+        $this->smarty->display("portal.tpl");
     }
 
-    
     function accept($idPersonalBook){
         $state= "l";
         
@@ -52,7 +75,8 @@ class LendBook {
         $this->mysqli->query("UPDATE lending_relations SET returnDate = DATE_ADD(authorizationDate, INTERVAL duration WEEK)"
                 . " WHERE item_id_personal_book = '". $idPersonalBook ."' AND state != 'p'");
         
-        header("Location: portal.php?err=Es konnte keine sichere Session gestartet werden.");
+        $this->smarty->assign("alert_success", "Buch wurde zur Ausleihe akzeptiert.");
+        $this->smarty->display("portal.tpl");
        
     }
     
@@ -62,10 +86,12 @@ class LendBook {
         $this->mysqli->query("UPDATE lending_relations SET state = 'p' WHERE item_id_personal_book = $idPersonalBook");
                 
         if ($returnOrRemove=="remove"){
-            header("Location: portal.php?err=Buchantrag wurde gelöscht.");
+            $this->smarty->assign("alert_success", "Buchantrag wurde gelöscht.");
+            $this->smarty->display("portal.tpl");
         }
         else{
-            header("Location: portal.php?err=Buch wurde zurückgebracht.");
+            $this->smarty->assign("alert_success", "Buch wurde zurückgebracht.");
+            $this->smarty->display("portal.tpl");
         }
 
         
