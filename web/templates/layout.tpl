@@ -246,7 +246,7 @@
                 type: "GET",
                         url: "isAvailable.php",
                         data: {key: key, value: value},
-                        beforeSend: fun ction(html) { // this happen before actual call
+                        beforeSend: function(html) { // this happen before actual call
                 $(this).next('span.note').html('');
                 },
                         success: fun ction(re sult){ // this happen after we get result
