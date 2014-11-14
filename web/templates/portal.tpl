@@ -173,6 +173,7 @@
                                 {/foreach}
                             </tbody>
                         </table>
+                                <a href="{$path}?allPersonalBooks">alle meine Bücher anzeigen</a>
                     </div>
 
                 </div>

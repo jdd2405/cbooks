@@ -56,7 +56,7 @@
                             <ul class="nav nav-pills">
                                 <li><a href="{$path}">Startseite</a></li>
                                 <li><a href="{$path}">Impressum</a></li>
-                                <li><a href="{$path}">Hauftungsausschuss</a></li>
+                                <li><a href="{$path}">Haftungsausschuss</a></li>
                             </ul>
                         </nav>
                     </div>
