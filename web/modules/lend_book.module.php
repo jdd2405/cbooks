@@ -92,7 +92,7 @@ class LendBook {
             $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
             $mail->Subject = "Anfrage wurde bestätigt";
             //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
-            $mail->Body="Besitzer des Buches ist ".$owner['first_name'].".\n Bitte nimm mit ihm über die folgende Mailadresse Kontakt auf: ".$owner['email'].". \n"
+            $mail->Body="Besitzer des Buches ist ".$owner['first_name'].".\n Bitte nimm mit ".$owner['first_name']." über die folgende Mailadresse Kontakt auf: ".$owner['email'].". \n"
                     . "Vielen Dank und viel Spass beim Lesen.";
             $mail->send();
         } catch (phpmailerException $e) {   // PHP Mailer Exception
