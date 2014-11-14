@@ -577,6 +577,14 @@ class PHPMailer
     public function __construct($exceptions = false)
     {
         $this->exceptions = ($exceptions == true);
+        $this->SMTPAuth= true;
+        $this->SMTPSecure = "ssl"; // setzt Präfix 
+        $this->Host = 'mail.cbooks.ch'; // // setzt GMX als SMTP server
+        $this->Port = '465'; // setzt den SMTP port (=> Port 993 ist nötig für eine SSL Verbindung)
+        $this->Username = "info@cbooks.ch";
+        $this->Password = "r34dB00ks";
+        $this->CharSet = 'utf-8';
+        $this->SMTPDebug = 0;//    für SMTP debug information (für Testen) 1 = errors and messages 2 = messages only
     }
 
     /**

@@ -20,7 +20,7 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+        
     </head>
     <body>
         {if isset($alert_info) }
@@ -56,7 +56,7 @@
                             <ul class="nav nav-pills">
                                 <li><a href="{$path}">Startseite</a></li>
                                 <li><a href="{$path}">Impressum</a></li>
-                                <li><a href="{$path}">Hauftungsausschuss</a></li>
+                                <li><a href="{$path}">Haftungsausschuss</a></li>
                             </ul>
                         </nav>
                     </div>

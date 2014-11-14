@@ -51,19 +51,9 @@ if ($user->isLoggedIn == true) {
     $privateStats = new statisticsModule($smarty, $mysqli);
     $privateStats->getPrivateStats();
     
-    
-    
-    if ($result = $mysqli->query("SELECT id_isbn, title FROM books")) {
-
-        /* fetch value */   
-        $books = $result->fetch_all(MYSQLI_ASSOC);
-        //print_r($books);
-        $smarty->assign("books", $books);
-            /* close statement */
-        $result->close();
-    }
-
-    
+    $alert = new LendBook($smarty, $mysqli);
+    $alert->alert();
+   
 
     if(isset($_GET['logout'])){
         $logout = filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING);
@@ -91,6 +81,12 @@ if ($user->isLoggedIn == true) {
         $searchBookModule->search(filter_input(INPUT_GET, 'searchBook', FILTER_SANITIZE_STRING));
     }
     
+    else if(isset($_GET['allPersonalBooks'])){
+        require_once 'modules/statistics.module.php';
+        $listdetails = new statisticsModule($smarty, $mysqli);
+        $listdetails->allPersonalBooks();
+    }
+    
     else if(!empty($_GET['book_id'])){
         require_once 'modules/detail_book.module.php';
         $detailBookModule = new DetailBook($smarty, $mysqli);
@@ -103,23 +99,34 @@ if ($user->isLoggedIn == true) {
         $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
     }
     
-    
-    
     else if(isset($_GET['registrateBookWithISBN'])){
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
     }
     
+    else if(isset($_POST['registrateBook'])){
+        require_once 'modules/registrate_book.module.php';
+        $insertBook = new registrateBookModule($smarty, $mysqli);
+        $insertBook->insertPersonalBook();
+       
+    }
+    
+    /*
+     * Konzeptionell kein buch registrierbar ohne ISBN
+     * 
+     * 
     else if(isset($_GET['registrateBook'])){
         require_once 'modules/registrate_book.module.php';
         $smarty->display("registrate_book.tpl");
     }
+     * 
+     */
     
     else if(isset($_GET['list'])){
         require_once 'modules/lend_book.module.php';
-        $acceptRequest = new LendBook($smarty, $mysqli);
-        $acceptRequest->statement(filter_input(INPUT_GET, 'list', FILTER_SANITIZE_NUMBER_INT));
+        $listdetails = new LendBook($smarty, $mysqli);
+        $listdetails->statement(filter_input(INPUT_GET, 'list', FILTER_SANITIZE_NUMBER_INT));
     }
     
     else if(isset($_GET['accept'])){
@@ -128,6 +135,23 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->accept(filter_input(INPUT_GET, 'accept', FILTER_SANITIZE_NUMBER_INT));
     }
     
+    else if(isset($_GET['RemoveOrReturn'], $_GET['ID'])){
+        require_once 'modules/lend_book.module.php';
+        $removeRequest = new LendBook($smarty, $mysqli);
+        $removeRequest->removeOrReturn(filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'RemoveOrReturn', FILTER_SANITIZE_STRING));
+    }
+    
+    else if(isset($_GET['extend'])){
+        require_once 'modules/lend_book.module.php';
+        $extendRequest = new LendBook($smarty, $mysqli);
+        $extendRequest->extend(filter_input(INPUT_GET, 'extend', FILTER_SANITIZE_NUMBER_INT));
+    }
+    
+    else if(isset($_GET['return'])){
+        require_once 'modules/lend_book.module.php';
+        $returnRequest = new LendBook($smarty, $mysqli);
+        $returnRequest->returned(filter_input(INPUT_GET, 'return', FILTER_SANITIZE_NUMBER_INT));
+    }
     
     else {
         $smarty->display('portal.tpl');

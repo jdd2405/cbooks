@@ -24,19 +24,23 @@ class DetailBook {
     
     function details($book_id){
         
-        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book
+        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book, p.owner_id_user
             FROM personal_books p
             INNER JOIN books b
             ON p.isbn=b.id_isbn
             WHERE p.id_personal_book = '$book_id'";
         
-        $result = $this->mysqli->query($query); 
+        $result = $this->mysqli->query($query);
         
         /* fetch value */   
         $details = $result->fetch_array(MYSQLI_ASSOC);
         
         $result->free();
         
+        $query= "SELECT DATE_FORMAT(returnDate,'%d.%m.%Y') AS returnDate FROM lending_relations WHERE item_id_personal_book = $book_id AND state= 'l' ";
+        $result =$this->mysqli->query($query);
+        $returnDate = $result->fetch_array(MYSQLI_ASSOC);
+        $result->free();
         
         $result = $this->mysqli->query("SELECT first_name, city FROM cb_users INNER JOIN personal_books ON id_cb_user = owner_id_user WHERE id_personal_book ='$book_id'");
         $besitzerdaten= $result->fetch_array(MYSQLI_ASSOC);
@@ -45,6 +49,7 @@ class DetailBook {
         
         
         $this->smarty->assign("details", $details);
+        $this->smarty->assign("returnDate",$returnDate);
         $this->smarty->assign("besitzerdaten", $besitzerdaten);
         
         $this->smarty->display('book_details.tpl');

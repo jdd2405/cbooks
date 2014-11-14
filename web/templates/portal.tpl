@@ -131,10 +131,16 @@
 
                             <h2>neues Buch registrieren</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
+                                <!-- JO? Warum "updateUser_form" -->
                                 <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
-
                             </form>
+                            <!--
+                            Konzeptionell kein buch registrierbar ohne ISBN
+                            
+                            
                             <a href="{$path}?registrateBook">Keine ISBN vorhanden?</a>
+                            
+                            -->
 
                         </div>
                     </div>
@@ -142,6 +148,7 @@
             </div>
 
         </div>
+
         <div class="col-sm-4">
 
             <div class="panel panel-default">
@@ -166,11 +173,40 @@
                                 {/foreach}
                             </tbody>
                         </table>
+                                <a href="{$path}?allPersonalBooks">alle meine Bücher anzeigen</a>
                     </div>
 
                 </div>
             </div>
-        </div>
+                <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Bald ablaufende Bücher</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Titel</th>
+                                    <th>Rückgabedatum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $alertbooks as $alertbook}
+                                    <tr onclick="document.location = '{$path}?book_id={$alertbook.id_personal_book}';"> 
+                                        <td>{$alertbook.title}</td>
+                                        <td>{$alertbook.returnDate}</td>
+                                    </tr>
+                                {foreachelse}
+                                    <tr><td colspan="2">Zurzeit keine zurückzugebenen Bücher</td></tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                </div>
+
+            </div>
+
             <div class="col-sm-4">
                 <div class="row">
                     <div class="col-md-12">

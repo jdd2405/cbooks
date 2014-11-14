@@ -25,10 +25,47 @@ class registrateBookModule {
             
         }
 
-
         /* Template aufrufen mit Smarty */
 
         $this->smarty->display("registrate_book.tpl");
+    }
+    
+    function insertPersonalBook(){
+                        
+        $queryAddBook = "INSERT INTO books"
+                . "(id_isbn, title, subtitle) values ("
+                . "'".$_POST['isbn']."', "
+                . "'".$_POST['title']."', "
+                . "'".$_POST['subtitle']."');"
+                . "";
+        $queryAddPersonalBook = "INSERT INTO personal_books"
+                . "(isbn, run, description, owner_id_user) values ("
+                . "'".$_POST['isbn']."', "
+                . "'".$_POST['run']."', "
+                . "'".$_POST['description']."', "
+                . "'".$_SESSION['user_id']."');"
+                . "";
+        
+        echo "Query Book: ".$queryAddPersonalBook."</br>";
+        echo "Query Pers Book: ".$queryAddBook;
+        
+        /*
+         *  INNER JOIN cb_users u
+         *  ON pb.owner_id_user=u.id_cb_user
+         */
+        
+        $this->mysqli->query($queryAddBook);
+        $this->mysqli->query($queryAddPersonalBook);
+        
+        
+        /* Template aufrufen mit Smarty */
+        
+        $this->smarty->display("portal.tpl");
+        
+       /* $queryPersonalBook
+        * 
+        */
+        
     }
 
 }
