@@ -74,6 +74,7 @@
                                             <dd>{$test.requestDate}</dd>
                                             <dt>Ausleihedauer: </dt>
                                             <dd>{$test.duration}</dd><br>
+                                            <a href="{$path}?decline={$test.item_id_personal_book}" class="btn btn-default">Ausleihe ablehnen</a>
                                             <a href="{$path}?accept={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe akzeptieren</a>
                                         </dl>
                                     </div>

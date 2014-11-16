@@ -125,6 +125,52 @@ class LendBook {
        
     }
     
+    function decline($idPersonalBook){
+        $result = $this->mysqli->query("SELECT email FROM cb_users JOIN lending_relations ON id_cb_user = lender_id_user WHERE item_id_personal_book = $idPersonalBook");
+        $userMail = $result->fetch_assoc();
+        $result->free();
+        
+        $result = $this->mysqli->query("SELECT isbn, title, first_name FROM cb_users 
+            JOIN personal_books ON id_cb_user = owner_id_user 
+            JOIN lending_relations ON id_personal_book = item_id_personal_book 
+            JOIN books ON isbn = id_isbn
+            WHERE id_personal_book = $idPersonalBook");
+        $requestDetails = $result->fetch_assoc();
+        $result->close();
+        
+        $this->mysqli->query("UPDATE personal_books SET availability= 'a' WHERE id_personal_book = $idPersonalBook");
+        $this->mysqli->query("UPDATE lending_relations SET state = 'p' WHERE item_id_personal_book = $idPersonalBook");
+        
+        
+        //Mail an Antragssteller schicken um Ablehnung der Anfrage mitzuteilen
+         try {
+            $mail = new PHPMailer();
+            $mail->IsSMTP();    // Klasse nutzt SMTP
+            $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+            $mail->AddAddress($userMail['email']);  // Empfänger information
+            $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
+            $mail->Subject = "Die Buchanfrage wurde leider abgelehnt.";
+            //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
+            $mail->Body="Leider wurde deine Buchanfrage abgelehnt. \n"
+                    . "Das angefragte Buch hiess ".$requestDetails['title'].". \n"
+                    . "ISBN Numer: ".$requestDetails['isbn']." \n"
+                    . "Der Besitzer des Buches war ".$requestDetails['first_name'].". \n"
+                    . "Versuche das Buch bei einem anderen User auf der cBooks-Plattform auszuleihen.";
+            $mail->send();
+        } catch (phpmailerException $e) {   // PHP Mailer Exception
+            $e->errorMessage();
+        } catch (Exception $e) {
+            echo $e->errorMessage();        // allg. Exception
+        }
+        
+        
+        $this->smarty->assign("alert_success", "Anfrage wurde abgelehnt");
+        $this->smarty->display("portal.tpl");
+    }
+    
+    
+    
+    
     function removeOrReturn($idPersonalBook, $returnOrRemove){
         
         $this->mysqli->query("UPDATE personal_books SET availability= 'a' WHERE id_personal_book = $idPersonalBook");
