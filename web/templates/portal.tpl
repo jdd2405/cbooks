@@ -212,10 +212,8 @@
                             <div class="panel-body">
                                 <h2>Deine Statistik</h2>
                                 <dl class="dl-horizontal">
-                                <dt>Registrierte Bücher</dt>
+                                <dt>Deine Bücher</dt>
                         <dd>{$nofRegBooks}</dd>
-                        <dt>Registrierte Benutzer</dt>
-                        <dd>{$nofRegUsers}</dd>
                         <dt>Ausgeliehne Bücher</dt>
                         <dd>{$nofLends}</dd>
 
