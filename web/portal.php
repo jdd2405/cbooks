@@ -135,6 +135,12 @@ if ($user->isLoggedIn == true) {
         $acceptRequest->accept(filter_input(INPUT_GET, 'accept', FILTER_SANITIZE_NUMBER_INT));
     }
     
+    else if(isset($_GET['decline'])){
+        require_once 'modules/lend_book.module.php';
+        $declineRequest = new LendBook($smarty, $mysqli);
+        $declineRequest->decline(filter_input(INPUT_GET, 'decline', FILTER_SANITIZE_NUMBER_INT));
+    }
+    
     else if(isset($_GET['RemoveOrReturn'], $_GET['ID'])){
         require_once 'modules/lend_book.module.php';
         $removeRequest = new LendBook($smarty, $mysqli);
