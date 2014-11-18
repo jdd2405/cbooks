@@ -62,33 +62,31 @@
                     <h2>Buch finden</h2>
 
                     <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" id="toggleSearch">
+                    <!--<ul class="nav nav-tabs" id="toggleSearch">
                         <li class="active"><a href="#search" data-toggle="tab">suchen</a></li>
                         <li><a href="#browse" data-toggle="tab">schmökern</a></li>
-                    </ul>
+                    </ul>-->
 
                     <!-- Tab panes -->
+                    <!--
                     <div class="tab-content">
-                        <div class="tab-pane active" id="search">
+                        <div class="tab-pane active" id="search">-->
 
                             <form class="form-inline" role="form" action="{$path}" method="GET">
-                                <input type="text" class="form-control " name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                                <input type="text" class="form-control " id="searchBookInput" name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
                             </form>
 
-                        </div>
 
-                        <div class="tab-pane" id="browse">
+                        <!--<div class="tab-pane" id="browse">
                             <ul class="list-inline">
                                 <li>Kategorie</li>
                                 <li>Alphabet</li>
                                 <li>Popularität</li>
-                            </ul>
+                            </ul>-->
 
-                        </div>
-                    </div> 
-                </div>
+
+        </div>
             </div>
-
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
