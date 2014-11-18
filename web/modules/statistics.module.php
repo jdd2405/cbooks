@@ -11,6 +11,8 @@
  *
  * @author Jonas
  */
+require_once 'classes/User.class.php';
+
 class statisticsModule {
     
     public $smarty;
@@ -57,20 +59,14 @@ class statisticsModule {
         
     }
     
-    function getPrivateStats(){
-        if ($result = $this->mysqli->query("SELECT * FROM personal_books")) {
+    function getPrivateStats($user){
+        if ($result = $this->mysqli->query("SELECT * FROM personal_books WHERE owner_id_user = ".$user->user_id)) {
             $nofRegBooks = $result->num_rows;
             $this->smarty->assign("nofRegBooks", $nofRegBooks);
             $result->close();
         }
         
-        if ($result = $this->mysqli->query("SELECT * FROM cb_users")) {
-            $nofRegUsers = $result->num_rows;
-            $this->smarty->assign("nofRegUsers", $nofRegUsers);
-            $result->close();
-        }
-        
-        if ($result = $this->mysqli->query("SELECT * FROM lending_relations")) {
+        if ($result = $this->mysqli->query("SELECT * FROM lending_relations WHERE lender_id_user = ".$user->user_id)) {
             $nofLends = $result->num_rows;
             $this->smarty->assign("nofLends", $nofLends);
             $result->close();
