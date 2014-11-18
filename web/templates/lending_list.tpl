@@ -71,7 +71,7 @@
                                             <dt>Postleitzahl und Ort: </dt>
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Anfragedatum: </dt>
-                                            <dd>{$test.requestDate}</dd>
+                                            <dd>{$test.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
                                             <dd>{$test.duration}</dd><br>
                                             <a href="{$path}?decline={$test.item_id_personal_book}" class="btn btn-default">Ausleihe ablehnen</a>
@@ -87,7 +87,7 @@
                                             <dt>Postleitzahl und Ort: </dt>
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Anfragedatum: </dt>
-                                            <dd>{$test.requestDate}</dd>
+                                            <dd>{$test.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
                                             <dd>{$test.duration}</dd><br>
                                             <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=remove" class="btn btn-primary">Anfrage zurücknehmen</a>
@@ -103,7 +103,7 @@
                                             <dt>Postleitzahl und Ort: </dt>
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Rückgabedatum: </dt>
-                                            <dd>{$test.returnDate}</dd><br>
+                                            <dd>{$test.returnDate|date_format:"%e.%m.%Y"}</dd><br>
                                             <a href="{$path}?extend={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe verlängern</a>
                                         </dl>
                                     </div>
@@ -117,7 +117,7 @@
                                             <dt>Postleitzahl und Ort: </dt>
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Rückgabedatum: </dt>
-                                            <dd>{$test.returnDate}</dd><br>
+                                            <dd>{$test.returnDate|date_format:"%e.%m.%Y"}</dd><br>
                                             <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=return" class="btn btn-primary">Buchrückgabe bestätigen</a>
                                         </dl>
                                     </div>

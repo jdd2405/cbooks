@@ -116,7 +116,7 @@
 
                             <h2>Buch suchen</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="searchBook">
-                                <input type="text" class="form-control " name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                                <input type="text" class="form-control " name="searchBook" id="searchBookInput" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 
                             </form>
 
@@ -132,7 +132,7 @@
                             <h2>neues Buch registrieren</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
                                 <!-- JO? Warum "updateUser_form" -->
-                                <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                <input type="text" class="form-control " name="registrateBookWithISBN" id="ISBNinput" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
                             </form>
                             <!--
                             Konzeptionell kein buch registrierbar ohne ISBN
