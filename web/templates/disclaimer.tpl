@@ -56,75 +56,24 @@
 
 {block name=body}
     <div class="row">
-        <div class="col-sm-4" id="findABook">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>Buch finden</h2>
+                    <h2>Haftungsausschluss</h2>
 
-                    <!-- Nav tabs -->
-                    <!--<ul class="nav nav-tabs" id="toggleSearch">
-                        <li class="active"><a href="#search" data-toggle="tab">suchen</a></li>
-                        <li><a href="#browse" data-toggle="tab">schmökern</a></li>
-                    </ul>-->
-
-                    <!-- Tab panes -->
-                    <!--
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="search">-->
-
-                            <form class="form-inline" role="form" action="{$path}" method="GET">
-                                <input type="text" class="form-control " id="searchBookInput" name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                            </form>
-
-
-                        <!--<div class="tab-pane" id="browse">
-                            <ul class="list-inline">
-                                <li>Kategorie</li>
-                                <li>Alphabet</li>
-                                <li>Popularität</li>
-                            </ul>-->
-
-
-        </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Grosse Auswahl</h2>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Titel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {foreach $newestBooks as $book}
-                                    <tr onclick="document.location = '{$path}?book_id={$book[0]}';"> 
-                                        <td>{$book[2]}</td>
-                                    </tr>
-                                {/foreach}
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
             </div>
+
         </div>
-        <div class="col-sm-4" id="registerABook">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>Statistik</h2>
-                    <dl class="dl-horizontal">
-                        <dt>Registrierte Bücher</dt>
-                        <dd>{$nofRegBooks}</dd>
-                        <dt>Registrierte Benutzer</dt>
-                        <dd>{$nofRegUsers}</dd>
-                        <dt>Ausgeliehne Bücher</dt>
-                        <dd>{$nofLends}</dd>
-
-                    </dl>
+                    <address>
+                        <strong>cBooks.ch</strong><br>
+                        Fachhochschule Nordwestschweiz FHNW<br>
+                        School of Business<br>
+                    </address>
                 </div>
             </div>
         </div>

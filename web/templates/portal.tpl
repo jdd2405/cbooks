@@ -4,7 +4,7 @@
         <div class="panel-body">
             <h2>Herzlich Willkommen{if $user->first_name != ""},{/if} {$user->first_name}</h2>
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
             <address>
                 <dl class="dl-horizontal">
                     <dt>Adresse</dt>
@@ -21,15 +21,15 @@
                 </dl>
             </address>
                 </div>
-                    <div class="col-md-3">
-                        <dl class="dl-horizontal">
-                        <dt>Empfangene Anfragen</dt>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal" id ="buecherlistenLinks">
+                        <dt>Empfangene Anfragen <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=1" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Offene Anfragen</dt>
+                        <dt>Offene Anfragen <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=2" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Geliehene Bücher</dt>
+                        <dt>Geliehene Bücher <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=3" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Verliehene Bücher</dt>
+                        <dt>Verliehene Bücher <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=4" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
                         </dl>
                     </div>
@@ -116,7 +116,7 @@
 
                             <h2>Buch suchen</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="searchBook">
-                                <input type="text" class="form-control " name="searchBook" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                                <input type="text" class="form-control " name="searchBook" id="searchBookInput" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 
                             </form>
 
@@ -132,7 +132,7 @@
                             <h2>neues Buch registrieren</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
                                 <!-- JO? Warum "updateUser_form" -->
-                                <input type="text" class="form-control " name="registrateBookWithISBN" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                <input type="text" class="form-control " name="registrateBookWithISBN" id="ISBNinput" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
                             </form>
                             <!--
                             Konzeptionell kein buch registrierbar ohne ISBN
@@ -158,14 +158,12 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ISBN</th>
                                     <th>Titel</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {foreach $newestBooks as $book}
                                     <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
-                                        <td>{$book.isbn}</td>
                                         <td>{$book.title}</td>
                                     </tr>
                                 {foreachelse}
@@ -214,10 +212,8 @@
                             <div class="panel-body">
                                 <h2>Deine Statistik</h2>
                                 <dl class="dl-horizontal">
-                                <dt>Registrierte Bücher</dt>
+                                <dt>Deine Bücher</dt>
                         <dd>{$nofRegBooks}</dd>
-                        <dt>Registrierte Benutzer</dt>
-                        <dd>{$nofRegUsers}</dd>
                         <dt>Ausgeliehne Bücher</dt>
                         <dd>{$nofLends}</dd>
 

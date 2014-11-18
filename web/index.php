@@ -52,13 +52,20 @@ require_once 'modules/statistics.module.php';
 $statisticsModule = new statisticsModule($smarty, $mysqli);
 $statisticsModule->getPublicStats();
 
-// Check for error messages
-if (isset($_GET['err'])) {
-    $smarty->assign("alert_warning", filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING));
+// Check for warning and info messages
+if (isset($_GET['warning'])) {
+    $smarty->assign("alert_warning", filter_input(INPUT_GET, 'warning', FILTER_SANITIZE_STRING));
+}
+else if (isset($_GET['info'])) {
+    $smarty->assign("alert_info", filter_input(INPUT_GET, 'info', FILTER_SANITIZE_STRING));
+}
+
+else if (isset($_GET['page'])){
+    $smarty->display(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING).".tpl");
 }
 
 // Check for called actions
-    if(isset($_GET['searchBook'])){
+   else if(isset($_GET['searchBook'])){
         require_once 'modules/search_book.module.php';
         $searchBookModule = new SearchBookModule($smarty, $mysqli);
 
@@ -98,12 +105,20 @@ else if(isset($_GET['logout'])){
     $smarty->display('index.tpl');
 }
 
-else if(!empty($_GET['book_id'])){
+else if(isset($_GET['book_id'])){
         require_once 'modules/detail_book.module.php';
         $showDetail = new DetailBook($smarty, $mysqli);
         $showDetail->details(filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_NUMBER_INT));
     }
 
+else if (isset($_GET['do'])){
+        switch (filter_input(INPUT_GET, 'do', FILTER_DEFAULT)){
+            case "cronjob":
+                require_once 'modules/lend_book.module.php';
+                $lendBookModule = new LendBook($smarty, $mysqli);
+                $lendBookModule->checkLendingRelations();
+        }
+}
 
 // If no action is called
 else {
