@@ -56,16 +56,16 @@ $statisticsModule->getPublicStats();
 if (isset($_GET['warning'])) {
     $smarty->assign("alert_warning", filter_input(INPUT_GET, 'warning', FILTER_SANITIZE_STRING));
 }
-if (isset($_GET['info'])) {
+else if (isset($_GET['info'])) {
     $smarty->assign("alert_info", filter_input(INPUT_GET, 'info', FILTER_SANITIZE_STRING));
 }
 
-if (isset($_GET['page'])){
+else if (isset($_GET['page'])){
     $smarty->display(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING).".tpl");
 }
 
 // Check for called actions
-    if(isset($_GET['searchBook'])){
+   else if(isset($_GET['searchBook'])){
         require_once 'modules/search_book.module.php';
         $searchBookModule = new SearchBookModule($smarty, $mysqli);
 

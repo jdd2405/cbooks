@@ -133,14 +133,17 @@ if ($user->isLoggedIn == true) {
     else if (isset($_GET['warning'])) {
         $smarty->assign("alert_warning", filter_input(INPUT_GET, 'warning', FILTER_SANITIZE_STRING));
         $smarty->display('portal.tpl');
-    } else if (isset($_GET['info'])) {
+    } 
+    else if (isset($_GET['info'])) {
         $smarty->assign("alert_info", filter_input(INPUT_GET, 'info', FILTER_SANITIZE_STRING));
         $smarty->display('portal.tpl');
     }
 
-    if (isset($_GET['page'])) {
+    else if (isset($_GET['page'])) {
         $smarty->display(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) . ".tpl");
-    } else {
+    } 
+    
+    else {
         $smarty->display('portal.tpl');
     }
 } else {
