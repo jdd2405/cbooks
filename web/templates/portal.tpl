@@ -158,14 +158,12 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ISBN</th>
                                     <th>Titel</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {foreach $newestBooks as $book}
                                     <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
-                                        <td>{$book.isbn}</td>
                                         <td>{$book.title}</td>
                                     </tr>
                                 {foreachelse}

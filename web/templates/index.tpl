@@ -98,14 +98,12 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ISBN</th>
                                     <th>Titel</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {foreach $newestBooks as $book}
                                     <tr onclick="document.location = '{$path}?book_id={$book[0]}';"> 
-                                        <td>{$book[1]}</td>
                                         <td>{$book[2]}</td>
                                     </tr>
                                 {/foreach}
