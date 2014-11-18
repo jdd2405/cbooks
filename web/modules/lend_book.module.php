@@ -220,7 +220,9 @@ class LendBook {
             $result = $this->mysqli->query($query);
             $test123 = $result->fetch_all(MYSQLI_ASSOC);
             
-           
+            $rows = $result->num_rows;
+            
+            $this->smarty->assign("rows",$rows);
             $this->smarty->assign("test123", $test123);
             $result->close();
             

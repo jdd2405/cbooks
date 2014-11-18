@@ -64,3 +64,16 @@ h1, h2, h3, h4, h5, h6 {
 #ISBNinput{
     width: 80%;
 }
+
+#buecherlistenLinks{
+    float: right;
+
+}
+
+#buecherlistenLinks dd{
+    margin-left: 220px;
+}
+
+#buecherlistenLinks dt{
+    width: 200px;
+}

@@ -4,7 +4,7 @@
         <div class="panel-body">
             <h2>Herzlich Willkommen{if $user->first_name != ""},{/if} {$user->first_name}</h2>
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
             <address>
                 <dl class="dl-horizontal">
                     <dt>Adresse</dt>
@@ -21,15 +21,15 @@
                 </dl>
             </address>
                 </div>
-                    <div class="col-md-3">
-                        <dl class="dl-horizontal">
-                        <dt>Empfangene Anfragen</dt>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal" id ="buecherlistenLinks">
+                        <dt>Empfangene Anfragen <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=1" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Offene Anfragen</dt>
+                        <dt>Offene Anfragen <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=2" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Geliehene Bücher</dt>
+                        <dt>Geliehene Bücher <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=3" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Verliehene Bücher</dt>
+                        <dt>Verliehene Bücher <span class="badge">42</span></dt>
                         <dd><a href="{$path}?list=4" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
                         </dl>
                     </div>
