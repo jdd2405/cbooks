@@ -317,4 +317,41 @@ class LendBook {
         $this->smarty->assign("rowsList4",$rowsList4);
         
     }
+    
+    function checkLendingRelations(){
+        $query="SELECT b.title, a.aut_name, p.isbn, u.email, u.first_name, DATE_FORMAT(l.returnDate,'%d.%m.%Y') AS returnDate "
+                . "FROM lending_relations l JOIN cb_users u ON  l.lender_id_user = u.id_cb_user "
+                . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+                . "JOIN books b ON p.isbn = b.id_isbn "
+                . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
+                . "JOIN authors a ON bha.authors_id_author = id_author"
+                . "WHERE l.state = 'l' AND"
+                . "returnDate = DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
+        
+        
+        if ($result = $this->mysqli->query($query)) {
+
+            /* fetch object array */
+            while ($reminderData = $result->fetch_assoc()) {
+                try {
+                    $mail = new PHPMailer();
+                    $mail->IsSMTP();    // Klasse nutzt SMTP
+                    $mail->SetFrom("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");     // Sender Information         
+                    $mail->AddAddress($reminderData['email']);  // Empfänger information
+                    $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
+                    $mail->Subject = "Reminder-Mail";
+                    //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
+                    $mail->Body = "Hallo ".$reminderData['first_name']."\n  ";
+                    $mail->send();
+                } catch (phpmailerException $e) {   // PHP Mailer Exception
+                    $e->errorMessage();
+                } catch (Exception $e) {
+                    echo $e->errorMessage();        // allg. Exception
+                }
+            }
+
+            /* free result set */
+            $result->close();
+        }
+    }
 }
