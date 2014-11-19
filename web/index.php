@@ -110,6 +110,12 @@ else if(isset($_GET['book_id'])){
         $showDetail = new DetailBook($smarty, $mysqli);
         $showDetail->details(filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_NUMBER_INT));
     }
+    
+else if (isset($_GET['allBooks'])) {
+        require_once 'modules/statistics.module.php';
+        $listdetails = new statisticsModule($smarty, $mysqli);
+        $listdetails->allBooks();
+}
 
 else if (isset($_GET['do'])){
         switch (filter_input(INPUT_GET, 'do', FILTER_DEFAULT)){

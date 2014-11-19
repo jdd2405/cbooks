@@ -90,7 +90,7 @@ class statisticsModule {
         $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle "
                 . "FROM personal_books pb JOIN books b ON pb.isbn = b.id_isbn JOIN cb_users u "
                 . "ON pb.owner_id_user = u.id_cb_user "
-                . "WHERE u.id_cb_user = ".$_SESSION['user_id']." ORDER BY pb.reg_date DESC ");
+                . "WHERE u.id_cb_user = ".$_SESSION['user_id']." ORDER BY b.title DESC ");
         $allPersonalBooks = $result->fetch_all(MYSQLI_ASSOC);
         
         $result->close();
@@ -98,6 +98,18 @@ class statisticsModule {
         $this->smarty->assign("allPersonalBooks", $allPersonalBooks);
         $this->smarty->display("book_list.tpl");
     }
+    
+    function allBooks(){
+        $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle "
+                . "FROM personal_books pb JOIN books b ON pb.isbn = b.id_isbn ORDER BY b.title ASC ");
+        $allPersonalBooks = $result->fetch_all(MYSQLI_ASSOC);
+        
+        $result->close();
+        
+        $this->smarty->assign("allPersonalBooks", $allPersonalBooks);
+        $this->smarty->display("book_list.tpl");
+    }
+    
      
 }
 

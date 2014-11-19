@@ -107,6 +107,7 @@
                                 {/foreach}
                             </tbody>
                         </table>
+                        <a href="{$path}?allBooks">alle Bücher anzeigen</a>
                     </div>
 
                 </div>
