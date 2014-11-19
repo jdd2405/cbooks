@@ -104,7 +104,6 @@
                                             <dd>{$test.zip} {$test.city}</dd>
                                             <dt>Rückgabedatum: </dt>
                                             <dd>{$test.returnDate|date_format:"%e.%m.%Y"}</dd><br>
-                                            <a href="{$path}?extend={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe verlängern</a>
                                         </dl>
                                     </div>
                                     

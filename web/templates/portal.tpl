@@ -23,14 +23,14 @@
                 </div>
                     <div class="col-md-4">
                         <dl class="dl-horizontal" id ="buecherlistenLinks">
-                        <dt>Empfangene Anfragen <span class="badge">42</span></dt>
-                        <dd><a href="{$path}?list=1" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Offene Anfragen <span class="badge">42</span></dt>
-                        <dd><a href="{$path}?list=2" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Geliehene Bücher <span class="badge">42</span></dt>
-                        <dd><a href="{$path}?list=3" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
-                        <dt>Verliehene Bücher <span class="badge">42</span></dt>
-                        <dd><a href="{$path}?list=4" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-list"></span></a></dd>
+                            <dt>Empfangene Anfragen</dt>
+                            <dd><a href="{$path}?list=1"><span class="badge">{$rowsList1}</span></a></dd>
+                            <dt>Offene Anfragen</dt>
+                            <dd><a href="{$path}?list=2"><span class="badge">{$rowsList2}</span></a></dd>
+                            <dt>Geliehene Bücher</dt>
+                            <dd><a href="{$path}?list=3"><span class="badge">{$rowsList3}</span></a></dd>
+                            <dt>Verliehene Bücher</dt>
+                            <dd><a href="{$path}?list=4"><span class="badge">{$rowsList4}</span></a></dd>
                         </dl>
                     </div>
             </div>

@@ -183,15 +183,9 @@ class LendBook {
         else{
             $this->smarty->assign("alert_success", "Buch wurde zurückgebracht.");
             $this->smarty->display("portal.tpl");
-        }
-
-        
+        } 
     }
     
-    function extend($idPersonalBook){
-        
-        
-    }
     
     function alert(){
         $query= "SELECT title, DATE_FORMAT(returnDate,'%d.%m.%Y') AS returnDate, id_personal_book FROM lending_relations JOIN personal_books ON item_id_personal_book = id_personal_book"
@@ -219,10 +213,7 @@ class LendBook {
             
             $result = $this->mysqli->query($query);
             $test123 = $result->fetch_all(MYSQLI_ASSOC);
-            
-            $rows = $result->num_rows;
-            
-            $this->smarty->assign("rows",$rows);
+
             $this->smarty->assign("test123", $test123);
             $result->close();
             
@@ -262,7 +253,7 @@ class LendBook {
         }
         
         //Verliehene Bücher
-        else{
+        else {
             $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
@@ -280,5 +271,50 @@ class LendBook {
         $this->smarty->assign("lendingListTitle", $lendingListTitle);
         $this->smarty->display('lending_list.tpl');
         
-    }      
+    }
+    
+    
+    function badgeUpdate(){
+        $id=$_SESSION['user_id'];
+        
+        $query= "SELECT * FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
+        $result = $this->mysqli->query($query);
+        $rowsList1 = $result->num_rows;
+        $result->free();
+        
+        $query= "SELECT * FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND l.lender_id_user =$id";
+        $result = $this->mysqli->query($query);
+        $rowsList2 = $result->num_rows;
+        $result->free();
+        
+        
+        $query= "SELECT * FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND l.lender_id_user =$id";
+        $result = $this->mysqli->query($query);
+        $rowsList3 = $result->num_rows;
+        $result->free();
+        
+        
+        $query= "SELECT * FROM lending_relations l "
+            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
+            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
+            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND p.owner_id_user =$id";
+        $result = $this->mysqli->query($query);
+        $rowsList4 = $result->num_rows;
+        $result->close();
+        
+        $this->smarty->assign("rowsList1",$rowsList1);
+        $this->smarty->assign("rowsList2",$rowsList2);
+        $this->smarty->assign("rowsList3",$rowsList3);
+        $this->smarty->assign("rowsList4",$rowsList4);
+        
+    }
 }
