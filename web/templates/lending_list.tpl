@@ -69,7 +69,7 @@
                                             <dt>Antragsperson: </dt>
                                             <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$list.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$list.city}</dd>
                                             <dt>Anfragedatum: </dt>
                                             <dd>{$list.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
@@ -85,7 +85,7 @@
                                             <dt>Bucheigentümer: </dt>
                                             <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$list.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$list.city}</dd>
                                             <dt>Anfragedatum: </dt>
                                             <dd>{$list.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
@@ -101,7 +101,7 @@
                                             <dt>Bucheigentümer: </dt>
                                             <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$list.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$list.city}</dd>
                                             <dt>Rückgabedatum: </dt>
                                             <dd>{$list.returnDate|date_format:"%e.%m.%Y"}</dd><br>
                                         </dl>
