@@ -36,13 +36,13 @@
             </script>
             
                 <!--{$detail=0}-->
-                {foreach $test123 as $test}
+                {foreach $lists as $list}
                     <!--{$detail++}-->
 
                     <tr> 
-                        <td>{$test.isbn}</td>
-                        <td>{$test.title}</td>
-                        <td>{$test.subtitle}</td>
+                        <td>{$list.isbn}</td>
+                        <td>{$list.title}</td>
+                        <td>{$list.subtitle}</td>
                         <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail});  return false;"><span id="collapseBtn" class="glyphicon glyphicon-sort"></span></button></td>
                     </tr>
                     
@@ -54,11 +54,11 @@
                                     <dl class="dl-horizontal">
                                         <h4>Buchdetails</h4>
                                         <dt>Titel: </dt>
-                                        <dd>{$test.title}</dd>
+                                        <dd>{$list.title}</dd>
                                         <dt>Untertitel: </dt>
-                                        <dd>{$test.subtitle}</dd>
+                                        <dd>{$list.subtitle}</dd>
                                         <dt>Klappentext: </dt>
-                                        <dd>{$test.blurb}</dd>
+                                        <dd>{$list.blurb}</dd>
                                         
                                     </dl>
                                 </div>
@@ -67,15 +67,15 @@
                                         <dl class="dl-horizontal">
                                             <h4>Zusatzinformationen</h4>
                                             <dt>Antragsperson: </dt>
-                                            <dd>{$test.first_name}</dd>
+                                            <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$test.city}</dd>
                                             <dt>Anfragedatum: </dt>
-                                            <dd>{$test.requestDate|date_format:"%e.%m.%Y"}</dd>
+                                            <dd>{$list.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
-                                            <dd>{$test.duration}</dd><br>
-                                            <a href="{$path}?decline={$test.item_id_personal_book}" class="btn btn-default">Ausleihe ablehnen</a>
-                                            <a href="{$path}?accept={$test.item_id_personal_book}" class="btn btn-primary">Ausleihe akzeptieren</a>
+                                            <dd>{$list.duration}</dd><br>
+                                            <a href="{$path}?decline={$list.item_id_personal_book}" class="btn btn-default">Ausleihe ablehnen</a>
+                                            <a href="{$path}?accept={$list.item_id_personal_book}" class="btn btn-primary">Ausleihe akzeptieren</a>
                                         </dl>
                                     </div>
                                 {elseif $lendingListTitle == "Offene Anfragen"}
@@ -83,14 +83,14 @@
                                         <dl class="dl-horizontal">
                                             <h4>Zusatzinformationen</h4>
                                             <dt>Bucheigentümer: </dt>
-                                            <dd>{$test.first_name}</dd>
+                                            <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$test.city}</dd>
                                             <dt>Anfragedatum: </dt>
-                                            <dd>{$test.requestDate|date_format:"%e.%m.%Y"}</dd>
+                                            <dd>{$list.requestDate|date_format:"%e.%m.%Y"}</dd>
                                             <dt>Ausleihedauer: </dt>
-                                            <dd>{$test.duration}</dd><br>
-                                            <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=remove" class="btn btn-primary">Anfrage zurücknehmen</a>
+                                            <dd>{$list.duration}</dd><br>
+                                            <a href="{$path}?ID={$list.item_id_personal_book}&RemoveOrReturn=remove" class="btn btn-primary">Anfrage zurücknehmen</a>
                                         </dl>
                                     </div>
                                 
@@ -99,11 +99,11 @@
                                         <dl class="dl-horizontal">
                                             <h4>Zusatzinformationen</h4>
                                             <dt>Bucheigentümer: </dt>
-                                            <dd>{$test.first_name}</dd>
+                                            <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$test.city}</dd>
                                             <dt>Rückgabedatum: </dt>
-                                            <dd>{$test.returnDate|date_format:"%e.%m.%Y"}</dd><br>
+                                            <dd>{$list.returnDate|date_format:"%e.%m.%Y"}</dd><br>
                                         </dl>
                                     </div>
                                     
@@ -112,12 +112,12 @@
                                         <dl class="dl-horizontal">
                                             <h4>Zusatzinformationen</h4>
                                             <dt>Vorname: </dt>
-                                            <dd>{$test.first_name}</dd>
+                                            <dd>{$list.first_name}</dd>
                                             <dt>Postleitzahl und Ort: </dt>
-                                            <dd>{$test.zip} {$test.city}</dd>
+                                            <dd>{$list.zip} {$list.city}</dd>
                                             <dt>Rückgabedatum: </dt>
-                                            <dd>{$test.returnDate|date_format:"%e.%m.%Y"}</dd><br>
-                                            <a href="{$path}?ID={$test.item_id_personal_book}&RemoveOrReturn=return" class="btn btn-primary">Buchrückgabe bestätigen</a>
+                                            <dd>{$list.returnDate|date_format:"%e.%m.%Y"}</dd><br>
+                                            <a href="{$path}?ID={$list.item_id_personal_book}&RemoveOrReturn=return" class="btn btn-primary">Buchrückgabe bestätigen</a>
                                         </dl>
                                     </div>
                                 {/if}

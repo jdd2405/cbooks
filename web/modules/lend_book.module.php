@@ -212,9 +212,9 @@ class LendBook {
             . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
             
             $result = $this->mysqli->query($query);
-            $test123 = $result->fetch_all(MYSQLI_ASSOC);
+            $received = $result->fetch_all(MYSQLI_ASSOC);
 
-            $this->smarty->assign("test123", $test123);
+            $this->smarty->assign("lists", $received);
             $result->close();
             
             $lendingListTitle= "Empfangene Anfragen";    
@@ -230,7 +230,7 @@ class LendBook {
             $result = $this->mysqli->query($query);
             $requests = $result->fetch_all(MYSQLI_ASSOC);
             
-            $this->smarty->assign("test123", $requests);
+            $this->smarty->assign("lists", $requests);
             $result->close();
             
             $lendingListTitle= "Offene Anfragen";
@@ -246,7 +246,7 @@ class LendBook {
             $result = $this->mysqli->query($query);
             $borrowed = $result->fetch_all(MYSQLI_ASSOC);
             
-            $this->smarty->assign("test123", $borrowed);
+            $this->smarty->assign("lists", $borrowed);
             $result->close();
             
             $lendingListTitle= "Geliehene Bücher";
@@ -262,7 +262,7 @@ class LendBook {
             $result = $this->mysqli->query($query);
             $lended = $result->fetch_all(MYSQLI_ASSOC);
             
-            $this->smarty->assign("test123", $lended);
+            $this->smarty->assign("lists", $lended);
             $result->close();
             
             $lendingListTitle= "Verliehene Bücher";
