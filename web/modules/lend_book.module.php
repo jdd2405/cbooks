@@ -209,7 +209,10 @@ class LendBook {
             $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND p.owner_id_user =$id";
+            . "JOIN books b ON p.isbn=b.id_isbn "
+            . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
+            . "JOIN authors a ON bha.authors_id_author = a.id_author "
+            . "WHERE l.state ='r' AND p.owner_id_user =$id";
             
             $result = $this->mysqli->query($query);
             $received = $result->fetch_all(MYSQLI_ASSOC);
@@ -225,7 +228,10 @@ class LendBook {
             $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='r' AND l.lender_id_user =$id";
+            . "JOIN books b ON p.isbn=b.id_isbn "
+            . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
+            . "JOIN authors a ON bha.authors_id_author = a.id_author "
+            . "WHERE l.state ='r' AND l.lender_id_user =$id";
             
             $result = $this->mysqli->query($query);
             $requests = $result->fetch_all(MYSQLI_ASSOC);
@@ -241,7 +247,10 @@ class LendBook {
             $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND l.lender_id_user =$id";
+            . "JOIN books b ON p.isbn=b.id_isbn "
+            . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
+            . "JOIN authors a ON bha.authors_id_author = a.id_author "
+            . "WHERE l.state ='l' AND l.lender_id_user =$id";
             
             $result = $this->mysqli->query($query);
             $borrowed = $result->fetch_all(MYSQLI_ASSOC);
@@ -257,7 +266,10 @@ class LendBook {
             $query= "SELECT * FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn WHERE l.state ='l' AND p.owner_id_user =$id";
+            . "JOIN books b ON p.isbn=b.id_isbn "
+            . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
+            . "JOIN authors a ON bha.authors_id_author = a.id_author "
+            . "WHERE l.state ='l' AND p.owner_id_user =$id";
             
             $result = $this->mysqli->query($query);
             $lended = $result->fetch_all(MYSQLI_ASSOC);
@@ -318,6 +330,8 @@ class LendBook {
         
     }
     
+    
+    //Cronjob
     function checkLendingRelations(){
         $query="SELECT b.title, a.aut_name, p.isbn, u.email, u.first_name, DATE_FORMAT(l.returnDate,'%d.%m.%Y') AS returnDate "
                 . "FROM lending_relations l JOIN cb_users u ON  l.lender_id_user = u.id_cb_user "

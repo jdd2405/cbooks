@@ -16,7 +16,7 @@
                 <tr>
                     <th>ISBN</th>
                     <th>Titel</th>
-                    <th>Untertitel</th>
+                    <th>Autor</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@
                     <tr> 
                         <td>{$list.isbn}</td>
                         <td>{$list.title}</td>
-                        <td>{$list.subtitle}</td>
+                        <td>{$list.aut_name}</td>
                         <td><button type="button" class="btn btn-primary" onclick="moreDetails({$detail});  return false;"><span id="collapseBtn" class="glyphicon glyphicon-sort"></span></button></td>
                     </tr>
                     
@@ -53,13 +53,16 @@
                                 <div class="col-md-5">
                                     <dl class="dl-horizontal">
                                         <h4>Buchdetails</h4>
+                                        <dt>ISBN: </dt>
+                                        <dd>{$list.isbn}</dd>
                                         <dt>Titel: </dt>
                                         <dd>{$list.title}</dd>
                                         <dt>Untertitel: </dt>
                                         <dd>{$list.subtitle}</dd>
+                                        <dt>Autor: </dt>
+                                        <dd>{$list.aut_name}</dd>
                                         <dt>Klappentext: </dt>
-                                        <dd>{$list.blurb}</dd>
-                                        
+                                        <dd>{$list.blurb}</dd> 
                                     </dl>
                                 </div>
                                 {if $lendingListTitle == "Empfangene Anfragen"}

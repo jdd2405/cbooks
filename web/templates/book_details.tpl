@@ -31,6 +31,10 @@
                                         <td>{$details["subtitle"]}</td>
                                     </tr>
                                     <tr>
+                                        <th>Autor</th>
+                                        <td>{$details["aut_name"]}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Klappentext</th>
                                         <td>{$details["blurb"]}</td>
                                     </tr>
@@ -74,6 +78,14 @@
                             <div class="panel-body">
                                 <a href="{$path}?registrateBookWithISBN={$details["isbn"]}" class="btn btn-primary">Buch bearbeiten</a>
 
+                            </div>
+                        </div>
+                    </div>
+                {elseif !isset($isLoggedIn)}
+                    <div class="col-sm-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <p><b>Du musst eingeloggt sein um ein Buch auszuleihen.</b></p>
                             </div>
                         </div>
                     </div>

@@ -27,12 +27,16 @@ class SearchBookModule{
 
         /* create a prepared statement */
         // fallback: "SELECT id_isbn, title FROM books WHERE id_isbn = ? OR title LIKE ?"
-        $query = "SELECT b.id_isbn, b.title, u.zip, u.city, pb.id_personal_book
+        $query = "SELECT b.id_isbn, b.title, u.zip, u.city, pb.id_personal_book, a.aut_name
             FROM books b
             INNER JOIN personal_books pb
             ON b.id_isbn=pb.isbn
             INNER JOIN cb_users u
             ON pb.owner_id_user=u.id_cb_user
+            INNER JOIN books_has_authors bha
+            ON b.id_isbn = bha.books_id_isbn
+            INNER JOIN authors a
+            ON bha.authors_id_author = a.id_author
             WHERE b.id_isbn = ? OR b.title LIKE ?";
         if ($stmt = $this->mysqli->prepare($query)) {
 
