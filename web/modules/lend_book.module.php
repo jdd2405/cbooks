@@ -355,7 +355,10 @@ class LendBook {
                     $mail->AddReplyTo("info@cbooks.ch", "cBooks.ch - die Büchertauschplatform");  // Spezifiziere ReplyTo Addresse 
                     $mail->Subject = "Reminder-Mail";
                     //$mail->AltBody = ""; // Plain-text message body, falls kein HTML email viewer vorhanden
-                    $mail->Body = "Hallo ".$reminderData['first_name']."\n  ";
+                    $mail->Body = "Hallo ".$reminderData['first_name']."\n "
+                            . "Die Ausleihdauer des Buches ".$reminderData['title']." von ".$reminderData['aut_name']." läuft am ".$reminderData['returnDate']." ab. \n"
+                            . "Bitte bringe das Buch zurück. \n"
+                            . "Dein cBooks.ch Team";
                     $mail->send();
                 } catch (phpmailerException $e) {   // PHP Mailer Exception
                     $e->errorMessage();
