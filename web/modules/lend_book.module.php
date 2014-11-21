@@ -333,6 +333,7 @@ class LendBook {
     
     //Cronjob
     function checkLendingRelations(){
+        echo "in function";
         $query="SELECT b.title, a.aut_name, p.isbn, u.email, u.first_name, DATE_FORMAT(l.returnDate,'%d.%m.%Y') AS returnDate "
                 . "FROM lending_relations l JOIN cb_users u ON  l.lender_id_user = u.id_cb_user "
                 . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
@@ -344,9 +345,10 @@ class LendBook {
         
         
         if ($result = $this->mysqli->query($query)) {
-
+            
             /* fetch object array */
             while ($reminderData = $result->fetch_assoc()) {
+                echo "in while";
                 try {
                     $mail = new PHPMailer();
                     $mail->IsSMTP();    // Klasse nutzt SMTP

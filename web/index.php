@@ -33,6 +33,11 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 
+// Setup PHPMailer
+require_once('mail/class.phpmailer.php');
+require_once('mail/class.smtp.php');
+
+
 // Logo-link
 $smarty->assign("path", "index.php");
 /* 

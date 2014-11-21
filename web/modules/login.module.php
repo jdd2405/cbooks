@@ -12,8 +12,7 @@
  * @author Jonas
  */
 require_once('classes/User.class.php');
-require_once('mail/class.phpmailer.php');
-require_once('mail/class.smtp.php');
+
 
 class LoginModule {
 
