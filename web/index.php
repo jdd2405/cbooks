@@ -117,13 +117,17 @@ else if (isset($_GET['allBooks'])) {
         $listdetails->allBooks();
 }
 
-else if (isset($_GET['do'])){
-        switch (filter_input(INPUT_GET, 'do', FILTER_DEFAULT)){
+else if (isset($argv)){
+    foreach ($argv as $arg) {
+        $e=explode("=",$arg);
+        switch ($e){
             case "cronjob":
                 require_once 'modules/lend_book.module.php';
                 $lendBookModule = new LendBook($smarty, $mysqli);
                 $lendBookModule->checkLendingRelations();
         }
+    }
+        
 }
 
 // If no action is called
