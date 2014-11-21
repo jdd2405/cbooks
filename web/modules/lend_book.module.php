@@ -338,8 +338,8 @@ class LendBook {
                 . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
                 . "JOIN books b ON p.isbn = b.id_isbn "
                 . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
-                . "JOIN authors a ON bha.authors_id_author = id_author"
-                . "WHERE l.state = 'l' AND"
+                . "JOIN authors a ON bha.authors_id_author = id_author "
+                . "WHERE l.state = 'l' AND "
                 . "returnDate = DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
         
         
