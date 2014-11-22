@@ -45,7 +45,7 @@
             {/if}
 
             <header>
-                <div class="row">
+                <div class="row" id="header">
                     <div class="col-md-3">
                         <div class="logo">
                             <a href="{$path}"><img src="img/v2.png" class="img-responsive"></a>
@@ -168,19 +168,21 @@
         </div>
 
     {block name=body}{/block}
+    <footer>
+        <div class="row" id="footer">
 
-    <div class="row">
 
 
-        <footer>
             <div class="col-md-12">
                 <div class="text-right" id="madeBy">
                     <a href="http://www.realnet.ch" target="_blank"><img src="img/logo.png"></a>
+                    <a href="http://www.fhnw.ch" target="_blank"><img src="img/fhnw_fhnw_logo_de.png"></a>
                 </div>
             </div>
-        </footer>
 
-    </div>
+
+        </div>
+    </footer>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

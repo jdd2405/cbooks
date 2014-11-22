@@ -18,10 +18,16 @@ header .logo {
     margin: 30px -5px 15px 15px ;
 }
 
-#metaNav .nav-pills {float: right; margin-top: 50px;}
+#metaNav .nav-pills {float: right; margin-top: 50px; margin-bottom: 50px;}
 
 #banner{
     position: relative;
+}
+
+.jumbotron{
+    background-image: url('../../img/jumbotron/stack_of_books.jpg');
+    background-position: right bottom;
+    background-repeat: no-repeat;
 }
 
 #banner .img-profile {width: 100%; background-color: #003355; border: 5px #003355; }
@@ -35,9 +41,18 @@ div.login-buttons {
     position: absolute;
     right: 30px;
     top: 15px;
-    
 }
 
+#loginBtn:before{
+    content:url('../../img/jumbotron/already_registrated.png'); /* with class ModalCarrot ??*/
+    position: absolute; /*or absolute*/
+    left:-240px;
+    top:-50px;
+}
+
+tr[onclick]{
+    cursor: pointer;
+}
 
 #findABook .tab-content {margin-top: 15px;}
 
@@ -48,6 +63,10 @@ div.login-buttons {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: impact;
+}
+
+.text-muted {
+    opacity: 0.6;
 }
 
 .inverse {
@@ -76,4 +95,27 @@ h1, h2, h3, h4, h5, h6 {
 
 #buecherlistenLinks dt{
     width: 200px;
+}
+
+#footer {
+    margin-top: 50px;
+    padding-bottom: 20px;
+}
+
+#footer #madeBy img{
+    margin: 20px;
+}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    opacity: 0.6;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   opacity: 0.6;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   opacity: 0.6;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   opacity: 0.6;
 }
