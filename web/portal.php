@@ -121,10 +121,6 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/lend_book.module.php';
         $removeRequest = new LendBook($smarty, $mysqli);
         $removeRequest->removeOrReturn(filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'RemoveOrReturn', FILTER_SANITIZE_STRING));
-    } else if (isset($_GET['return'])) {
-        require_once 'modules/lend_book.module.php';
-        $returnRequest = new LendBook($smarty, $mysqli);
-        $returnRequest->returned(filter_input(INPUT_GET, 'return', FILTER_SANITIZE_NUMBER_INT));
     }
 
 

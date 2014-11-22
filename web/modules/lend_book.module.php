@@ -36,9 +36,7 @@ class LendBook {
         $result=$this->mysqli->query("SELECT email FROM cb_users JOIN personal_books ON id_cb_user = owner_id_user WHERE id_personal_book = $id_personal_book");
         $email = $result->fetch_assoc();
         $result->close();
-        
-        
-        
+               
         //mail
         try {
             $mail = new PHPMailer();
@@ -58,9 +56,8 @@ class LendBook {
             echo $e->errorMessage();        // allg. Exception
         }
 
-
-
         $this->smarty->assign("alert_success", "Buch wurde angefragt.");
+        LendBook::badgeUpdate();
         $this->smarty->display("portal.tpl");
     }
 
@@ -121,6 +118,7 @@ class LendBook {
         
         
         $this->smarty->assign("alert_success", "Buch wurde zur Ausleihe akzeptiert.");
+        LendBook::badgeUpdate();
         $this->smarty->display("portal.tpl");
        
     }
@@ -165,6 +163,7 @@ class LendBook {
         
         
         $this->smarty->assign("alert_success", "Anfrage wurde abgelehnt");
+        LendBook::badgeUpdate();
         $this->smarty->display("portal.tpl");
     }
     
@@ -178,10 +177,12 @@ class LendBook {
                 
         if ($returnOrRemove=="remove"){
             $this->smarty->assign("alert_success", "Buchantrag wurde gelöscht.");
+            LendBook::badgeUpdate();
             $this->smarty->display("portal.tpl");
         }
         else{
             $this->smarty->assign("alert_success", "Buch wurde zurückgebracht.");
+            LendBook::badgeUpdate();
             $this->smarty->display("portal.tpl");
         } 
     }
@@ -206,13 +207,14 @@ class LendBook {
         
         //Empfangene Anfragen
         if($number==1){
-            $query= "SELECT * FROM lending_relations l "
+            $query= "SELECT p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
             . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
             . "JOIN authors a ON bha.authors_id_author = a.id_author "
-            . "WHERE l.state ='r' AND p.owner_id_user =$id";
+            . "WHERE l.state ='r' AND p.owner_id_user =$id "
+            . "GROUP BY p.isbn";
             
             $result = $this->mysqli->query($query);
             $received = $result->fetch_all(MYSQLI_ASSOC);
@@ -225,13 +227,14 @@ class LendBook {
         
         //Offene Anfragen
         else if($number==2){
-            $query= "SELECT * FROM lending_relations l "
-            . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
-            . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
-            . "JOIN books b ON p.isbn=b.id_isbn "
-            . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
-            . "JOIN authors a ON bha.authors_id_author = a.id_author "
-            . "WHERE l.state ='r' AND l.lender_id_user =$id";
+            $query= "SELECT p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name 
+                    FROM lending_relations l JOIN cb_users c ON l.lender_id_user = c.id_cb_user 
+                    JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book 
+                    JOIN books b ON p.isbn=b.id_isbn 
+                    JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn 
+                    JOIN authors a ON bha.authors_id_author = a.id_author 
+                    WHERE l.state ='r' AND l.lender_id_user =$id 
+                    GROUP BY p.isbn";
             
             $result = $this->mysqli->query($query);
             $requests = $result->fetch_all(MYSQLI_ASSOC);
@@ -244,13 +247,14 @@ class LendBook {
         
         //Geliehene Bücher
         else if ($number==3) {
-            $query= "SELECT * FROM lending_relations l "
+            $query= "SELECT p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
             . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
             . "JOIN authors a ON bha.authors_id_author = a.id_author "
-            . "WHERE l.state ='l' AND l.lender_id_user =$id";
+            . "WHERE l.state ='l' AND l.lender_id_user =$id "
+            . "GROUP BY p.isbn";
             
             $result = $this->mysqli->query($query);
             $borrowed = $result->fetch_all(MYSQLI_ASSOC);
@@ -263,13 +267,14 @@ class LendBook {
         
         //Verliehene Bücher
         else {
-            $query= "SELECT * FROM lending_relations l "
+            $query= "SELECT p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
             . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
             . "JOIN authors a ON bha.authors_id_author = a.id_author "
-            . "WHERE l.state ='l' AND p.owner_id_user =$id";
+            . "WHERE l.state ='l' AND p.owner_id_user =$id"
+            . "GROUP BY p.isbn";
             
             $result = $this->mysqli->query($query);
             $lended = $result->fetch_all(MYSQLI_ASSOC);
@@ -334,14 +339,15 @@ class LendBook {
     //Cronjob
     function checkLendingRelations(){
         echo "in function";
-        $query="SELECT b.title, a.aut_name, p.isbn, u.email, u.first_name, DATE_FORMAT(l.returnDate,'%d.%m.%Y') AS returnDate "
+        $query="SELECT b.title, p.isbn, u.email, u.first_name, DATE_FORMAT(l.returnDate,'%d.%m.%Y') AS returnDate, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name "
                 . "FROM lending_relations l JOIN cb_users u ON  l.lender_id_user = u.id_cb_user "
                 . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
                 . "JOIN books b ON p.isbn = b.id_isbn "
                 . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
                 . "JOIN authors a ON bha.authors_id_author = id_author "
                 . "WHERE l.state = 'l' AND "
-                . "returnDate = DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
+                . "returnDate = DATE_ADD(CURDATE(), INTERVAL 7 DAY) "
+                . "GROUP BY p.isbn";
         
         
         if ($result = $this->mysqli->query($query)) {

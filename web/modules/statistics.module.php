@@ -87,12 +87,12 @@ class statisticsModule {
     
     
     function allPersonalBooks(){
-        $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle, a.aut_name "
+        $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name "
                 . "FROM personal_books pb JOIN books b ON pb.isbn = b.id_isbn "
                 . "JOIN cb_users u ON pb.owner_id_user = u.id_cb_user "
                 . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
                 . "JOIN authors a ON bha.authors_id_author = a.id_author "
-                . "WHERE u.id_cb_user = ".$_SESSION['user_id']." ORDER BY b.title DESC ");
+                . "WHERE u.id_cb_user = ".$_SESSION['user_id']." GROUP BY pb.isbn ORDER BY b.title DESC");
         
         $allPersonalBooks = $result->fetch_all(MYSQLI_ASSOC);
         
@@ -103,10 +103,10 @@ class statisticsModule {
     }
     
     function allBooks(){
-        $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle, a.aut_name "
+        $result= $this->mysqli->query("SELECT pb.id_personal_book, pb.isbn, b.title, b.subtitle, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name "
                 . "FROM personal_books pb JOIN books b ON pb.isbn = b.id_isbn "
                 . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
-                . "JOIN authors a ON bha.authors_id_author = a.id_author ORDER BY b.title ASC ");
+                . "JOIN authors a ON bha.authors_id_author = a.id_author GROUP BY pb.isbn ORDER BY b.title ASC ");
         $allBooks = $result->fetch_all(MYSQLI_ASSOC);
         
         $result->close();
