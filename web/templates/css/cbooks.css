@@ -18,7 +18,7 @@ header .logo {
     margin: 30px -5px 15px 15px ;
 }
 
-#metaNav .nav-pills {float: right; margin-top: 50px;}
+#metaNav .nav-pills {float: right; margin-top: 50px; margin-bottom: 50px;}
 
 #banner{
     position: relative;
@@ -46,11 +46,13 @@ div.login-buttons {
 #loginBtn:before{
     content:url('../../img/jumbotron/already_registrated.png'); /* with class ModalCarrot ??*/
     position: absolute; /*or absolute*/
-    z-index:100000; /*a number that's more than the modal box*/
-    left:-250px;
-    top:10px;
+    left:-240px;
+    top:-50px;
 }
 
+tr[onclick]{
+    cursor: pointer;
+}
 
 #findABook .tab-content {margin-top: 15px;}
 
