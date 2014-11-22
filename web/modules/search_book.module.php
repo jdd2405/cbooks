@@ -38,7 +38,7 @@ class SearchBookModule{
             INNER JOIN authors a
             ON bha.authors_id_author = a.id_author
             WHERE b.id_isbn = ? OR b.title LIKE ? 
-            GROUP BY b.id_isbn";
+            GROUP BY pb.id_personal_book";
         if ($stmt = $this->mysqli->prepare($query)) {
 
             /* bind parameters for markers */

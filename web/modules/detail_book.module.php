@@ -31,7 +31,7 @@ class DetailBook {
             JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn 
             JOIN authors a ON bha.authors_id_author = a.id_author
             WHERE p.id_personal_book = '$book_id'
-            GROUP BY p.isbn";
+            GROUP BY p.id_personal_book";
         
         $result = $this->mysqli->query($query);
         
