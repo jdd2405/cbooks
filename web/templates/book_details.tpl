@@ -119,11 +119,8 @@
                                     <option>7</option>
                                     <option>8</option>
                                 </select>
-                                <input type="hidden" name="id_personal_book" value="{$details["id_personal_book"]}"/>
-
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" >Ausleihe anfragen</button>
-                                </div>
+                                <input type="hidden" name="id_personal_book" value="{$details["id_personal_book"]}"/> &nbsp;
+                                <button type="submit" class="btn btn-primary" >Ausleihe anfragen</button>
                             </form>
 
                         </div>
