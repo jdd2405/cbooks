@@ -82,6 +82,11 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/detail_book.module.php';
         $detailBookModule = new DetailBook($smarty, $mysqli);
         $detailBookModule->details(filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_NUMBER_INT));
+        
+require_once 'modules/editBook.module.php';
+        $editBookModule = new editBookModule($smarty, $mysqli);
+        $editBook->editCompleteBook;
+        
     } else if (isset($_GET['duration'], $_GET['id_personal_book'])) {
         require_once 'modules/lend_book.module.php';
         $lendBookModule = new LendBook($smarty, $mysqli);
@@ -90,6 +95,21 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
+        /*
+    } else if (!empty($_GET['x_jot'])) {
+        require_once 'modules/edit_book.module.php';
+        $editBookModule = new editBook($smarty, $mysqli);
+        $editBookModule->details(filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_NUMBER_INT));
+         * 
+        
+    } else if (isset($_GET['editBook'])) {    
+        require_once 'modules/editBook.module.php';
+        $editBookModule = new editBookModule($smarty, $mysqli);
+        $editBook->editCompleteBook;
+         * 
+         * 
+         */
+        
     } else if (isset($_POST['registrateBook'])) {
         require_once 'modules/registrate_book.module.php';
         $insertBook = new registrateBookModule($smarty, $mysqli);

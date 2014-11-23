@@ -24,7 +24,7 @@ class DetailBook {
     
     function details($book_id){
         
-        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book, p.owner_id_user, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name 
+        $query = "SELECT p.isbn, p.description, p.availability, b.title, b.subtitle, b.blurb, p.id_personal_book, p.owner_id_user, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name, p.run 
             FROM personal_books p
             INNER JOIN books b
             ON p.isbn=b.id_isbn
