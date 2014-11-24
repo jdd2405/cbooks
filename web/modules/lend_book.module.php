@@ -189,9 +189,10 @@ class LendBook {
     
     
     function alert(){
-        $query= "SELECT title, DATE_FORMAT(returnDate,'%d.%m.%Y') AS returnDate, id_personal_book FROM lending_relations JOIN personal_books ON item_id_personal_book = id_personal_book"
-                . " JOIN books ON isbn = id_isbn WHERE lender_id_user = '".$_SESSION['user_id']."' AND"
-                . " returnDate BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
+        $query= "SELECT title, DATE_FORMAT(returnDate,'%d.%m.%Y') AS returnDate, id_personal_book FROM lending_relations "
+                . "JOIN personal_books ON item_id_personal_book = id_personal_book "
+                . "JOIN books ON isbn = id_isbn WHERE lender_id_user = '".$_SESSION['user_id']."' AND "
+                . "returnDate BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)";
             
             $result = $this->mysqli->query($query);
             $alertbooks = $result->fetch_all(MYSQLI_ASSOC);
