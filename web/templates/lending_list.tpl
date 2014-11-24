@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                        <script language="JavaScript" type="text/javascript">
+            <script language="JavaScript" type="text/javascript">
                 {literal}
                     function moreDetails(detail){
                         var d = document.getElementById(detail);
