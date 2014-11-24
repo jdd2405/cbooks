@@ -18,21 +18,21 @@
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control " name="isbn" placeholder="ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} required>
+                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} required>
                                 <span class="note"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="title" class="col-sm-4 control-label">Titel</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="title" placeholder="Titel" {if isset($book.title)}value="{$book.title}"{/if} required>
+                                <input type="text" class="form-control" name="title" placeholder="... Titel" {if isset($book.title)}value="{$book.title}"{/if} required>
                                 <span class="note"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="subtitle" class="col-sm-4 control-label">Untertitel</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="subtitle" placeholder="... Untertitel">
+                                <input type="text" class="form-control" name="subtitle" placeholder="... Untertitel" {if isset($book.subtitle)}value="{$book.subtitle}"{/if}>
                                 <span class="note"></span>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="volume" class="col-sm-4 control-label">Klappentext</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="blurb" placeholder="... Klappentext">
+                                <input type="text" class="form-control" name="blurb" placeholder="... Klappentext"{if isset($book.blurb)}value="{$book.blurb}"{/if}>
                                 <span class="note"></span>
                             </div>
                         </div>

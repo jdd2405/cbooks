@@ -76,6 +76,7 @@
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBook">Buch bearbeiten j</button>
                                 <a href="{$path}?registrateBookWithISBN={$details["isbn"]}" class="btn btn-primary">Buch bearbeiten</a>
 
                             </div>
@@ -128,6 +129,85 @@
                     </div>
                 </div>
             </div>
+                                
+            <!--Modal-->
+            <div class="modal fade" id="editBook" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Buch bearbeiten</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <form class="form-horizontal" role="form" action="{$path}" method="POST" name="book_registration_form">
+                                <div class="form-group">
+                                    <label for="isbn" class="col-sm-4 control-label">ISBN</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} disabled="disabled">
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-4 control-label">Titel</label>
+                                    <div class="col-sm-8">
+                                        <input type="textarea" class="form-control" name="title" placeholder="... Titel" {if isset($details.title)}value="{$details.title}"{/if} required>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subtitle" class="col-sm-4 control-label">Untertitel</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="subtitle" placeholder="... Untertitel"{if isset($details.subtitle)}value="{$details.subtitle}"{/if}>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="author" class="col-sm-4 control-label">Autor</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="author" placeholder="... Autor"{if isset($details.aut_name)}value="{$details.aut_name}"{/if}>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="volume" class="col-sm-4 control-label">Klappentext</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="blurb" placeholder="... Klappentext" {if isset($details.blurb)}value="{$details.blurb}"{/if}>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="run" class="col-sm-4 control-label">Auflage</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="run" placeholder="... Auflage" {if isset($details.run)}value="{$details.run}"{/if}>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description" class="col-sm-4 control-label">Beschrieb</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="description" placeholder="... individuelle Beschreibung"{if isset($details.description)}value="{$details.description}"{/if}>
+                                        <span class="note"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <div class="msg"></div>
+                                        <button type="submit" name="editBook" class="btn btn-primary">Änderungen Speichern</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>              
 
         </div>
 

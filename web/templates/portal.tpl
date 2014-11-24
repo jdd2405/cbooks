@@ -130,18 +130,11 @@
                         <div class="panel-body">
 
                             <h2>neues Buch registrieren</h2>
-                            <form class="form-inline" role="form" action="" method="GET" name="updateUser_form">
-                                <!-- JO? Warum "updateUser_form" -->
-                                <input type="text" class="form-control " name="registrateBookWithISBN" id="ISBNinput" placeholder="ISBN" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            <form class="form-inline" role="form" action="" method="GET" >
+                                <input type="text" class="form-control" name="registrateBookWithISBN" id="ISBNinput" placeholder="ISBN" required>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
                             </form>
-                            <!--
-                            Konzeptionell kein buch registrierbar ohne ISBN
                             
-                            
-                            <a href="{$path}?registrateBook">Keine ISBN vorhanden?</a>
-                            
-                            -->
-
                         </div>
                     </div>
                 </div>
