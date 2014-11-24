@@ -208,7 +208,7 @@ class LendBook {
         
         //Empfangene Anfragen
         if($number==1){
-            $query= "SELECT p.id_personal_book p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
+            $query= "SELECT p.id_personal_book, p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
@@ -228,7 +228,7 @@ class LendBook {
         
         //Offene Anfragen
         else if($number==2){
-            $query= "SELECT p.id_personal_book p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name 
+            $query= "SELECT p.id_personal_book, p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name 
                     FROM lending_relations l JOIN cb_users c ON l.lender_id_user = c.id_cb_user 
                     JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book 
                     JOIN books b ON p.isbn=b.id_isbn 
@@ -248,7 +248,7 @@ class LendBook {
         
         //Geliehene Bücher
         else if ($number==3) {
-            $query= "SELECT p.id_personal_book p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
+            $query= "SELECT p.id_personal_book, p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
@@ -268,13 +268,13 @@ class LendBook {
         
         //Verliehene Bücher
         else {
-            $query= "SELECT p.id_personal_book p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
+            $query= "SELECT p.id_personal_book, p.isbn, b.title, b.subtitle, b.blurb, l.item_id_personal_book, c.first_name, c.zip, c.city, l.requestDate, l.duration, l.returnDate , GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name FROM lending_relations l "
             . "JOIN cb_users c ON l.lender_id_user = c.id_cb_user "
             . "JOIN personal_books p ON l.item_id_personal_book = p.id_personal_book "
             . "JOIN books b ON p.isbn=b.id_isbn "
             . "JOIN books_has_authors bha ON b.id_isbn = bha.books_id_isbn "
             . "JOIN authors a ON bha.authors_id_author = a.id_author "
-            . "WHERE l.state ='l' AND p.owner_id_user =$id"
+            . "WHERE l.state ='l' AND p.owner_id_user =$id "
             . "GROUP BY p.id_personal_book";
             
             $result = $this->mysqli->query($query);
