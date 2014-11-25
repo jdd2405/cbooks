@@ -59,7 +59,7 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>Haftungsausschuss</h2>
+                    <h2>Haftungsausschluss</h2>
 
 
                 </div>

@@ -56,7 +56,7 @@
                             <ul class="nav nav-pills">
                                 <li><a href="{$path}">Startseite</a></li>
                                 <li><a href="{$path}?page=impressum">Impressum</a></li>
-                                <li><a href="{$path}?page=disclaimer">Haftungsausschuss</a></li>
+                                <li><a href="{$path}?page=disclaimer">Haftungsausschluss</a></li>
                             </ul>
                         </nav>
                     </div>
