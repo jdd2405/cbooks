@@ -11,12 +11,13 @@
  *
  * @author Johi
  */
-class edit_Book {
-    
+class editBook {
+     
     function __construct($smarty, $mysqli) {
         $this->smarty = $smarty;
         $this->mysqli = $mysqli;
     }
+    
     /*
     function searchCompleteBookByID($isbn) {
 
@@ -32,14 +33,18 @@ class edit_Book {
     */
     
     function updateCompleteBook(){
-        $queryAddBook = "UPDATE books"
-                . "(title, subtitle, blurb) values ("
-                . "'" . $_POST['isbn'] . "', "
-                . "'" . $_POST['title'] . "', "
-                . "'" . $_POST['subtitle'] . "', "
-                . "'" . $_POST['blurb'] 
-                . "' WHERE id_isbn = " . $details.isbn
-                . "');";
+        
+      //  echo "</br>Checkpoint 2</br>";
+        
+        $queryAddBook = "UPDATE books SET " 
+                . "title = '". $_GET['title'] ."', "
+                . "subtitle = '". $_GET['subtitle'] ."', "
+                . "blurb = '". $_GET['blurb'] ."'"
+              //  . "'" . $_GET['title'] . "', "
+              //  . "'" . $_GET['subtitle'] . "', "
+
+                . " WHERE id_isbn = '" . $_GET['isbn']
+                . "';";
         /*
         $queryAddPersonalBook = "INSERT INTO personal_books"
                 . "(isbn, run, description, owner_id_user) values ("
@@ -62,7 +67,9 @@ class edit_Book {
          */
         $this->mysqli->query($queryAddBook);
         
-        echo"</br>Checkpoint </br>";
+        echo $queryAddBook;
+        
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         
     }
     

@@ -76,9 +76,7 @@
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBook">Buch bearbeiten j</button>
-                                <a href="{$path}?registrateBookWithISBN={$details["isbn"]}" class="btn btn-primary">Buch bearbeiten</a>
-
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBook">Buch bearbeiten</button>
                             </div>
                         </div>
                     </div>
@@ -140,11 +138,12 @@
                         </div>
                         <div class="modal-body">
                             
-                            <form class="form-horizontal" role="form" action="{$path}" method="POST" name="book_registration_form">
+                            <form class="form-horizontal" role="form" action={$path} method="GET" name="bookEditForm">
                                 <div class="form-group">
                                     <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} disabled="disabled">
+                                        <input type="text" class="form-control " name="isbn-display" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} disabled="disabled">
+                                        <input type="hidden" name="isbn" {if isset($details.isbn)}value="{$details.isbn}"{/if} >
                                         <span class="note"></span>
                                     </div>
                                 </div>
@@ -198,7 +197,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="msg"></div>
-                                        <button type="submit" name="editBook" class="btn btn-primary">Änderungen Speichern</button>
+                                        <button type="submit" name="editBook" class="btn btn-primary">&Auml;nderungen speichern</button>
                                     </div>
                                 </div>
                             </form>
