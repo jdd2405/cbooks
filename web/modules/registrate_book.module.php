@@ -82,10 +82,12 @@ class registrateBookModule {
     }
 
     function getAuthorIDbyName($authorName) {
-
+/*
         $sqlQuery = "SELECT id_author FROM authors WHERE aut_name = '" . $authorName . "'";
         $result = $this->mysqli->query($sqlQuery);
         $authors = array();
+ * 
+ */
         
         while ($row = mysqli_fetch_assoc($result)) {
 //           print_r($row);

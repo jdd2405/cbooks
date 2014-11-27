@@ -17,33 +17,20 @@ class editBook {
         $this->smarty = $smarty;
         $this->mysqli = $mysqli;
     }
-    
-    /*
-    function searchCompleteBookByID($isbn) {
-
-        $this->smarty->assign("isbn_input", $isbn);
-
-        $query = "SELECT id_isbn, title, subtitle, blurb
-            FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
-        if ($result = $this->mysqli->query($query)) {
-            $book = $result->fetch_assoc();
-            $this->smarty->assign("book", $book);
-        }
-    
-    */
-    
+        
     function updateCompleteBook(){
         
       //  echo "</br>Checkpoint 2</br>";
         
-        $queryUpdateBook = "UPDATE books SET " 
+        $queryUpdateBook = "UPDATE books SET "
                 . "title = '". $_GET['title'] ."', "
                 . "subtitle = '". $_GET['subtitle'] ."', "
                 . "blurb = '". $_GET['blurb'] ."'"
-              //  . "'" . $_GET['title'] . "', "
-              //  . "'" . $_GET['subtitle'] . "', "
-
                 . " WHERE id_isbn = '" . $_GET['isbn']
+                . "';";
+        $queryUpdatePersonalBook = "UPDATE personal_books SET "
+                . "title = '". $_GET['description'] ."', "
+                . " WHERE id_personal_book = {$details["id_personal_book"]}"
                 . "';";
 
         $this->mysqli->query($queryUpdateBook);
