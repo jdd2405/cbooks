@@ -36,7 +36,7 @@ class editBook {
         
       //  echo "</br>Checkpoint 2</br>";
         
-        $queryAddBook = "UPDATE books SET " 
+        $queryUpdateBook = "UPDATE books SET " 
                 . "title = '". $_GET['title'] ."', "
                 . "subtitle = '". $_GET['subtitle'] ."', "
                 . "blurb = '". $_GET['blurb'] ."'"
@@ -45,29 +45,9 @@ class editBook {
 
                 . " WHERE id_isbn = '" . $_GET['isbn']
                 . "';";
-        /*
-        $queryAddPersonalBook = "INSERT INTO personal_books"
-                . "(isbn, run, description, owner_id_user) values ("
-                . "'" . $_POST['isbn'] . "', "
-                . "'" . $_POST['run'] . "', "
-                . "'" . $_POST['description'] . "', "
-                . "'" . $_SESSION['user_id'] . "');"
-                . "";
 
-        $queryConnectBookWithAuthors = "INSERT books_has_authors"
-                . "(books_id_isbn, authors_id_author) VALUES ("
-                . "'" . $_POST["isbn"] . "', '" . $author_id . "')";
-        
-        
-        
-        $this->mysqli->query($queryAddPersonalBook);
-        
-        $this->mysqli->query($queryConnectBookWithAuthors);
-         * 
-         */
-        $this->mysqli->query($queryAddBook);
-        
-        echo $queryAddBook;
+        $this->mysqli->query($queryUpdateBook);
+        $this->mysqli->query($queryUpdatePersonalBook);
         
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         

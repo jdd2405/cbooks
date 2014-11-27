@@ -64,6 +64,8 @@ class registrateBookModule {
                 . "(books_id_isbn, authors_id_author) VALUES ("
                 . "'" . $_POST["isbn"] . "', '" . $author_id . "')";
         
+        echo '</br>'.$queryAddBook.'</br></br>'.$queryAddPersonalBook.'</br></br>'.$queryConnectBookWithAuthors.'</br>';
+        
         $this->mysqli->query($queryAddBook);
         
         $this->mysqli->query($queryAddPersonalBook);

@@ -96,7 +96,7 @@ if ($user->isLoggedIn == true) {
         $editBookModule = new editBook($smarty, $mysqli);
         $editBookModule->updateCompleteBook();
                 
-    } else if (isset($_GET['registrateBook'])) {
+    } else if (isset($_POST['registrateBook'])) {
         require_once 'modules/registrate_book.module.php';
         $insertBook = new registrateBookModule($smarty, $mysqli);
         $insertBook->insertPersonalBook();
