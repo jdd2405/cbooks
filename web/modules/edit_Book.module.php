@@ -20,8 +20,7 @@ class editBook {
         
     function updateCompleteBook(){
         
-      //  echo "</br>Checkpoint 2</br>";
-        
+              
         $queryUpdateBook = "UPDATE books SET "
                 . "title = '". $_GET['title'] ."', "
                 . "subtitle = '". $_GET['subtitle'] ."', "
@@ -35,6 +34,11 @@ class editBook {
 
         $this->mysqli->query($queryUpdateBook);
         $this->mysqli->query($queryUpdatePersonalBook);
+    /*    
+        Wenn sich der Autor verändert sollen alle Autoren gelöscht.
+     * 
+     */
+        
         
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         

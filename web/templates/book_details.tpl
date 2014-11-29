@@ -3,7 +3,7 @@
 {block name="banner"}
     <div class="panel panel-default">
         <div class="panel-body">
-            <h2>Details zum Buch: "{$details["title"]}"</h2>
+            <h2>Details zum Buch:</br> "{$details["title"]}"</h2>
         </div>
     </div>
 {/block}
