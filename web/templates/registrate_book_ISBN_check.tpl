@@ -31,8 +31,8 @@
                     <h4>Anforderungen an ISBN</h4>
                     <p>
                         Die ISBN muss aus 10 oder 13 Ziffern bestehen.
-                        Um sie besser lesbar zu machen, kann sie mit einem "-" strukturiert werden.
-                        Wenn es sich um eine 10-stellige ISBN handelt, kann die letzte Ziffer aus dem Buchstabaen "X" - r&ouml;misch 10 - bestehen.
+                        Um sie besser lesbar zu machen, kann sie mit Trennstrichen strukturiert werden.
+                        Wenn es sich um eine 10-stellige ISBN handelt, kann die letzte Ziffer aus dem Buchstaben "X" - r&ouml;misch 10 - bestehen.
                     </p>
                 </div>
             </div>

@@ -52,20 +52,27 @@ class registrateBookModule {
                 }
             }
 
+            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+            $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
+            $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
+            
             $queryAddBook = "INSERT INTO books"
                     . "(id_isbn, title, subtitle, blurb) values ("
                     . "'" . $_POST['isbn'] . "', "
-                    . "'" . $_POST['title'] . "', "
-                    . "'" . $_POST['subtitle'] . "', "
-                    . "'" . $_POST['blurb'] 
+                    . "'" . $title . "', "
+                    . "'" . $subtitle . "', "
+                    . "'" . $blurb 
                     . "');"
                     . "";
 
+            $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
+            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+            
             $queryAddPersonalBook = "INSERT INTO personal_books"
                     . "(isbn, run, description, owner_id_user) values ("
                     . "'" . $_POST['isbn'] . "', "
-                    . "'" . $_POST['run'] . "', "
-                    . "'" . $_POST['description'] . "', "
+                    . "'" . $run . "', "
+                    . "'" . $description . "', "
                     . "'" . $_SESSION['user_id'] . "');"
                     . "";
 

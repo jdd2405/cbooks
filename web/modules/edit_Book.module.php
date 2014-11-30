@@ -20,15 +20,22 @@ class editBook {
         
     function updateCompleteBook(){
         
-              
+        
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
+        $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
+                      
         $queryUpdateBook = "UPDATE books SET "
-                . "title = '". $_GET['title'] ."', "
-                . "subtitle = '". $_GET['subtitle'] ."', "
-                . "blurb = '". $_GET['blurb'] ."'"
+                . "title = '". $title ."', "
+                . "subtitle = '". $subtitle ."', "
+                . "blurb = '". $blurb ."'"
                 . " WHERE id_isbn = '" . $_GET['isbn']
                 . "';";
+        
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        
         $queryUpdatePersonalBook = "UPDATE personal_books SET "
-                . "title = '". $_GET['description'] ."', "
+                . "title = '". $description ."', "
                 . " WHERE id_personal_book = {$details["id_personal_book"]}"
                 . "';";
 
