@@ -1,4 +1,33 @@
 {extends file="layout.tpl"}
+
+<script language="javascript" type="text/javascript">
+    {literal}
+
+        
+
+$(document).ready(function() {
+    $('#isbnForm').bootstrapValidator({
+        feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                isbn: {
+                    validators: {
+                        isbn: {
+                            message: 'The value is not valid ISBN'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+
+    {/literal}
+</script>
+
 {block name="banner"}
     <div class="panel panel-default">
         <div class="panel-body">
@@ -130,8 +159,9 @@
                         <div class="panel-body">
 
                             <h2>neues Buch registrieren</h2>
-                            <form class="form-inline" role="form" action="" method="GET" >
-                                <input type="text" class="form-control" name="registrateBookWithISBN" id="ISBNinput" placeholder="ISBN" required>
+
+                            <form class="form-inline" action="" method="GET" id="isbnForm">
+                                <input type="text" class="form-control" name="isbn" data-bv-field="isbn" placeholder="ISBN">
                                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
                             </form>
 

@@ -9,8 +9,9 @@
         <title>cBooks.ch</title>
 
         <!-- Bootstrap -->
-        <link href="templates/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="templates/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrapvalidator/dist/css/bootstrapValidator.css" rel="stylesheet">
+        
         <!-- Custom Style Sheet -->
         <link href="templates/css/cbooks.css" rel="stylesheet">
 
@@ -186,11 +187,16 @@
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="templates/js/bootstrap.min.js"></script>
 <script src="templates/js/forms.js"></script>
 <script src="templates/js/sha512.js"></script>
+
+<!--Include all required plugin of the validator -->
+<script type="text/javascript" src="bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+
 <script type="text/javascript">
     {literal}    
 //match email address
