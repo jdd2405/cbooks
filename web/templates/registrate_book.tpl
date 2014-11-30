@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="author" class="col-sm-4 control-label">Autor</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="author" placeholder="... Autor">
+                                <input type="text" class="form-control" name="author" placeholder="... Autor"{if isset($book.author)}value="{$book.author}"{/if}>
                                 <span class="note"></span>
                             </div>
                         </div>
@@ -61,15 +61,6 @@
                             </div>
                         </div>
 
-                        <!--       
-                        <div class="form-group">
-                            <label for="volume" class="col-sm-4 control-label">Band</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="volume" placeholder="... Band">
-                                <span class="note"></span>
-                            </div>
-                        </div>
-                        -->
 
                         <div class="form-group">
                             <label for="description" class="col-sm-4 control-label">Beschrieb</label>
