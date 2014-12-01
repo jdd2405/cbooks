@@ -14,8 +14,11 @@ class registrateBookModule {
     }
 
     function searchBookByIsbn($isbn) {
-
-        $this->smarty->assign("isbn_input", $isbn);
+        
+        
+        
+        
+        /*$this->smarty->assign("isbn_input", $isbn);
 
         $query = "SELECT id_isbn, title, subtitle, blurb
             FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
@@ -24,7 +27,7 @@ class registrateBookModule {
             $this->smarty->assign("book", $book);
         }
 
-        /* Template aufrufen mit Smarty */
+         Template aufrufen mit Smarty
         
         
         $isbnCheck = NULL;
@@ -35,7 +38,7 @@ class registrateBookModule {
         }
         else{
             $this->smarty->display("registrate_book_ISBN_check.tpl");
-        }
+        }*/
     }
    
     function insertPersonalBook() {

@@ -42,6 +42,7 @@ class SearchBookModule{
         if ($stmt = $this->mysqli->prepare($query)) {
 
             /* bind parameters for markers */
+            
             $preparedValue = "%".$search_term."%";
             $stmt->bind_param('ss', $search_term, $preparedValue);
 
