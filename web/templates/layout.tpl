@@ -10,7 +10,7 @@
 
         <!-- Bootstrap -->
         <link href="templates/css/bootstrap.css" rel="stylesheet">
-        <link href="bootstrapvalidator/dist/css/bootstrapValidator.css" rel="stylesheet">
+        <link href="templates/css/bootstrapValidator.css" rel="stylesheet">
         
         <!-- Custom Style Sheet -->
         <link href="templates/css/cbooks.css" rel="stylesheet">
@@ -195,94 +195,114 @@
 <script src="templates/js/sha512.js"></script>
 
 <!--Include all required plugin of the validator -->
-<script type="text/javascript" src="bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="templates/js/bootstrapvalidator/bootstrapValidator.js"></script>
 
 <script type="text/javascript">
     {literal}    
-//match email address
+            //match email address
             var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$';
-//match credit card numbers
+            //match credit card numbers
             var creditCardRegex = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$';
-//match username
+            //match username
             var usernameRegex = '/^[a-z0-9_-]{3,16}$/';
-//match password
+            //match password
             var passwordRegex = '/^[a-z0-9_-]{6,18}$/';
-//Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords).
+            //Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords).
             var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/gm;
-//match elements that could contain a phone number
+            //match elements that could contain a phone number
             var phoneNumber = /[0-9-()+]{3,20}/;
-            $(document).ready(fun ct ion(){
+$(document).ready(function(){
 
     $('#toggleSearch a').click(function (e) {
-    e.preventDefault();
-            $(this).tab('show');
+        e.preventDefault();
+        $(this).tab('show');
     });
-            $("input").prop('requi red', true).blur(fun ction() {
+    
+    $("input").prop('required', true).blur(function() {
 
-    var key = $(this).prop('name');
-            var value = $(this).val();
-            if ($(this).val().l e ngth < 3 || $(this).val == $(this).attr('placehold er')){
+        var key = $(this).prop('name');
+        var value = $(this).val();
+        if ($(this).val().length < 3 || $(this).val == $(this).attr('placeholder')){
 
-    var msg;
+            var msg;
             var type = $(this).prop('name');
-            if (t ype == 'email' && value.match(emailRe gex)){
-    msg = 'Bitte geben Sie eine gültige E-Mail-Adresse an.';
-    }
-    el se if (t ype == 'usern ame'){
-    msg = 'Bitte wählen Sie einen Benutzernamen.';
-    }
-    el se if (t ype == 'passw ord'){
-    msg = 'Bitte wählen Sie ein Passwort.';
-    }
-    else{
-    msg = 'Bitte füllen Sie dieses Feld korrekt aus.';
-    }
+            if (type == 'email' && value.match(emailRegex)){
+                msg = 'Bitte geben Sie eine gültige E-Mail-Adresse an.';
+            }
+            else if (type == 'usern ame'){
+                msg = 'Bitte wählen Sie einen Benutzernamen.';
+            }
+            else if (type == 'passw ord'){
+                msg = 'Bitte wählen Sie ein Passwort.';
+            }
+            else{
+                msg = 'Bitte füllen Sie dieses Feld korrekt aus.';
+            }
 
 
-    $(this).next('span.note').addClass('text-danger');
+            $(this).next('span.note').addClass('text-danger');
             $(this).next('span.note').html(msg);
             $(this).parents("div.form-group").addClass('has-error');
-    }
+        }
 
-    else {
+        else {
 
-    $(this).next('span.note').removeClass('text-danger');
+            $(this).next('span.note').removeClass('text-danger');
             $(this).next('span.note').html("");
             $(this).parents("div.form-group").removeClass('has-error');
-            errorCount[$(this).index("#registrationModal [require d] ")] == 0;
+            errorCount[$(this).index("#registrationModal [required] ")] == 0;
             $.ajax({
-            type: "GET",
-                    url: "isAvailable.php",
-                    data: {key: key, value: value},
-                    beforeSend: function(html) { // this happen before actual call
+                type: "GET",
+                url: "isAvailable.php",
+                data: {key: key, value: value},
+                beforeSend: function(html) { // this happen before actual call
                     $(this).next('span.note').html('');
-                    },
-                    success: fun ction(re sult){ // this happen after we get result
-            if (r es ult != true){
-            $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').html("bereits registriert");
-                    $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').addClass('text-danger');
-                    $("#registrationModal input[na m e='" + r e sult + "']").next('span.note').html(msg);
-                    $("#registrationModal input[na m e='" + r e sult + "']").parents("div.form-group").addClass('has-error');
-            }
-            }
+                },
+                success: function(result){ // this happen after we get result
+                    if (result != true){
+                        $("#registrationModal input[name='" + result + "']").next('span.note').html("bereits registriert");
+                        $("#registrationModal input[name='" + result + "']").next('span.note').addClass('text-danger');
+                        $("#registrationModal input[name='" + result + "']").next('span.note').html(msg);
+                        $("#registrationModal input[name='" + result + "']").parents("div.form-group").addClass('has-error');
+                    }
+                }
             });
-    }
+        }
 
     });
-    });
-            function registrate(){
-            $.ajax({
+
+    function registrate(){
+        $.ajax({
             type: "GET",
-                    url: "registrate.php",
-                    data: { email: $("#registrationModal input[name='email']").val(), username: $("#registrationModal input[name='username']").val(), password: $("#registrationModal input[name='password']").val() }
-            })
-                    .done(fun ction(msg) {
-                    alert(msg);
-                    });
-            }
+            url: "registrate.php",
+            data: { email: $("#registrationModal input[name='email']").val(), username: $("#registrationModal input[name='username']").val(), password: $("#registrationModal input[name='password']").val() }
+        })
+        .done(function(msg) {
+            alert(msg);
+        });
+    };
 
     $(".alert").alert();
-    {/literal}  
+    
+
+    $('#isbnForm').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            isbn: {
+                validators: {
+                    isbn: {
+                        message: 'Das ist keine gültige ISBN'
+                    }
+                }
+            }
+        }
+    });
+});
+{/literal}
 </script>
 </body>
 </html>

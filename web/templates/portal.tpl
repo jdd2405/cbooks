@@ -159,10 +159,15 @@ $(document).ready(function() {
                         <div class="panel-body">
 
                             <h2>neues Buch registrieren</h2>
-
-                            <form class="form-inline" action="" method="GET" id="isbnForm">
-                                <input type="text" class="form-control" name="isbn" data-bv-field="isbn" placeholder="ISBN">
-                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            <form id="isbnForm" class="form-inline" action="{$path}" method="GET" id="isbnForm">
+                                <div class="form-group">
+                                    <label class="control-label sr-only">ISBN</label>
+                                    <input type="text" class="form-control" name="registrateBookWithISBN" placeholder="ISBN"/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                </div>
+                                
                             </form>
 
                         </div>
