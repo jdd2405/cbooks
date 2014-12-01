@@ -86,10 +86,10 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/lend_book.module.php';
         $lendBookModule = new LendBook($smarty, $mysqli);
         $lendBookModule->request(filter_input(INPUT_GET, 'duration', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'id_personal_book', FILTER_SANITIZE_NUMBER_INT));
-    } else if (isset($_GET['registrateBookWithISBN'])) {
+    } else if (isset($_GET['isbn'])) {
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
-        $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'registrateBookWithISBN', FILTER_DEFAULT));
+        $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'isbn', FILTER_DEFAULT));
         
     } else if(isset($_GET['editBook'])){
         require_once 'modules/edit_Book.module.php';
