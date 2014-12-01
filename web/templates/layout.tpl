@@ -194,10 +194,16 @@
 <script src="templates/js/forms.js"></script>
 <script src="templates/js/sha512.js"></script>
 
+
+
 <!--Include all required plugin of the validator -->
 <script type="text/javascript" src="templates/js/bootstrapvalidator/bootstrapValidator.js"></script>
 
 <script type="text/javascript">
+    // Template based Java-Script
+    {block name=js}{/block}
+        
+    // Global Java-Script
     {literal}    
             //match email address
             var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$';
@@ -284,23 +290,6 @@ $(document).ready(function(){
 
     $(".alert").alert();
     
-
-    $('#isbnForm').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            isbn: {
-                validators: {
-                    isbn: {
-                        message: 'Das ist keine gültige ISBN'
-                    }
-                }
-            }
-        }
-    });
 });
 {/literal}
 </script>

@@ -1,32 +1,6 @@
 {extends file="layout.tpl"}
 
-<script language="javascript" type="text/javascript">
-    {literal}
 
-        
-
-$(document).ready(function() {
-    $('#isbnForm').bootstrapValidator({
-        feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                isbn: {
-                    validators: {
-                        isbn: {
-                            message: 'The value is not valid ISBN'
-                        }
-                    }
-                }
-            }
-        });
-    });
-
-
-    {/literal}
-</script>
 
 {block name="banner"}
     <div class="panel panel-default">
@@ -258,4 +232,32 @@ $(document).ready(function() {
 
     </div>
 
+{/block}
+
+{block name=js}
+    {literal}
+
+        
+
+$(document).ready(function() {
+    $('#isbnForm').bootstrapValidator({
+        feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                isbn: {
+                    validators: {
+                        isbn: {
+                            message: 'The value is not valid ISBN'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+
+    {/literal}
 {/block}
