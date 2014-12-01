@@ -72,7 +72,6 @@ if ($user->isLoggedIn == true) {
     } else if (isset($_GET['searchBook'])) {
         require_once 'modules/search_book.module.php';
         $searchBookModule = new SearchBookModule($smarty, $mysqli);
-
         $searchBookModule->search(filter_input(INPUT_GET, 'searchBook', FILTER_SANITIZE_STRING));
     } else if (isset($_GET['allPersonalBooks'])) {
         require_once 'modules/statistics.module.php';

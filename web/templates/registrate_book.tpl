@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} required>
+                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} disabled>
                                 <span class="note"></span>
                             </div>
                         </div>
@@ -108,7 +108,6 @@
             </div>
         </div>
     </div>
-
 
 
 

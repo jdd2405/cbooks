@@ -136,7 +136,7 @@
                             <form id="isbnForm" class="form-inline" action="{$path}" method="GET">
                                 <div class="form-group">
                                     <label class="control-label sr-only">ISBN</label>
-                                    <input type="text" class="form-control" name="isbn" placeholder="ISBN"/>
+                                    <input type="text" class="form-control" name="isbn" placeholder="ISBN" required/>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button>

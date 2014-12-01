@@ -14,23 +14,23 @@ class registrateBookModule {
     }
 
     function searchBookByIsbn($isbn) {
+        $cleanISBN = str_replace("-", "", $isbn);
         
         
-        
-        
-        /*$this->smarty->assign("isbn_input", $isbn);
-
         $query = "SELECT id_isbn, title, subtitle, blurb
-            FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
+            FROM books WHERE id_isbn = '" . $cleanISBN . "' LIMIT 1";
         if ($result = $this->mysqli->query($query)) {
             $book = $result->fetch_assoc();
             $this->smarty->assign("book", $book);
         }
+        
+        $this->smarty->assign("isbn_input", $cleanISBN); 
+  
 
-         Template aufrufen mit Smarty
+        //Template aufrufen mit Smarty
         
         
-        $isbnCheck = NULL;
+        /*$isbnCheck = NULL;
         $error_msg = NULL;
         
         if (checkISBN($isbn) == 1) {
@@ -39,6 +39,7 @@ class registrateBookModule {
         else{
             $this->smarty->display("registrate_book_ISBN_check.tpl");
         }*/
+        $this->smarty->display("registrate_book.tpl");
     }
    
     function insertPersonalBook() {
