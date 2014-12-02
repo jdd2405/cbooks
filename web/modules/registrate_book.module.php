@@ -23,7 +23,8 @@ class registrateBookModule {
             $this->smarty->assign("alert_warning", "Sie haben keine gültige ISBN angegeben.");
             $this->smarty->display('portal.tpl');
         } else {
-            $isbn = preg_replace("/[0-9]{13}|[0-9]{10}|([0-9]{9}X?|x?)/","",$input);
+            preg_match("/[0-9]{13}|[0-9]{10}|([0-9]{9}X?|x?)/", $input, $match);
+            $isbn = $match[0];
             $query = "SELECT b.id_isbn, b.title, b.subtitle, b.blurb, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name
                 FROM books b
                 JOIN books_has_authors bhs ON b.id_isbn = bhs.books_id_isbn
@@ -88,32 +89,6 @@ class registrateBookModule {
             //Hier
             require_once('modules/edit_Book.module.php');
             editBook::updateAuthor($authorsArray, $isbn);
-            
-            //alte Autorenverlinkungen (vor Update) löschen
-            $queryDelete = "DELETE FROM books_has_authors WHERE books_id_isbn = '$isbn'";
-            $this->mysqli->query($queryDelete);
-
-            //Update der Autoren
-
-            $anzahlAuthor = count($authorsArray);
-            for ($i = 0; $i < $anzahlAuthor; $i++) {
-                $authorInDB = "SELECT id_author FROM authors WHERE aut_name = '$authorsArray[$i]'";
-                $result = $this->mysqli->query($authorInDB);
-                if (0 !== $result->num_rows) {
-                    $authorID = $result->fetch_array(MYSQLI_NUM);
-                    $result->free();
-                    $queryUpdate = "INSERT INTO books_has_authors (books_id_isbn, authors_id_author) VALUES ('$isbn', '$authorID[0]')";
-                    $this->mysqli->query($queryUpdate);
-                } else {
-                    $queryInsertNewAuthor = "INSERT INTO authors(aut_name) VALUES ('$authorsArray[$i]')";
-                    $this->mysqli->query($queryInsertNewAuthor);
-                    $queryNewAuthorID = "SELECT id_author FROM authors WHERE aut_name = '$authorsArray[$i]'";
-                    $result = $this->mysqli->query($queryNewAuthorID);
-                    $authors_id_author = $result->fetch_array(MYSQLI_NUM);
-                    $queryInsertNewBookHasAuthor = "INSERT INTO books_has_authors (books_id_isbn, authors_id_author) VALUES ('$isbn', '$authors_id_author[0]')";
-                    $this->mysqli->query($queryInsertNewBookHasAuthor);
-                }
-            }
         
 
         /* Template aufrufen mit Smarty */
