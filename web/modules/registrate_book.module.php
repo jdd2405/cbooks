@@ -13,87 +13,91 @@ class registrateBookModule {
         $this->mysqli = $mysqli;
     }
 
-    function searchBookByIsbn($isbn) {
-        $cleanISBN = str_replace("-", "", $isbn);
+    function searchBookByIsbn($input) {
         
-        
-        $query = "SELECT id_isbn, title, subtitle, blurb
-            FROM books WHERE id_isbn = '" . $cleanISBN . "' LIMIT 1";
-        if ($result = $this->mysqli->query($query)) {
-            $book = $result->fetch_assoc();
-            $this->smarty->assign("book", $book);
-        }
-        
-        $this->smarty->assign("isbn_input", $cleanISBN); 
-  
+        // If no valid ISBN
+        if (!$this->checkIsbn($input)) {
+            $this->smarty->assign("alert_warning", "Sie haben keine gültige ISBN angegeben.");
+            $this->smarty->display('portal.tpl');
+        } else {
+            $isbn = preg_replace("/[^0-9]/","",$input);
+            $query = "SELECT id_isbn, title, subtitle, blurb
+            FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
+            if ($result = $this->mysqli->query($query)) {
+                $book = $result->fetch_assoc();
+                $this->smarty->assign("book", $book);
+            }
 
-        //Template aufrufen mit Smarty
-        
-        
-        /*$isbnCheck = NULL;
-        $error_msg = NULL;
-        
-        if (checkISBN($isbn) == 1) {
+            $this->smarty->assign("isbn_input", $isbn);
+
+
+            //Template aufrufen mit Smarty
+
+
+            /* $isbnCheck = NULL;
+              $error_msg = NULL;
+
+              if (checkISBN($isbn) == 1) {
+              $this->smarty->display("registrate_book.tpl");
+              }
+              else{
+              $this->smarty->display("registrate_book_ISBN_check.tpl");
+              } */
             $this->smarty->display("registrate_book.tpl");
         }
-        else{
-            $this->smarty->display("registrate_book_ISBN_check.tpl");
-        }*/
-        $this->smarty->display("registrate_book.tpl");
     }
-   
+
     function insertPersonalBook() {
         $author_id = -1;
-        
-            if (isset($_POST["author"])) {
 
+        if (isset($_POST["author"])) {
+
+            $author_id = $this->getAuthorIDbyName($_POST["author"]);
+
+            if ($author_id < 0) {
+                $sqlQuery = "INSERT authors (aut_name) VALUES ('" . $_POST["author"] . "')";
+                $this->mysqli->query($sqlQuery);
                 $author_id = $this->getAuthorIDbyName($_POST["author"]);
-
-                if ($author_id < 0) {
-                    $sqlQuery = "INSERT authors (aut_name) VALUES ('" . $_POST["author"] . "')";
-                    $this->mysqli->query($sqlQuery);
-                    $author_id = $this->getAuthorIDbyName($_POST["author"]);
-                }
             }
-            
-            $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_NUMBER_INT);
-            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-            $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
-            $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
-            
-            $queryAddBook = "INSERT INTO books "
-                    . "(id_isbn, title, subtitle, blurb) values ("
-                    . "'" . $isbn . "', "
-                    . "'" . $title . "', "
-                    . "'" . $subtitle . "', "
-                    . "'" . $blurb 
-                    . "');"
-                    . "";
+        }
 
-            $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
-            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-            
-            $queryAddPersonalBook = "INSERT INTO personal_books "
-                    . "(isbn, run, description, owner_id_user) values ("
-                    . "'" . $isbn . "', "
-                    . "'" . $run . "', "
-                    . "'" . $description . "', "
-                    . "'" . $_SESSION['user_id'] . "')";
+        $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_NUMBER_INT);
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
+        $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
 
-            $queryConnectBookWithAuthors = "INSERT books_has_authors "
-                    . "(books_id_isbn, authors_id_author) VALUES ("
-                    . "'" . $isbn . "', '" . $author_id . "')";
+        $queryAddBook = "INSERT INTO books "
+                . "(id_isbn, title, subtitle, blurb) values ("
+                . "'" . $isbn . "', "
+                . "'" . $title . "', "
+                . "'" . $subtitle . "', "
+                . "'" . $blurb
+                . "');"
+                . "";
 
-            $this->mysqli->query($queryAddBook);
+        $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 
-            $this->mysqli->query($queryAddPersonalBook);
+        $queryAddPersonalBook = "INSERT INTO personal_books "
+                . "(isbn, run, description, owner_id_user) values ("
+                . "'" . $isbn . "', "
+                . "'" . $run . "', "
+                . "'" . $description . "', "
+                . "'" . $_SESSION['user_id'] . "')";
 
-            $this->mysqli->query($queryConnectBookWithAuthors);
+        $queryConnectBookWithAuthors = "INSERT books_has_authors "
+                . "(books_id_isbn, authors_id_author) VALUES ("
+                . "'" . $isbn . "', '" . $author_id . "')";
 
-            /* Template aufrufen mit Smarty */
+        $this->mysqli->query($queryAddBook);
 
-            header("Location: portal.php?info=Dein Buch wurde hinzugefügt.");
+        $this->mysqli->query($queryAddPersonalBook);
 
+        $this->mysqli->query($queryConnectBookWithAuthors);
+
+        /* Template aufrufen mit Smarty */
+
+        header("Location: portal.php?info=Dein Buch wurde hinzugefügt.");
     }
 
     function getAuthorIDbyName($authorName) {
@@ -102,28 +106,67 @@ class registrateBookModule {
         $result = $this->mysqli->query($sqlQuery);
         $authors = array();
 
-        
+
         while ($row = mysqli_fetch_assoc($result)) {
 //           print_r($row);
             $authors[] = $row['id_author'];
-       }
+        }
 //       print_r($authors);
 
         if (empty($authors)) {
             return -2;
-        }
-        else {
+        } else {
             return $authors[0];
         }
-
     }
-    
-}
-function checkISBN($input){
+
+    function checkIsbn($str) {
+        $regex = '/\b(?:ISBN(?:: ?| ))?((?:97[89])?\d{9}[\dx])\b/i';
+
+        if (preg_match($regex, str_replace('-', '', $str), $matches)) {
+            return (10 === strlen($matches[1])) 
+                ? $this->isValidIsbn10($matches[1])  // ISBN-10
+                : $this->isValidIsbn13($matches[1]); // ISBN-13
+        } else {
+            return false;
+        }
+    }
+
+    function isValidIsbn10($isbn) {
+        $check = 0;
+
+        for ($i = 0; $i < 10; $i++) {
+            if ('x' === strtolower($isbn[$i])) {
+                $check += 10 * (10 - $i);
+            } elseif (is_numeric($isbn[$i])) {
+                $check += (int) $isbn[$i] * (10 - $i);
+            } else {
+                return false;
+            }
+        }
+
+        return (0 === ($check % 11)) ? 1 : false;
+    }
+
+    function isValidIsbn13($isbn) {
+        $check = 0;
+
+        for ($i = 0; $i < 13; $i += 2) {
+            $check += (int) $isbn[$i];
+        }
+
+        for ($i = 1; $i < 12; $i += 2) {
+            $check += 3 * $isbn[$i];
+        }
+
+        return (0 === ($check % 10)) ? 2 : false;
+    }
+
+    /*function checkISBN($input) {
 
         $rawIsbn = $input;
-        
-    //    echo "<p>ISBN 4: ".$rawIsbn."</p>";
+
+        //    echo "<p>ISBN 4: ".$rawIsbn."</p>";
 
         $anz = preg_match_all("/-/", $rawIsbn);
         $anx = preg_match_all("/x/", $rawIsbn);
@@ -139,98 +182,92 @@ function checkISBN($input){
         $an8 = preg_match_all("/8/", $rawIsbn);
         $an9 = preg_match_all("/9/", $rawIsbn);
 
-        $antot = $an9+$an8+$an7+$an6+$an5+$an4+$an3+$an2+$an1+$an0+$anX+$anx+$anz;
-        $lang  = strlen($rawIsbn);
+        $antot = $an9 + $an8 + $an7 + $an6 + $an5 + $an4 + $an3 + $an2 + $an1 + $an0 + $anX + $anx + $anz;
+        $lang = strlen($rawIsbn);
 
-    //    echo "<p>Es wurden: ".$antot." erlaubte Zeichen gefunden. Total sind ".$lang." Zeichen vorhanden.</p>";
+        //    echo "<p>Es wurden: ".$antot." erlaubte Zeichen gefunden. Total sind ".$lang." Zeichen vorhanden.</p>";
 
-        if($antot==$lang){
-            
-    //        echo "</br>RAW ISBN 5: ".$rawIsbn;
+        if ($antot == $lang) {
+
+            //        echo "</br>RAW ISBN 5: ".$rawIsbn;
 
             $cleanIsbn = implode(explode("-", $rawIsbn));
 
-    //        echo "<p>ISBN : ".$rawIsbn."</p>";
-    //        echo "<p>Fragmente: ".$cleanIsbn."</p>";
+            //        echo "<p>ISBN : ".$rawIsbn."</p>";
+            //        echo "<p>Fragmente: ".$cleanIsbn."</p>";
 
-            if (strlen($cleanIsbn) == 13){
+            if (strlen($cleanIsbn) == 13) {
                 $z01 = substr($cleanIsbn, -13, 1);
                 $z02 = substr($cleanIsbn, -12, 1);
                 $z03 = substr($cleanIsbn, -11, 1);
                 $z04 = substr($cleanIsbn, -10, 1);
-                $z05 = substr($cleanIsbn,  -9, 1);
-                $z06 = substr($cleanIsbn,  -8, 1);
-                $z07 = substr($cleanIsbn,  -7, 1);
-                $z08 = substr($cleanIsbn,  -6, 1);
-                $z09 = substr($cleanIsbn,  -5, 1);
-                $z10 = substr($cleanIsbn,  -4, 1);
-                $z11 = substr($cleanIsbn,  -3, 1);  
-                $z12 = substr($cleanIsbn,  -2, 1);
-                $z13 = substr($cleanIsbn,  -1, 1);
+                $z05 = substr($cleanIsbn, -9, 1);
+                $z06 = substr($cleanIsbn, -8, 1);
+                $z07 = substr($cleanIsbn, -7, 1);
+                $z08 = substr($cleanIsbn, -6, 1);
+                $z09 = substr($cleanIsbn, -5, 1);
+                $z10 = substr($cleanIsbn, -4, 1);
+                $z11 = substr($cleanIsbn, -3, 1);
+                $z12 = substr($cleanIsbn, -2, 1);
+                $z13 = substr($cleanIsbn, -1, 1);
 
-                $sum = $z01+$z03+$z05+$z07+$z09+$z11+3*($z02+$z04+$z06+$z08+$z10+$z12);
-                $pz  = 10-substr($sum, -1, 1);
-            //    echo "<p>12-stellige Pr&uuml;fsumme: ".$sum."</p>";
-            //    echo "<p>12-stellige Pr&uuml;fziffer: ".$pz."</p>";
+                $sum = $z01 + $z03 + $z05 + $z07 + $z09 + $z11 + 3 * ($z02 + $z04 + $z06 + $z08 + $z10 + $z12);
+                $pz = 10 - substr($sum, -1, 1);
+                //    echo "<p>12-stellige Pr&uuml;fsumme: ".$sum."</p>";
+                //    echo "<p>12-stellige Pr&uuml;fziffer: ".$pz."</p>";
 
-                if ($pz == $z13){
+                if ($pz == $z13) {
                     $isbnCheck = 1;
                     return $isbnCheck;
                     // echo "<p>Die 13-stellige ISBN ist korrekt.</br>true</p>";						
-                }
-                else{
+                } else {
                     $isbnCheck = 0;
                     return $isbnCheck;
                     //echo "<p>Die 13-stellige ISBN hat einen Fehler.</br>false</p>";
                 }
-            }
-            else{
-                if (strlen($cleanIsbn) == 10){
+            } else {
+                if (strlen($cleanIsbn) == 10) {
                     $z01 = 1 * substr($cleanIsbn, -10, 1);
-                    $z02 = 2 * substr($cleanIsbn,  -9, 1);
-                    $z03 = 3 * substr($cleanIsbn,  -8, 1);
-                    $z04 = 4 * substr($cleanIsbn,  -7, 1);
-                    $z05 = 5 * substr($cleanIsbn,  -6, 1);
-                    $z06 = 6 * substr($cleanIsbn,  -5, 1);
-                    $z07 = 7 * substr($cleanIsbn,  -4, 1);
-                    $z08 = 8 * substr($cleanIsbn,  -3, 1);  
-                    $z09 = 9 * substr($cleanIsbn,  -2, 1);
-                    if (substr($cleanIsbn,  -1, 1)== 'X' || 'x'){
+                    $z02 = 2 * substr($cleanIsbn, -9, 1);
+                    $z03 = 3 * substr($cleanIsbn, -8, 1);
+                    $z04 = 4 * substr($cleanIsbn, -7, 1);
+                    $z05 = 5 * substr($cleanIsbn, -6, 1);
+                    $z06 = 6 * substr($cleanIsbn, -5, 1);
+                    $z07 = 7 * substr($cleanIsbn, -4, 1);
+                    $z08 = 8 * substr($cleanIsbn, -3, 1);
+                    $z09 = 9 * substr($cleanIsbn, -2, 1);
+                    if (substr($cleanIsbn, -1, 1) == 'X' || 'x') {
                         $z10 = 100;
-                    }
-                    else{
-                        $z10 = 10 * substr($cleanIsbn,  -1, 1);
+                    } else {
+                        $z10 = 10 * substr($cleanIsbn, -1, 1);
                     }
 
-                    $sum = $z01+$z03+$z05+$z07+$z09+$z02+$z04+$z06+$z08+$z10;
-                    $pz  = $sum%11;
+                    $sum = $z01 + $z03 + $z05 + $z07 + $z09 + $z02 + $z04 + $z06 + $z08 + $z10;
+                    $pz = $sum % 11;
                     // echo "<p>9-stellige Pr&uuml;fsumme: ".$sum."</p>";
                     // echo "<p>Pr&uuml;fziffer: ".$pz."</p>";
 
-                    if ($pz == 0){
+                    if ($pz == 0) {
                         // echo "</br>CHECK !!!!";
                         $isbnCheck = 1;
                         return $isbnCheck;
                         //echo "<p>Die 10-stellige ISBN ist korrekt.</br>true</p>";		
-                    }
-                    else{
+                    } else {
                         $isbnCheck = 0;
                         return $isbnCheck;
                         //echo "<p>Die 10-stellige ISBN hat einen Fehler.</br>false</p>";
                     }
-                }
-                else{ 
+                } else {
                     $isbnCheck = 0;
                     return $isbnCheck;
                     //echo "<p>Die ISBN sollte genau 10 oder 13 Stellen haben. Der Trennstrich wird dabei nicht mitgerechnet.</p>";
                 }
             }
-        }
-        else{ 
+        } else {
             $isbnCheck = 0;
             return $isbnCheck;
             //echo "Eine Nummer eingeben";
         }
-        
-    }
+    }*/
 
+}
