@@ -142,8 +142,8 @@
                                 <div class="form-group">
                                     <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control " name="isbn-display" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} disabled="disabled">
-                                        <input type="hidden" name="isbn" {if isset($details.isbn)}value="{$details.isbn}"{/if} >
+                                        <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} readonly>
+                                        <input type="hidden" name="pbID" {if isset($details.id_personal_book)}value="{$details.id_personal_book}"{/if} >
                                         <span class="note"></span>
                                     </div>
                                 </div>
