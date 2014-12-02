@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="author" class="col-sm-4 control-label">Autor</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="author" placeholder="... Autor"{if isset($book.author)}value="{$book.author}"{/if}>
+                                <input type="text" class="form-control" name="author" placeholder="... Autor"{if isset($book.aut_name)}value="{$book.aut_name}"{/if}>
                                 <span class="note"></span>
                             </div>
                         </div>
@@ -108,8 +108,5 @@
             </div>
         </div>
     </div>
-
-
-
 
 {/block}
