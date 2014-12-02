@@ -35,7 +35,16 @@ class editBook {
         $queryUpdatePersonalBook = "UPDATE personal_books SET description = '$description' "
                 . "WHERE id_personal_book = $pbID";
         
-        $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
+        $authors = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
+        $author = explode(", ", $authors);
+        $anzahlAuthor = count($author);
+        for($i = 0; $i<$anzahlAuthor-1; $i++){
+            $authorInDB = "SELECT id_author FROM authors WHERE aut_name = $author[$i]";
+            if ($result = $this->mysqli->query($authorInDB)){
+                $authorID = $result->fetch_array(MYSQLI_ASSOC);
+                $queryUpdate = "";
+            }
+        }
         
         //$queryUpdateAuthor = "UPDATE authors SET ";
 
@@ -45,7 +54,6 @@ class editBook {
         Wenn sich der Autor verändert sollen alle Autoren gelöscht.
      * 
      */
-
         header("Location: portal.php?info=Dein Buch wurde geändert.");
         
     }
