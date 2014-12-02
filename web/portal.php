@@ -89,7 +89,6 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/registrate_book.module.php';
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'isbn', FILTER_DEFAULT));
-        
     } else if(isset($_POST['editBook'])){
         require_once 'modules/edit_Book.module.php';
         $editBookModule = new editBook($smarty, $mysqli);
