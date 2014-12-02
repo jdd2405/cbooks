@@ -8,6 +8,8 @@
 
 
 class registrateBookModule {
+    
+    
 
     function __construct($smarty, $mysqli) {
         $this->smarty = $smarty;
@@ -82,7 +84,11 @@ class registrateBookModule {
         
             $authorsAllInOne = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
             $authorsArray = explode(", ", $authorsAllInOne);
-
+            
+            //Hier
+            require_once('modules/edit_Book.module.php');
+            editBook::updateAuthor($authorsArray, $isbn);
+            
             //alte Autorenverlinkungen (vor Update) löschen
             $queryDelete = "DELETE FROM books_has_authors WHERE books_id_isbn = '$isbn'";
             $this->mysqli->query($queryDelete);
