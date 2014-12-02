@@ -77,6 +77,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBook">Buch bearbeiten</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBook">Buch löschen</button>
                             </div>
                         </div>
                     </div>
@@ -206,7 +207,26 @@
 
                     </div>
                 </div>
-            </div>              
+            </div>
+            
+            <!--Modal-->
+            <div class="modal fade" id="deleteBook" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Buch löschen</h4>
+                        </div>
+                        <div class="modal-body">
+                            Willst du das Buch definitiv löschen?
+                            <a href="{$path}?deleteBook={$details["id_personal_book"]}" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span> Bestätigen</a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>                            
+                                        
 
         </div>
 

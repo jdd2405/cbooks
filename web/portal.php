@@ -98,7 +98,10 @@ if ($user->isLoggedIn == true) {
         require_once 'modules/registrate_book.module.php';
         $insertBook = new registrateBookModule($smarty, $mysqli);
         $insertBook->insertPersonalBook();
-        
+    }else if (isset($_GET['deleteBook'])){    
+        require_once 'modules/edit_Book.module.php';
+        $deleteBook = new editBook($smarty, $mysqli);
+        $deleteBook->deleteBook(filter_input(INPUT_GET, 'deleteBook', FILTER_SANITIZE_NUMBER_INT));
     } else if (isset($_GET['list'])) {
         require_once 'modules/lend_book.module.php';
         $listdetails = new LendBook($smarty, $mysqli);

@@ -50,4 +50,15 @@ class editBook {
         
     }
     
+    function deleteBook($idPersonalBook){
+        $querylendingRelations = "delete from lending_relations where item_id_personal_book = $idPersonalBook";
+        $queryPersonalBook = "delete from personal_books where id_personal_book = $idPersonalBook";
+        
+        $this->mysqli->query($querylendingRelations);
+        $this->mysqli->query($queryPersonalBook);
+        
+        header("Location: portal.php?info=Dein Buch wurde gelöscht.");
+        
+    }
+    
 }
