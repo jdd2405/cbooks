@@ -138,7 +138,7 @@
                         </div>
                         <div class="modal-body">
                             
-                            <form class="form-horizontal" role="form" action={$path} method="GET" name="bookEditForm">
+                            <form class="form-horizontal" role="form" action="{$path}" method="POST">
                                 <div class="form-group">
                                     <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                                     <div class="col-sm-8">

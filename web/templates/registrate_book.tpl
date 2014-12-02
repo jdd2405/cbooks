@@ -14,7 +14,7 @@
                 <div class="panel-body">
 
                     <h3>Daten erfassen</h3>
-                    <form class="form-horizontal" role="form" action="{$path}" method="POST" name="book_registration_form">
+                    <form class="form-horizontal" role="form" action="{$path}" method="POST">
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
