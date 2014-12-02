@@ -21,8 +21,12 @@ class registrateBookModule {
             $this->smarty->display('portal.tpl');
         } else {
             $isbn = preg_replace("/[^0-9]/","",$input);
-            $query = "SELECT id_isbn, title, subtitle, blurb
-            FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
+            $query = "SELECT b.id_isbn, b.title, b.subtitle, b.blurb, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name
+                FROM books b
+                JOIN books_has_authors bhs ON b.id_isbn = bhs.books_id_isbn
+                JOIN authors a ON bhs.authors_id_author = a.id_author
+                WHERE id_isbn = '" . $isbn . "' LIMIT 1";
+                        
             if ($result = $this->mysqli->query($query)) {
                 $book = $result->fetch_assoc();
                 $this->smarty->assign("book", $book);
