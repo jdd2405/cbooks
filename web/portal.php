@@ -90,7 +90,7 @@ if ($user->isLoggedIn == true) {
         $registrateBookModule = new registrateBookModule($smarty, $mysqli);
         $registrateBookModule->searchBookByIsbn(filter_input(INPUT_GET, 'isbn', FILTER_DEFAULT));
         
-    } else if(isset($_GET['editBook'])){
+    } else if(isset($_POST['editBook'])){
         require_once 'modules/edit_Book.module.php';
         $editBookModule = new editBook($smarty, $mysqli);
         $editBookModule->updateCompleteBook();

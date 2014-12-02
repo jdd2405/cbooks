@@ -14,11 +14,11 @@
                 <div class="panel-body">
 
                     <h3>Daten erfassen</h3>
-                    <form class="form-horizontal" role="form" action="{$path}" method="POST" name="book_registration_form">
+                    <form class="form-horizontal" role="form" action="{$path}" method="POST">
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} disabled>
+                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn}" {else if isset($isbn_input)}value="{$isbn_input}"{/if} readonly>
                                 <span class="note"></span>
                             </div>
                         </div>
