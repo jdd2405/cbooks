@@ -55,14 +55,15 @@ class registrateBookModule {
                     $author_id = $this->getAuthorIDbyName($_POST["author"]);
                 }
             }
-
+            
+            $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_NUMBER_INT);
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
             $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
             $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
             
-            $queryAddBook = "INSERT INTO books"
+            $queryAddBook = "INSERT INTO books "
                     . "(id_isbn, title, subtitle, blurb) values ("
-                    . "'" . $_POST['isbn'] . "', "
+                    . "'" . $isbn . "', "
                     . "'" . $title . "', "
                     . "'" . $subtitle . "', "
                     . "'" . $blurb 
@@ -72,17 +73,16 @@ class registrateBookModule {
             $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
             $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
             
-            $queryAddPersonalBook = "INSERT INTO personal_books"
+            $queryAddPersonalBook = "INSERT INTO personal_books "
                     . "(isbn, run, description, owner_id_user) values ("
-                    . "'" . $_POST['isbn'] . "', "
+                    . "'" . $isbn . "', "
                     . "'" . $run . "', "
                     . "'" . $description . "', "
-                    . "'" . $_SESSION['user_id'] . "');"
-                    . "";
+                    . "'" . $_SESSION['user_id'] . "')";
 
-            $queryConnectBookWithAuthors = "INSERT books_has_authors"
+            $queryConnectBookWithAuthors = "INSERT books_has_authors "
                     . "(books_id_isbn, authors_id_author) VALUES ("
-                    . "'" . $_POST["isbn"] . "', '" . $author_id . "')";
+                    . "'" . $isbn . "', '" . $author_id . "')";
 
             echo '</br>'.$queryAddBook.'</br></br>'.$queryAddPersonalBook.'</br></br>'.$queryConnectBookWithAuthors.'</br>';
 
