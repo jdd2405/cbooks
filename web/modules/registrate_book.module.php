@@ -92,7 +92,7 @@ class registrateBookModule {
 
             /* Template aufrufen mit Smarty */
 
-            $this->smarty->display("portal.tpl");
+            header("Location: portal.php?info=Dein Buch wurde hinzugefügt.");
 
     }
 
