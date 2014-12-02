@@ -76,13 +76,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .jumbotron {background-color: #fff;}
 
-#searchBookInput{
-    width: 80%;
-}
-
-#ISBNinput{
-    width: 80%;
-}
 
 .form-inline .form-group {
     vertical-align: top;

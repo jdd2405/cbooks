@@ -20,7 +20,7 @@ class registrateBookModule {
             $this->smarty->assign("alert_warning", "Sie haben keine gültige ISBN angegeben.");
             $this->smarty->display('portal.tpl');
         } else {
-            $isbn = preg_replace("/[^0-9]/","",$input);
+            $isbn = preg_replace("/[^0-9]/","",$input); echo $isbn;
             $query = "SELECT id_isbn, title, subtitle, blurb
             FROM books WHERE id_isbn = '" . $isbn . "' LIMIT 1";
             if ($result = $this->mysqli->query($query)) {
@@ -61,7 +61,7 @@ class registrateBookModule {
             }
         }
 
-        $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_NUMBER_INT);
+        $isbn = preg_replace("/[^0-9]/","",$_POST['isbn']);
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
         $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);

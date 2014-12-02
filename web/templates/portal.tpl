@@ -119,7 +119,14 @@
 
                             <h2>Buch suchen</h2>
                             <form class="form-inline" role="form" action="" method="GET" name="searchBook">
-                                <input type="text" class="form-control " name="searchBook" id="searchBookInput" placeholder="ISBN, Titel oder Stichwort" required> <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">ISBN, Titel oder Stichwort</label>
+                                    <input type="text" class="form-control " name="searchBook" id="searchBookInput" placeholder="ISBN, Titel oder Stichwort" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                                </div> 
+                                
 
                             </form>
 

@@ -78,7 +78,7 @@ class statisticsModule {
             JOIN books b ON pb.isbn = b.id_isbn
             JOIN cb_users u ON pb.owner_id_user = u.id_cb_user
             WHERE u.id_cb_user = ".$_SESSION['user_id']."
-            ORDER BY pb.reg_date DESC 
+            ORDER BY pb.reg_date ASC 
             LIMIT 5")) {
             for ($newestBooks = array (); $row = $result->fetch_assoc(); $newestBooks[] = $row);
             $this->smarty->assign("newestBooks", $newestBooks);
@@ -95,7 +95,6 @@ class statisticsModule {
                 . "WHERE u.id_cb_user = ".$_SESSION['user_id']." GROUP BY pb.id_personal_book ORDER BY b.title DESC");
         
         $allPersonalBooks = $result->fetch_all(MYSQLI_ASSOC);
-        
         $result->close();
         
         $this->smarty->assign("allPersonalBooks", $allPersonalBooks);
