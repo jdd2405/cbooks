@@ -20,7 +20,7 @@
                                 <tbody>
                                     <tr>
                                         <th>ISBN</th>
-                                        <td>{$details["isbn"]}</td>
+                                        <td>{if $details.isbn|count_characters>10}{$details.isbn|substr:-13:3}-{/if}{$details.isbn|substr:-10:1}-{$details.isbn|substr:-9:5}-{$details.isbn|substr:-4:3}-{$details.isbn|substr:-1}</td>
                                     </tr>
                                     <tr>
                                         <th>Titel</th>
@@ -143,7 +143,7 @@
                                 <div class="form-group">
                                     <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($details.isbn)}value="{$details.isbn}"{/if} readonly>
+                                        <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($details.isbn)}value="{if $details.isbn|count_characters>10}{$details.isbn|substr:-13:3}-{/if}{$details.isbn|substr:-10:1}-{$details.isbn|substr:-9:5}-{$details.isbn|substr:-4:3}-{$details.isbn|substr:-1}"{/if} readonly>
                                         <input type="hidden" name="pbID" {if isset($details.id_personal_book)}value="{$details.id_personal_book}"{/if} >
                                         <span class="note"></span>
                                     </div>

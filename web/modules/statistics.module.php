@@ -78,7 +78,7 @@ class statisticsModule {
             JOIN books b ON pb.isbn = b.id_isbn
             JOIN cb_users u ON pb.owner_id_user = u.id_cb_user
             WHERE u.id_cb_user = ".$_SESSION['user_id']."
-            ORDER BY pb.reg_date ASC 
+            ORDER BY pb.reg_date DESC
             LIMIT 5")) {
             for ($newestBooks = array (); $row = $result->fetch_assoc(); $newestBooks[] = $row);
             $this->smarty->assign("newestBooks", $newestBooks);
