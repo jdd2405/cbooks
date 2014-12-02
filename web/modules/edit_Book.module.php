@@ -41,13 +41,21 @@ class editBook {
         
         
         $authors = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
+        $author = explode(", ", $authors);
+        $this->updateAuthor($author, $isbn);
         
+
+        header("Location: portal.php?info=Dein Buch wurde geändert.");
+        
+    }
+    
+    function updateAuthor($author, $isbn){
         //alte Autorenverlinkungen (vor Update) löschen
         $queryDelete = "DELETE FROM books_has_authors WHERE books_id_isbn = '$isbn'";
         $this->mysqli->query($queryDelete);
         
         //Update der Autoren
-        $author = explode(", ", $authors);
+        
         $anzahlAuthor = count($author);
         for($i = 0; $i<$anzahlAuthor; $i++){
             $authorInDB = "SELECT id_author FROM authors WHERE aut_name = '$author[$i]'";
@@ -68,9 +76,6 @@ class editBook {
                 $this->mysqli->query($queryInsertNewBookHasAuthor); 
             }
         }
-
-        header("Location: portal.php?info=Dein Buch wurde geändert.");
-        
     }
     
     function deleteBook($idPersonalBook){

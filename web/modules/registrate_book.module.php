@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 
+
 class registrateBookModule {
 
     function __construct($smarty, $mysqli) {
@@ -52,19 +53,6 @@ class registrateBookModule {
     }
 
     function insertPersonalBook() {
-        $author_id = -1;
-
-        if (isset($_POST["author"])) {
-
-            $author_id = $this->getAuthorIDbyName($_POST["author"]);
-
-            if ($author_id < 0) {
-                $sqlQuery = "INSERT authors (aut_name) VALUES ('" . $_POST["author"] . "')";
-                $this->mysqli->query($sqlQuery);
-                $author_id = $this->getAuthorIDbyName($_POST["author"]);
-            }
-        }
-
         $isbn = preg_replace("/[^0-9]/","",$_POST['isbn']);
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
@@ -78,6 +66,7 @@ class registrateBookModule {
                 . "'" . $blurb
                 . "');"
                 . "";
+        $this->mysqli->query($queryAddBook);
 
         $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
@@ -88,41 +77,44 @@ class registrateBookModule {
                 . "'" . $run . "', "
                 . "'" . $description . "', "
                 . "'" . $_SESSION['user_id'] . "')";
-
-        $queryConnectBookWithAuthors = "INSERT books_has_authors "
-                . "(books_id_isbn, authors_id_author) VALUES ("
-                . "'" . $isbn . "', '" . $author_id . "')";
-
-        $this->mysqli->query($queryAddBook);
-
         $this->mysqli->query($queryAddPersonalBook);
+        
+        
+            $authorsAllInOne = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
+            $authorsArray = explode(", ", $authorsAllInOne);
 
-        $this->mysqli->query($queryConnectBookWithAuthors);
+            //alte Autorenverlinkungen (vor Update) löschen
+            $queryDelete = "DELETE FROM books_has_authors WHERE books_id_isbn = '$isbn'";
+            $this->mysqli->query($queryDelete);
+
+            //Update der Autoren
+
+            $anzahlAuthor = count($authorsArray);
+            for ($i = 0; $i < $anzahlAuthor; $i++) {
+                $authorInDB = "SELECT id_author FROM authors WHERE aut_name = '$authorsArray[$i]'";
+                $result = $this->mysqli->query($authorInDB);
+                if (0 !== $result->num_rows) {
+                    $authorID = $result->fetch_array(MYSQLI_NUM);
+                    $result->free();
+                    $queryUpdate = "INSERT INTO books_has_authors (books_id_isbn, authors_id_author) VALUES ('$isbn', '$authorID[0]')";
+                    $this->mysqli->query($queryUpdate);
+                } else {
+                    $queryInsertNewAuthor = "INSERT INTO authors(aut_name) VALUES ('$authorsArray[$i]')";
+                    $this->mysqli->query($queryInsertNewAuthor);
+                    $queryNewAuthorID = "SELECT id_author FROM authors WHERE aut_name = '$authorsArray[$i]'";
+                    $result = $this->mysqli->query($queryNewAuthorID);
+                    $authors_id_author = $result->fetch_array(MYSQLI_NUM);
+                    $queryInsertNewBookHasAuthor = "INSERT INTO books_has_authors (books_id_isbn, authors_id_author) VALUES ('$isbn', '$authors_id_author[0]')";
+                    $this->mysqli->query($queryInsertNewBookHasAuthor);
+                }
+            }
+        
 
         /* Template aufrufen mit Smarty */
 
         header("Location: portal.php?info=Dein Buch wurde hinzugefügt.");
     }
 
-    function getAuthorIDbyName($authorName) {
-
-        $sqlQuery = "SELECT id_author FROM authors WHERE aut_name = '" . $authorName . "'";
-        $result = $this->mysqli->query($sqlQuery);
-        $authors = array();
-
-
-        while ($row = mysqli_fetch_assoc($result)) {
-//           print_r($row);
-            $authors[] = $row['id_author'];
-        }
-//       print_r($authors);
-
-        if (empty($authors)) {
-            return -2;
-        } else {
-            return $authors[0];
-        }
-    }
 
     function checkIsbn($str) {
         $regex = '/\b(?:ISBN(?:: ?| ))?((?:97[89])?\d{9}[\dx])\b/i';
