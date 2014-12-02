@@ -17,7 +17,7 @@ class editBook {
         $this->smarty = $smarty;
         $this->mysqli = $mysqli;
     }
-        
+
     function updateCompleteBook(){
         
         
@@ -45,9 +45,9 @@ class editBook {
         Wenn sich der Autor verändert sollen alle Autoren gelöscht.
      * 
      */
+        $this->mysqli->assign("title", $title);
         
-        
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header("Location: portal.php?info=Dein Buch wurde geändert.");
         
     }
     
