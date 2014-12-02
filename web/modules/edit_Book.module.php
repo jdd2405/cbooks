@@ -24,6 +24,7 @@ class editBook {
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
         $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);
+        $run = filter_input(INPUT_POST, 'run', FILTER_SANITIZE_STRING);
         $input = filter_input(INPUT_POST, 'isbn' , FILTER_SANITIZE_NUMBER_INT);
         $isbn = preg_replace("/[^0-9]/","",$input);
         $pbID = filter_input(INPUT_POST, 'pbID', FILTER_SANITIZE_NUMBER_INT);
@@ -34,7 +35,7 @@ class editBook {
         
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         
-        $queryUpdatePersonalBook = "UPDATE personal_books SET description = '$description' "
+        $queryUpdatePersonalBook = "UPDATE personal_books SET description = '$description', run = '$run' "
                 . "WHERE id_personal_book = '$pbID'";
         $this->mysqli->query($queryUpdatePersonalBook);
         
