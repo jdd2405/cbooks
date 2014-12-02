@@ -29,7 +29,7 @@
 
                                     {foreach $searchResult as $book}
                                         <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
-                                            <td>{if $book.id_isbn|count_characters>10}{$book.id_isbn|substr:-13:3}-{/if}{$book.id_isbn|substr:-10:1}-{$book.id_isbn|substr:-9:5}-{$book.id_isbn|substr:-4:3}-{$book.id_isbn|substr:-1}</td>
+                                            <td>{$book.id_isbn|isbn}</td>
                                             <td>{$book.title}</td>
                                             <td>{$book.aut_name}</td>
                                             <td>{$book.zip} {$book.city}</td>
@@ -54,7 +54,7 @@
 
                                     {foreach $allPersonalBooks as $book}
                                         <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
-                                            <td>{if $book.isbn|count_characters>10}{$book.isbn|substr:-13:3}-{/if}{$book.isbn|substr:-10:1}-{$book.isbn|substr:-9:5}-{$book.isbn|substr:-4:3}-{$book.isbn|substr:-1}</td>
+                                            <td>{$book.isbn|isbn}</td>
                                             <td>{$book.title}</td>
                                             <td>{$book.aut_name}</td>
                                         </tr>
@@ -78,7 +78,7 @@
 
                                     {foreach $allBooks as $allBook}
                                         <tr onclick="document.location = '{$path}?book_id={$allBook.id_personal_book}';"> 
-                                            <td>{$allBook.isbn}</td>
+                                            <td>{$allBook.isbn|isbn}</td>
                                             <td>{$allBook.title}</td>
                                             <td>{$allBook.aut_name}</td>
                                         </tr>

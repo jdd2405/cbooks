@@ -14,13 +14,13 @@ define("SECURE", FALSE);    // NUR FÜR DIE ENTWICKLUNG!!!!
 
 // Setup DB
 $mysqli = new mysqli("194.126.200.55",  "cbooksch_dev", "r34d_b00k$", "cbooksch_dev");
-$mysqli->query("SET NAMES 'utf8'");
 
 /* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
+if ($mysqli->connect_errno) {
+    printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
+$mysqli->query("SET NAMES 'utf8'");
 
 
 // Setup Smarty
@@ -31,6 +31,10 @@ $smarty->setTemplateDir('./templates/');
 $smarty->setCompileDir('smarty/templates_c/');
 $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
+
+// Setup custom ISBN-Modifier
+require_once 'smarty/plugins/modifier.isbn.php';
+$smarty->registerPlugin('modifier', 'isbn', 'smarty_modifier_isbn');
 
 
 // Setup PHPMailer
