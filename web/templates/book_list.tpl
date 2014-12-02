@@ -53,7 +53,7 @@
                                 <tbody>
 
                                     {foreach $allPersonalBooks as $book}
-                                        <tr onclick="document.location = '{$path}?book_id={$allPersonalBook.id_personal_book}';"> 
+                                        <tr onclick="document.location = '{$path}?book_id={$book.id_personal_book}';"> 
                                             <td>{if $book.isbn|count_characters>10}{$book.isbn|substr:-13:3}-{/if}{$book.isbn|substr:-10:1}-{$book.isbn|substr:-9:5}-{$book.isbn|substr:-4:3}-{$book.isbn|substr:-1}</td>
                                             <td>{$book.title}</td>
                                             <td>{$book.aut_name}</td>
