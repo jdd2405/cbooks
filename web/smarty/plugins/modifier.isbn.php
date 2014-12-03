@@ -19,13 +19,13 @@
 function smarty_modifier_isbn($string) {
     preg_match("/[0-9]{13}|[0-9]{10}|([0-9]{9}X?|x?)/", $string, $matches);
     if (substr($matches[0], -1) == "x" || strlen($matches[0]) == 10) {
-        $isbn = substr($matches[0], -10, 1) . "-" . substr($matches[0], -9, 5) . "-" . substr($matches[0], -4, 3) . "-" . substr($matches[0], -10, 1);
+        $isbn = substr($matches[0], -10, 1) . "-" . substr($matches[0], -9, 5) . "-" . substr($matches[0], -4, 3) . "-" . substr($matches[0], -1, 1);
         return $isbn;
     } else if (strlen($matches[0]) == 9) {
-        $isbn = substr($matches[0], -10, 1) . "-" . substr($matches[0], -9, 5) . "-" . substr($matches[0], -4, 3) . "-X";
+        $isbn = substr($matches[0], -9, 1) . "-" . substr($matches[0], -8, 5) . "-" . substr($matches[0], -3, 3) . "-X";
         return $isbn;
     } else if (strlen($matches[0]) == 13) {
-        $isbn = substr($matches[0], -13, 3) . "-" . substr($matches[0], -10, 1) . "-" . substr($matches[0], -9, 5) . "-" . substr($matches[0], -4, 3) . "-" . substr($matches[0], -10, 1);
+        $isbn = substr($matches[0], -13, 3) . "-" . substr($matches[0], -10, 1) . "-" . substr($matches[0], -9, 5) . "-" . substr($matches[0], -4, 3) . "-" . substr($matches[0], -1, 1);
         return $isbn;
     }
     else {
