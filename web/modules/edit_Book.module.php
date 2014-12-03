@@ -42,10 +42,11 @@ class editBook {
         
         $authors = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
         $author = explode(", ", $authors);
+        
         $this->updateAuthor($author, $isbn);
         
-
-        header("Location: portal.php?info=Dein Buch wurde geändert.");
+        $this->smarty->display("portal.tpl");
+        //header("Location: portal.php?info=Dein Buch wurde geändert.");
         
     }
     
@@ -73,7 +74,7 @@ class editBook {
                 $result = $this->mysqli->query($queryNewAuthorID);
                 $authors_id_author = $result->fetch_array(MYSQLI_NUM);
                 $queryInsertNewBookHasAuthor = "INSERT INTO books_has_authors (books_id_isbn, authors_id_author) VALUES ('$isbn', '$authors_id_author[0]')";
-                $this->mysqli->query($queryInsertNewBookHasAuthor); 
+                $this->mysqli->query($queryInsertNewBookHasAuthor);
             }
         }
     }
