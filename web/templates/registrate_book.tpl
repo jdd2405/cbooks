@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{if $book.id_isbn|count_characters>10}{$book.id_isbn|substr:-13:3}-{/if}{$book.id_isbn|substr:-10:1}-{$book.id_isbn|substr:-9:5}-{$book.id_isbn|substr:-4:3}-{$book.id_isbn|substr:-1}" {else if isset($isbn_input)}value="{if $isbn_input|count_characters>10}{$isbn_input|substr:-13:3}-{/if}{$isbn_input|substr:-10:1}-{$isbn_input|substr:-9:5}-{$isbn_input|substr:-4:3}-{$isbn_input|substr:-1}"{/if} readonly>
+                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn|isbn}"{/if} readonly>
                                 <span class="note"></span>
                             </div>
                         </div>
