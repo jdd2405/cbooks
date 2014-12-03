@@ -199,9 +199,11 @@
 <!--Include all required plugin of the validator -->
 <script type="text/javascript" src="templates/js/bootstrapvalidator/bootstrapValidator.js"></script>
 
+<!-- Template based Java-Script -->
+{block name=js}{/block}
+
 <script type="text/javascript">
-    // Template based Java-Script
-    {block name=js}{/block}
+    
         
     // Global Java-Script
     {literal}    
@@ -224,7 +226,7 @@ $(document).ready(function(){
         $(this).tab('show');
     });
     
-    $("input").prop('required', true).blur(function() {
+    $("#registtrationModal input").prop('required', true).blur(function() {
 
         var key = $(this).prop('name');
         var value = $(this).val();

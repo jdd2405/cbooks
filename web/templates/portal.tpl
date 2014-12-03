@@ -242,6 +242,7 @@
 {/block}
 
 {block name=js}
+<script type="text/javascript">
     {literal}
 
         
@@ -267,4 +268,5 @@ $(document).ready(function() {
 
 
     {/literal}
+</script>
 {/block}

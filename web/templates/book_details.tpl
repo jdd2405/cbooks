@@ -44,8 +44,8 @@
                                     </tr>
                                     <tr>
                                         <th>Verfügbarkeit</th>
-                                        <td>{if $details["availability"] == l}ausgeliehen</td></tr>
-                                    <tr><th>Rückgabedatum</th><td>{$returnDate["returnDate"]}</td></tr>{elseif $details["availability"] == a}verfügbar {else}zur Zeit nicht verfügbar{/if}
+                                        <td>{if $details["availability"] == l}ausgeliehen <span class="glyphicon glyphicon-remove text-danger"></span></td></tr>
+                                    <tr><th>Rückgabedatum</th><td>{$returnDate["returnDate"]}</td></tr>{elseif $details["availability"] == a}verfügbar <span class="glyphicon glyphicon-ok text-success"></span>{else}zur Zeit nicht verfügbar{/if}
 
                                 </tbody>    
                             </table>     
@@ -76,6 +76,7 @@
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <h4>Weitere Aktionen</h4>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBook">Buch bearbeiten</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBook">Buch löschen</button>
                             </div>
@@ -124,11 +125,14 @@
                             </form>
 
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                        </div>
 
                     </div>
                 </div>
             </div>
-                                
+
             <!--Modal-->
             <div class="modal fade" id="editBook" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
                 <div class="modal-dialog">
@@ -138,7 +142,7 @@
                             <h4 class="modal-title" id="myModalLabel">Buch bearbeiten</h4>
                         </div>
                         <div class="modal-body">
-                            
+
                             <form class="form-horizontal" role="form" action="{$path}" method="POST">
                                 <div class="form-group">
                                     <label for="isbn" class="col-sm-4 control-label">ISBN</label>
@@ -204,11 +208,14 @@
                             </form>
 
                         </div>
-                                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            
+
             <!--Modal-->
             <div class="modal fade" id="deleteBook" tabindex="-1" role="dialog" aria-labelledby="Test" aria-hidden="true">
                 <div class="modal-dialog">
@@ -218,15 +225,20 @@
                             <h4 class="modal-title" id="myModalLabel">Buch löschen</h4>
                         </div>
                         <div class="modal-body">
-                            Willst du das Buch definitiv löschen?
-                            <a href="{$path}?deleteBook={$details["id_personal_book"]}" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span> Bestätigen</a>
+                            <strong>Willst du das Buch definitiv löschen?</strong><br>
+                            Diese Aktion kann nicht rückgängig gemacht werden!
+                            
 
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{$path}?deleteBook={$details["id_personal_book"]}" class="btn btn-danger pull-left"><span class="glyphicon glyphicon-remove"></span> Buch löschen</a>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
                         </div>
 
                     </div>
                 </div>
             </div>                            
-                                        
+
 
         </div>
 

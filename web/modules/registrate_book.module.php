@@ -23,8 +23,8 @@ class registrateBookModule {
             $this->smarty->assign("alert_warning", "Sie haben keine gültige ISBN angegeben.");
             $this->smarty->display('portal.tpl');
         } else {
-            preg_match("/[0-9]{13}|[0-9]{10}|([0-9]{9}X?|x?)/", $input, $match);
-            $isbn = $match[0];
+            $isbn = preg_replace("/[^0-9]/", "", $input);
+            echo $input." ".$isbn;
             $query = "SELECT b.id_isbn, b.title, b.subtitle, b.blurb, GROUP_CONCAT(a.aut_name SEPARATOR ', ') AS aut_name
                 FROM books b
                 JOIN books_has_authors bhs ON b.id_isbn = bhs.books_id_isbn
@@ -56,7 +56,7 @@ class registrateBookModule {
     }
 
     function insertPersonalBook() {
-        $isbn = $_POST['isbn'];
+        $isbn = preg_replace("/[^0-9]/", "", $_POST['isbn']);
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
         $blurb = filter_input(INPUT_POST, 'blurb', FILTER_SANITIZE_STRING);

@@ -14,11 +14,11 @@
                 <div class="panel-body">
 
                     <h3>Daten erfassen</h3>
-                    <form class="form-horizontal" role="form" action="{$path}" method="POST">
+                    <form id="registrateBookForm" class="form-horizontal" role="form" action="{$path}" method="POST">
                         <div class="form-group">
                             <label for="isbn" class="col-sm-4 control-label">ISBN</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" {if isset($book.id_isbn)}value="{$book.id_isbn|isbn}"{/if} readonly>
+                                <input type="text" class="form-control " name="isbn" placeholder="... ISBN" value="{if isset($book.id_isbn)}{$book.id_isbn|isbn}{else}{$isbn_input|isbn}{/if}" readonly>
                                 <span class="note"></span>
                             </div>
                         </div>
@@ -44,15 +44,15 @@
                                 <span class="note"></span>
                             </div>
                         </div>
-                                
+
                         <div class="form-group">
                             <label for="volume" class="col-sm-4 control-label">Klappentext</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="blurb" placeholder="... Klappentext"{if isset($book.blurb)}value="{$book.blurb}"{/if}>
+                                <textarea rows="5" class="form-control" name="blurb" placeholder="... Klappentext"{if isset($book.blurb)}value="{$book.blurb}"{/if}></textarea>
                                 <span class="note"></span>
                             </div>
                         </div>
-                                
+
                         <div class="form-group">
                             <label for="run" class="col-sm-4 control-label">Auflage</label>
                             <div class="col-sm-8">
@@ -109,4 +109,35 @@
         </div>
     </div>
 
+{/block}
+
+{block name=js}
+    <script type="text/javascript">
+        {literal}
+
+
+
+            $(document).ready(function () {
+                $('#registrateBookForm').bootstrapValidator({
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        title: {
+                            message: 'Du musst einen Titel angeben.',
+                            validators: {
+                                notEmpty: {
+                                    message: 'Bitte gib einen Titel an.'
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+
+
+        {/literal}
+    </script>
 {/block}
