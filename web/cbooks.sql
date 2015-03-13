@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `lastname`, `firstname`, `street`, `plz`, `city`, `phone`) VALUES
-(1, 'jdd2405', 'e=mc2trooper', 'jonas@daester.net', 'Däster', 'Jonas', 'Vorstadtstrasse 174', 4712, 'Laupersdorf', '079 621 72 56'),
+(1, 'jdd2405', 'test', 'jonas@daester.net', 'Däster', 'Jonas', 'Beispielstrasse', 9999, 'Hinterwald', '0800 800 800'),
 (7, 'admin', 'adsf', 'schalk.lpd@gmail.com', '', '', '', 0, '', '');
 
 --
