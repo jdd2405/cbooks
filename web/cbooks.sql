@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `lastname`, `firstname`, `street`, `plz`, `city`, `phone`) VALUES
 (1, 'jdd2405', 'test', 'jonas@daester.net', 'Däster', 'Jonas', 'Beispielstrasse', 9999, 'Hinterwald', '0800 800 800'),
-(7, 'admin', 'adsf', 'schalk.lpd@gmail.com', '', '', '', 0, '', '');
+(7, 'admin', 'adsf', 'name@host.ch', '', '', '', 0, '', '');
 
 --
 -- Constraints der exportierten Tabellen
